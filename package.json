@@ -1,0 +1,17 @@
+{
+  "name": "webpack-basis",
+  "version": "1.0.0",
+  "description": "A Webpack development environment with basic configuration.",
+  "private": true,
+  "main": "index.js",
+  "author": "Anani",
+  "keywords": [
+    "webpack"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anani1994/hello-world/tree/master/webpack-basis"
+  },
+  "homepage": "https://github.com/Anani1994/hello-world/tree/master/webpack-basis#readme",
+  "license": "MIT"
+}

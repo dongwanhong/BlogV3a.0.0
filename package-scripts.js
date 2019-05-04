@@ -11,14 +11,14 @@ module.exports = {
         description: 'Clean dist directory and run all builds in mode production',
         script: series(
           rimraf('dist/*'),
-          'webpack --config config/webpack.prod.js'
+          'webpack --config scripts/webpack.prod.js'
         )
       },
       dev: {
         description: 'Clean dist directory and run all builds in mode development',
         script: series(
           rimraf('dist/*'),
-          'webpack --config config/webpack.dev.js'
+          'webpack --config scripts/webpack.dev.js'
         )
       }
     }

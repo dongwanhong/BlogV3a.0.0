@@ -5,6 +5,9 @@
   "private": true,
   "main": "index.js",
   "author": "Anani",
+  "scripts": {
+    "build": "npx nps build"
+  },
   "keywords": [
     "webpack"
   ],
@@ -15,6 +18,8 @@
   "homepage": "https://github.com/Anani1994/hello-world/tree/master/webpack-basis#readme",
   "license": "MIT",
   "devDependencies": {
+    "nps": "^5.9.5",
+    "nps-utils": "^1.7.0",
     "webpack": "^4.30.0",
     "webpack-cli": "^3.3.1"
   }

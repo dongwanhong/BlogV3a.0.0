@@ -8,10 +8,17 @@ module.exports = {
   scripts: {
     build: {
       default: {
-        description: 'Clean dist directory and run all builds',
+        description: 'Clean dist directory and run all builds in mode production',
         script: series(
           rimraf('dist/*'),
-          'webpack --config config/webpack.common.js'
+          'webpack --config config/webpack.prod.js'
+        )
+      },
+      dev: {
+        description: 'Clean dist directory and run all builds in mode development',
+        script: series(
+          rimraf('dist/*'),
+          'webpack --config config/webpack.dev.js'
         )
       }
     }

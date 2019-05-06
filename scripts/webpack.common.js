@@ -1,4 +1,6 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const devMode = process.env.NODE_ENV !== 'production';
 
 const rules = [{
   test: /\.less$/,
@@ -13,6 +15,17 @@ const rules = [{
   }]
 }];
 
+const htmlWebpackPluginConf = {
+  template: './app/index.html', // 指定模版
+  filename: 'index.html', // 输出文件名
+  favicon: './app/images/favicon.ico',
+  minify: devMode ? null : {
+    removeComments: true, // 移除注释
+    removeRedundantAttributes: true, // 移除冗余属性
+    collapseWhitespace: true // 移除空白
+  }
+};
+
 const baseConfig = {
   entry: './app/index.js', // 入口文件，默认 main 作为名称
   output: {
@@ -21,7 +34,10 @@ const baseConfig = {
   },
   module: {
     rules: rules
-  }
+  },
+  plugins: [
+    new HtmlWebpackPlugin(htmlWebpackPluginConf)
+  ]
 };
 
 module.exports = baseConfig;

@@ -1,11 +1,15 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const devMode = process.env.NODE_ENV !== 'production';
 
 const rules = [{
-  test: /\.less$/,
+  test: /\.(le|c)ss$/,
   use: [{
-    loader: 'style-loader'
+    loader: MiniCssExtractPlugin.loader,
+    options: {
+      hmr: devMode,
+    }
   }, {
     loader: 'css-loader'
   }, {
@@ -26,17 +30,22 @@ const htmlWebpackPluginConf = {
   }
 };
 
+const miniCssExtractPluginCfg = {
+  filename: 'styles/[name].css',
+};
+
 const baseConfig = {
   entry: './app/index.js', // 入口文件，默认 main 作为名称
   output: {
     path: path.resolve(__dirname, '../dist'), // 指定输出文件所在目录
-    filename: '[name].js' // 输出文件名，其中 name 为变量，值为入口文件名
+    filename: 'javascript/[name].js' // 输出文件名，其中 name 为变量，值为入口文件名
   },
   module: {
     rules: rules
   },
   plugins: [
-    new HtmlWebpackPlugin(htmlWebpackPluginConf)
+    new HtmlWebpackPlugin(htmlWebpackPluginConf),
+    new MiniCssExtractPlugin(miniCssExtractPluginCfg),
   ]
 };
 

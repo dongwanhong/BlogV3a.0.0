@@ -17,6 +17,9 @@ const rules = [{
   }, {
     loader: 'less-loader'
   }]
+}, {
+  test: /\.js$/,
+  loader: 'babel-loader'
 }];
 
 const htmlWebpackPluginConf = {

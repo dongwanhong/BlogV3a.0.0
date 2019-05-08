@@ -1,5 +1,14 @@
 import './styles/app.less'
 
-const sayHello = () => console.log('Hello world!');
+function sayName (target) {
+    console.log(target.name);
+}
 
-sayHello();
+@sayName
+class TestClass {
+    constructor() {
+        console.log('Hello world!')
+    }
+}
+
+new TestClass()

@@ -7,7 +7,10 @@ module.exports = function(api) {
 
   // 插件先于 Preset 执行，顺序由上往下而行
   const plugins = [
-    //
+    ["@babel/plugin-proposal-decorators", {
+      legacy: true,
+    }],
+    "@babel/plugin-proposal-class-properties",
   ];
   // Preset 执行顺序相反由下向上而行
   const presets = [

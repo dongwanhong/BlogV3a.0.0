@@ -15,7 +15,12 @@ module.exports = function(api) {
   // Preset 执行顺序相反由下向上而行
   const presets = [
     // 如果 preset 名称的前缀为 babel-preset- 可以省略该前缀
-    '@babel/preset-env'
+    ['@babel/preset-env', {
+      // we using a .browserslistrc file to specify targets
+      // targets: { edge: "17", firefox: "60", chrome: "67", safari: "11.1" },
+      useBuiltIns: "usage",
+      corejs: 3,
+    }]
   ];
 
   return {

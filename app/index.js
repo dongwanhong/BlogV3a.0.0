@@ -1,4 +1,9 @@
 import './styles/app.less'
 
-const str = 'Hello world!'
-console.log(str.includes('e'))
+import Icon from './images/doraemon.png';
+
+const myIcon = new Image();
+myIcon.src = Icon;
+myIcon.width = 150;
+myIcon.height = 150;
+document.body.appendChild(myIcon);

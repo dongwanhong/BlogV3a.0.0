@@ -11,7 +11,7 @@ module.exports = {
         description: 'Clean dist directory and run all builds in mode production',
         script: series(
           rimraf('dist/*'),
-          'webpack --config scripts/webpack.prod.js'
+          'cross-env NODE_ENV=production webpack --config scripts/webpack.prod.js'
         )
       },
       dev: {
@@ -20,6 +20,12 @@ module.exports = {
           rimraf('dist/*'),
           'webpack --config scripts/webpack.dev.js'
         )
+      }
+    },
+    dev: {
+      default: {
+        description: 'Start a WEB service with development mode',
+        script: 'webpack-dev-server --config scripts/webpack.dev.js'
       }
     }
   }

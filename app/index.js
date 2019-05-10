@@ -1,3 +1,3 @@
 import './styles/app.less'
 
-console.log(undefinedVariable);
+console.log('undefinedVariable');

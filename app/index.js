@@ -3,5 +3,6 @@ if (module.hot) {
 }
 
 import './styles/app.less'
+import { square } from './math'
 
-console.log('undefinedVariable');
+console.log(square(2))

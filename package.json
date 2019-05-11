@@ -4,6 +4,7 @@
   "description": "A Webpack development environment with basic configuration.",
   "private": true,
   "main": "index.js",
+  "sideEffects": false,
   "author": "Anani",
   "scripts": {
     "build": "npx nps build",

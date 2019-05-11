@@ -4,7 +4,10 @@
   "description": "A Webpack development environment with basic configuration.",
   "private": true,
   "main": "index.js",
-  "sideEffects": false,
+  "sideEffects": [
+    "*.css",
+    "*.less"
+  ],
   "author": "Anani",
   "scripts": {
     "build": "npx nps build",

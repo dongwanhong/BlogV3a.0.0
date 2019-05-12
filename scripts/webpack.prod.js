@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const merge = require('webpack-merge');
 const common = require('./webpack.common');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -13,6 +14,7 @@ const prodConfig = {
       new OptimizeCSSAssetsPlugin(),
       new TerserJSPlugin()
     ],
+    runtimeChunk: 'single',
     splitChunks: {
       chunks: 'async',
       name: true,
@@ -46,6 +48,11 @@ const prodConfig = {
         path.join(process.cwd(), 'app/**/*.html'),
         path.join(process.cwd(), 'app/**/*.js'),
       ]),
+    }),
+    new webpack.HashedModuleIdsPlugin({
+      hashFunction: 'md4', // 指定 hash 算法
+      hashDigest: 'base64', // 生成哈希时使用的编码
+      hashDigestLength: 4 // 生成哈希值的长度
     }),
   ],
 };

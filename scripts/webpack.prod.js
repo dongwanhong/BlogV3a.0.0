@@ -12,7 +12,32 @@ const prodConfig = {
     minimizer: [
       new OptimizeCSSAssetsPlugin(),
       new TerserJSPlugin()
-    ]
+    ],
+    splitChunks: {
+      chunks: 'async',
+      name: true,
+      automaticNameDelimiter: '-',
+      // the priority is maxInitialRequest/maxAsyncRequests < maxSize < minSize
+      minSize: 0,
+      maxSize: 0,
+      minChunks: 1, // 引用计数
+      maxAsyncRequests: 5, // 最大的并行请求数
+      maxInitialRequests: 3, // 入口最大的并行请求数
+      cacheGroups: { // 缓存组，会继承 splitChunks 的配置
+        lodash: {
+          // filename: '[name].bundle.js',
+          priority: -10, // 缓存组打包的先后优先级
+          test: /lodash/, // 控制哪些模块被这个缓存组匹配到
+          chunks: 'all',
+        },
+        common: {
+          priority: -20,
+          chunks: 'all',
+          minChunks: 2,
+          reuseExistingChunk: true, // 如果当前代码块包含的模块已经有了，就不在产生一个新的代码块
+        },
+      },
+    },
   },
   plugins: [
     new PurifyCSSPlugin({

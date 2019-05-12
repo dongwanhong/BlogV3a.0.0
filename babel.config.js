@@ -11,6 +11,7 @@ module.exports = function(api) {
       legacy: true,
     }],
     "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-syntax-dynamic-import",
   ];
   // Preset 执行顺序相反由下向上而行
   const presets = [

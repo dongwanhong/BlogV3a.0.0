@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const devMode = process.env.NODE_ENV !== 'production';
@@ -58,6 +59,10 @@ const miniCssExtractPluginCfg = {
   filename: 'styles/[name].[contenthash:8].css',
 };
 
+const providePluginCfg = {
+  clone: 'exports-loader?clone!lodash/clone',
+};
+
 const baseConfig = {
   entry: './app/index.js', // 入口文件，默认 main 作为名称
   output: {
@@ -70,6 +75,7 @@ const baseConfig = {
   plugins: [
     new HtmlWebpackPlugin(htmlWebpackPluginConf),
     new MiniCssExtractPlugin(miniCssExtractPluginCfg),
+    new webpack.ProvidePlugin(providePluginCfg),
   ]
 };
 

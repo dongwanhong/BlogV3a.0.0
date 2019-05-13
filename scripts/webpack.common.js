@@ -72,7 +72,8 @@ const baseConfig = {
     'javascript/[name].[contenthash:8].js' // 输出文件名，其中 name 为变量，值为入口文件名
   },
   module: {
-    rules: rules
+    rules: rules,
+    noParse: /jquery/,
   },
   plugins: [
     new HtmlWebpackPlugin(htmlWebpackPluginConf),

@@ -18,7 +18,7 @@ const prodConfig = {
     splitChunks: {
       chunks: 'async',
       name: true,
-      automaticNameDelimiter: '-',
+      automaticNameDelimiter: '.',
       // the priority is maxInitialRequest/maxAsyncRequests < maxSize < minSize
       minSize: 0,
       maxSize: 0,

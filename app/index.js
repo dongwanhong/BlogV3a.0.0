@@ -2,10 +2,12 @@ if (module.hot) {
     module.hot.accept();
 }
 
-import './styles/app.less'
-
-const obj = {name: 'anani'}
-console.log(clone(obj))
-
 import $ from 'jquery';
-$('body').html('Hello world!')
+import moment from 'moment';
+import 'moment/locale/zh-cn'; // 由于忽略了语言包的引入，所以需要单独引入我们所需的语言包
+import './styles/app.less';
+
+moment.locale('zh-cn');
+
+$('body').html('Hello world!');
+console.log(moment().format('MMMM Do YYYY, h:mm:ss a'));

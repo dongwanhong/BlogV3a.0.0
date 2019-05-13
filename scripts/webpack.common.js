@@ -63,6 +63,11 @@ const providePluginCfg = {
   clone: 'exports-loader?clone!lodash/clone',
 };
 
+const ignorePluginCfg = {
+  resourceRegExp: /^\.\/locale$/,
+  contextRegExp: /moment$/
+};
+
 const baseConfig = {
   entry: './app/index.js', // 入口文件，默认 main 作为名称
   output: {
@@ -79,6 +84,7 @@ const baseConfig = {
     new HtmlWebpackPlugin(htmlWebpackPluginConf),
     new MiniCssExtractPlugin(miniCssExtractPluginCfg),
     new webpack.ProvidePlugin(providePluginCfg),
+    new webpack.IgnorePlugin(ignorePluginCfg),
   ]
 };
 

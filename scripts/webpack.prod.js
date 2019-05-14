@@ -26,10 +26,10 @@ const prodConfig = {
       maxAsyncRequests: 5, // 最大的并行请求数
       maxInitialRequests: 3, // 入口最大的并行请求数
       cacheGroups: { // 缓存组，会继承 splitChunks 的配置
-        lodash: {
+        jquery: {
           // filename: '[name].bundle.js',
           priority: -10, // 缓存组打包的先后优先级
-          test: /lodash/, // 控制哪些模块被这个缓存组匹配到
+          test: /jquery/, // 控制哪些模块被这个缓存组匹配到
           chunks: 'all',
         },
         common: {

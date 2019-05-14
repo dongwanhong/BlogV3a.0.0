@@ -42,6 +42,15 @@ const rules = [{
       fallback: 'file-loader',
     },
   }]
+}, {
+  test: require.resolve('jquery'),
+  use: [{
+    loader: 'expose-loader',
+    options: '$'
+  }, {
+    loader: 'expose-loader',
+    options: 'jQuery'
+  }]
 }];
 
 const htmlWebpackPluginConf = {
@@ -60,7 +69,7 @@ const miniCssExtractPluginCfg = {
 };
 
 const providePluginCfg = {
-  clone: 'exports-loader?clone!lodash/clone',
+  '_clone': 'exports-loader?clone!lodash/clone',
 };
 
 const ignorePluginCfg = {
@@ -78,7 +87,7 @@ const baseConfig = {
   },
   module: {
     rules: rules,
-    noParse: /jquery/,
+    // noParse: /jquery/,
   },
   plugins: [
     new HtmlWebpackPlugin(htmlWebpackPluginConf),

@@ -9,5 +9,4 @@ import './styles/app.less';
 
 moment.locale('zh-cn');
 
-$('body').html('Hello world!');
-console.log(moment().format('MMMM Do YYYY, h:mm:ss a'));
+$('body').html(`window.$ === $: ${ (window.$ === $).toString() }`);

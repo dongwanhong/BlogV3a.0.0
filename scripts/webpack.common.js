@@ -110,6 +110,12 @@ const baseConfig = {
     rules: rules,
     // noParse: /jquery/,
   },
+  resolve: {
+    extensions: ['.js', '.json', '.less', '.css', '.mjs'],
+    alias: {
+      '@style': path.resolve(__dirname, '../app/styles/'),
+    },
+  },
   plugins: [
     new HtmlWebpackPlugin(htmlWebpackPluginConf),
     new MiniCssExtractPlugin(miniCssExtractPluginCfg),

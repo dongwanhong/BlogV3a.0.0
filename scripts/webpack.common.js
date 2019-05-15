@@ -2,7 +2,9 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HappyPack = require('happypack');
 const devMode = process.env.NODE_ENV !== 'production';
+const happyThreadPool = HappyPack.ThreadPool({ size: 3 });
 
 const rules = [{
   test: /\.(le|c)ss$/,
@@ -10,27 +12,24 @@ const rules = [{
     loader: MiniCssExtractPlugin.loader,
     options: {
       hmr: devMode,
-    }
+    },
   }, {
-    loader: 'css-loader'
-  }, {
-    loader: 'postcss-loader'
-  }, {
-    loader: 'less-loader'
-  }]
+    loader: 'happypack/loader?id=styles',
+  }],
 }, {
   test: /\.js$/,
   exclude: /node_modules/,
-  loader: 'babel-loader'
-}, {
-  test: /\.(png|svg|jpg|gif)$/,
   use: [{
-    loader: 'url-loader',
-    options: {
-      limit: 8192,
-      name: 'images/[name].[ext]',
-      fallback: 'file-loader',
-    }
+    loader: 'happypack/loader?id=js',
+  }],
+}, {
+  test: require.resolve('jquery'),
+  use: [{
+    loader: 'expose-loader',
+    options: '$',
+  }, {
+    loader: 'expose-loader',
+    options: 'jQuery',
   }]
 }, {
   test: /\.(woff|woff2|eot|ttf|otf)$/,
@@ -43,13 +42,14 @@ const rules = [{
     },
   }]
 }, {
-  test: require.resolve('jquery'),
+  test: /\.(png|svg|jpg|gif)$/,
   use: [{
-    loader: 'expose-loader',
-    options: '$'
-  }, {
-    loader: 'expose-loader',
-    options: 'jQuery'
+    loader: 'url-loader',
+    options: {
+      limit: 8192,
+      name: 'images/[name].[ext]',
+      fallback: 'file-loader',
+    }
   }]
 }];
 
@@ -77,7 +77,28 @@ const ignorePluginCfg = {
   contextRegExp: /moment$/
 };
 
+const happyPackJSCfg = {
+  id: 'js',
+  threadPool: happyThreadPool,
+  loaders: [
+    'babel-loader',
+  ],
+};
+
+const happyPackStylesCfg = {
+  id: 'styles',
+  threadPool: happyThreadPool,
+  loaders: [{
+    loader: 'css-loader',
+  }, {
+    loader: 'postcss-loader',
+  }, {
+    loader: 'less-loader',
+  }],
+};
+
 const baseConfig = {
+  context: path.resolve(__dirname, '../'),
   entry: './app/index.js', // 入口文件，默认 main 作为名称
   output: {
     path: path.resolve(__dirname, '../dist'), // 指定输出文件所在目录
@@ -94,6 +115,8 @@ const baseConfig = {
     new MiniCssExtractPlugin(miniCssExtractPluginCfg),
     new webpack.ProvidePlugin(providePluginCfg),
     new webpack.IgnorePlugin(ignorePluginCfg),
+    new HappyPack(happyPackStylesCfg),
+    new HappyPack(happyPackJSCfg),
   ]
 };
 

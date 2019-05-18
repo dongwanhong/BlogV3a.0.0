@@ -1,4 +1,4 @@
-# ignored by default
+# Ignored by default
 /node_modules/*
 /bower_components/*
 
@@ -10,3 +10,4 @@
 /babel.config.js
 /package-scripts.js
 /postcss.config.js
+package.json

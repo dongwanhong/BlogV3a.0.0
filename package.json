@@ -12,7 +12,8 @@
   "scripts": {
     "build": "npx nps build",
     "build.dev": "npx nps build.dev",
-    "dev": "npx nps dev"
+    "dev": "npx nps dev",
+    "prettier": "prettier --write './app/**/*.{js,less,json}'"
   },
   "keywords": [
     "webpack"
@@ -48,6 +49,7 @@
     "nps-utils": "^1.7.0",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "postcss-loader": "^3.0.0",
+    "prettier": "^1.17.1",
     "purify-css": "^1.2.5",
     "purifycss-webpack": "^0.7.0",
     "terser-webpack-plugin": "^1.2.3",

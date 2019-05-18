@@ -1,6 +1,6 @@
-const path = require('path');
-const merge = require('webpack-merge');
-const common = require('./webpack.common');
+const path = require('path')
+const merge = require('webpack-merge')
+const common = require('./webpack.common')
 
 const devConfig = {
   mode: 'development',
@@ -27,16 +27,16 @@ const devConfig = {
     // 任意的 404 响应都可能需要被替代为 index.html，可以参阅 connect-history-api-fallback 进一步配置
     historyApiFallback: true,
     // 参数 app 是由 express 创建的，可用于拦截部分请求返回特定内容
-    before (app) { },
+    before(app) {},
     // 在处理静态资源之后，可以用于打印日志
-    after(app) { },
+    after(app) {},
     // 启用 quiet 后，除了初始启动信息之外的任何内容都不会被打印
     quiet: false,
     // Display only errors to reduce the amount of output
-    stats: 'errors-only',
+    stats: 'errors-only'
     // 前往 https://webpack.js.org/configuration/dev-server
     // 了解更多配置: https, headers, proxy, public, lazy, filename...
   }
-};
+}
 
-module.exports = merge(common, devConfig);
+module.exports = merge(common, devConfig)

@@ -1,8 +1,8 @@
 // See https://github.com/kentcdodds/nps for more about nps.
 // See https://doc.esdoc.org/github.com/kentcdodds/nps-utils/ for more about nps-utils.
 
-const npsUtils = require('nps-utils');
-const { series, rimraf }  = npsUtils;
+const npsUtils = require('nps-utils')
+const { series, rimraf } = npsUtils
 
 module.exports = {
   scripts: {
@@ -16,10 +16,7 @@ module.exports = {
       },
       dev: {
         description: 'Clean dist directory and run all builds in mode development',
-        script: series(
-          rimraf('dist/*'),
-          'webpack --config scripts/webpack.dev.js'
-        )
+        script: series(rimraf('dist/*'), 'webpack --config scripts/webpack.dev.js')
       }
     },
     dev: {
@@ -29,4 +26,4 @@ module.exports = {
       }
     }
   }
-};
+}

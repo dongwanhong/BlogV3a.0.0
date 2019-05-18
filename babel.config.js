@@ -3,29 +3,35 @@
  * 在 preset 中可以包含其他的 preset，以及带有参数的插件。
  */
 module.exports = function(api) {
-  api.cache(true);
+  api.cache(true)
 
   // 插件先于 Preset 执行，顺序由上往下而行
   const plugins = [
-    ["@babel/plugin-proposal-decorators", {
-      legacy: true,
-    }],
-    "@babel/plugin-proposal-class-properties",
-    "@babel/plugin-syntax-dynamic-import",
-  ];
+    [
+      '@babel/plugin-proposal-decorators',
+      {
+        legacy: true
+      }
+    ],
+    '@babel/plugin-proposal-class-properties',
+    '@babel/plugin-syntax-dynamic-import'
+  ]
   // Preset 执行顺序相反由下向上而行
   const presets = [
     // 如果 preset 名称的前缀为 babel-preset- 可以省略该前缀
-    ['@babel/preset-env', {
-      // we using a .browserslistrc file to specify targets
-      // targets: { edge: "17", firefox: "60", chrome: "67", safari: "11.1" },
-      useBuiltIns: "usage",
-      corejs: 3,
-    }]
-  ];
+    [
+      '@babel/preset-env',
+      {
+        // we using a .browserslistrc file to specify targets
+        // targets: { edge: "17", firefox: "60", chrome: "67", safari: "11.1" },
+        useBuiltIns: 'usage',
+        corejs: 3
+      }
+    ]
+  ]
 
   return {
     presets,
     plugins
-  };
-};
+  }
+}

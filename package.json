@@ -11,12 +11,15 @@
   "author": "Anani",
   "scripts": {
     "build": "npx nps build",
-    "build.dev": "npx nps build.dev",
+    "build:dev": "npx nps build.dev",
     "dev": "npx nps dev",
     "prettier": "prettier --write '*.{ts,js,less,css,json}'",
     "lint:base": "eslint --rule \"prettier/prettier: 2\"",
     "lint": "yarn run lint:base -- .",
-    "lint:fix": "yarn run lint -- --fix"
+    "lint:fix": "yarn run lint --fix",
+    "stylelint:base": "stylelint '**/*.less' --syntax less",
+    "stylelint": "yarn run stylelint:base",
+    "stylelint:fix": "yarn run stylelint:base --fix"
   },
   "keywords": [
     "webpack"
@@ -57,6 +60,8 @@
     "prettier": "^1.17.1",
     "purify-css": "^1.2.5",
     "purifycss-webpack": "^0.7.0",
+    "stylelint": "^10.0.1",
+    "stylelint-config-standard": "^18.3.0",
     "terser-webpack-plugin": "^1.2.3",
     "url-loader": "^1.1.2",
     "webpack": "^4.30.0",

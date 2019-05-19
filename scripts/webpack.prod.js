@@ -43,8 +43,8 @@ const prodConfig = {
     new PurifyCSSPlugin({
       // Give paths to parse for rules. These should be absolute
       paths: glob.sync([
-        path.join(process.cwd(), 'app/**/*.html'),
-        path.join(process.cwd(), 'app/**/*.js')
+        path.join(process.cwd(), 'src/**/*.html'),
+        path.join(process.cwd(), 'src/**/*.js')
       ])
     }),
     new webpack.HashedModuleIdsPlugin({

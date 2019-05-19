@@ -72,9 +72,9 @@ const rules = [
 ]
 
 const htmlWebpackPluginConf = {
-  template: './app/index.html', // 指定模版
+  template: './src/index.html', // 指定模版
   filename: 'index.html', // 输出文件名
-  favicon: './app/images/favicon.ico',
+  favicon: './src/images/favicon.ico',
   minify: devMode
     ? null
     : {
@@ -121,7 +121,7 @@ const happyPackStylesCfg = {
 
 const baseConfig = {
   context: path.resolve(__dirname, '../'),
-  entry: './app/index.js', // 入口文件，默认 main 作为名称
+  entry: './src/index.js', // 入口文件，默认 main 作为名称
   output: {
     path: path.resolve(__dirname, '../dist'), // 指定输出文件所在目录
     filename: devMode ? 'javascript/[name].js' : 'javascript/[name].[contenthash:8].js' // 输出文件名，其中 name 为变量，值为入口文件名
@@ -133,7 +133,7 @@ const baseConfig = {
   resolve: {
     extensions: ['.js', '.json', '.less', '.css', '.mjs'],
     alias: {
-      '@style': path.resolve(__dirname, '../app/styles/')
+      '@style': path.resolve(__dirname, '../src/styles/')
     }
   },
   plugins: [

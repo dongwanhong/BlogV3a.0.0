@@ -1,6 +1,6 @@
 {
   "name": "webpack-basis",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A Webpack development environment with basic configuration.",
   "private": true,
   "main": "index.js",
@@ -19,7 +19,8 @@
     "lint:fix": "yarn run lint --fix",
     "stylelint:base": "stylelint '**/*.less' --syntax less",
     "stylelint": "yarn run stylelint:base",
-    "stylelint:fix": "yarn run stylelint:base --fix"
+    "stylelint:fix": "yarn run stylelint:base --fix",
+    "release": "standard-version"
   },
   "keywords": [
     "webpack"
@@ -37,10 +38,14 @@
     "@babel/plugin-proposal-decorators": "^7.4.4",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/preset-env": "^7.4.4",
+    "@commitlint/cli": "^7.6.1",
+    "@commitlint/config-conventional": "^7.6.0",
     "autoprefixer": "^9.5.1",
     "babel-loader": "^8.0.5",
+    "commitizen": "^3.1.1",
     "cross-env": "^5.2.0",
     "css-loader": "^2.1.1",
+    "cz-conventional-changelog": "^2.1.0",
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^4.3.0",
     "exports-loader": "^0.7.0",
@@ -61,6 +66,7 @@
     "prettier": "^1.17.1",
     "purify-css": "^1.2.5",
     "purifycss-webpack": "^0.7.0",
+    "standard-version": "^6.0.1",
     "style-loader": "^0.23.1",
     "stylelint": "^10.0.1",
     "stylelint-config-prettier": "^5.2.0",
@@ -80,7 +86,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "commit-msg": "npx commitlint -E HUSKY_GIT_PARAMS"
     }
   },
   "lint-staged": {
@@ -97,5 +104,10 @@
     "ignore": [
       "dist/**/*"
     ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
   }
 }

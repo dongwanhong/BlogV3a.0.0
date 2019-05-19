@@ -11,7 +11,7 @@ const rules = [
     test: /\.(le|c)ss$/,
     use: [
       {
-        loader: MiniCssExtractPlugin.loader,
+        loader: devMode ? 'style-loader': MiniCssExtractPlugin.loader,
         options: {
           hmr: devMode
         }

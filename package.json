@@ -10,9 +10,9 @@
   ],
   "author": "Anani",
   "scripts": {
+    "start": "npx nps dev",
     "build": "npx nps build",
     "build:dev": "npx nps build.dev",
-    "dev": "npx nps dev",
     "prettier": "prettier --write '*.{ts,js,less,css,json}'",
     "lint:base": "eslint --rule \"prettier/prettier: 2\"",
     "lint": "yarn run lint:base -- .",

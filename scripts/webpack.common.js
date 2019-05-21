@@ -11,7 +11,7 @@ const rules = [
     test: /\.(le|c)ss$/,
     use: [
       {
-        loader: devMode ? 'style-loader': MiniCssExtractPlugin.loader,
+        loader: devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
         options: {
           hmr: devMode
         }
@@ -23,12 +23,22 @@ const rules = [
   },
   {
     test: /\.js$/,
+    enforce: 'pre',
+    loader: 'source-map-loader'
+  },
+  {
+    test: /\.m?js|jsx$/,
     exclude: /node_modules/,
     use: [
       {
         loader: 'happypack/loader?id=js'
       }
     ]
+  },
+  {
+    test: /\.tsx?$/,
+    use: 'ts-loader',
+    exclude: /node_modules/
   },
   {
     test: require.resolve('jquery'),
@@ -100,7 +110,7 @@ const ignorePluginCfg = {
 const happyPackJSCfg = {
   id: 'js',
   threadPool: happyThreadPool,
-  loaders: ['babel-loader']
+  loaders: ['babel-loader', 'eslint-loader']
 }
 
 const happyPackStylesCfg = {
@@ -121,7 +131,7 @@ const happyPackStylesCfg = {
 
 const baseConfig = {
   context: path.resolve(__dirname, '../'),
-  entry: './src/index.js', // 入口文件，默认 main 作为名称
+  entry: './src/index.tsx', // 入口文件，默认 main 作为名称
   output: {
     path: path.resolve(__dirname, '../dist'), // 指定输出文件所在目录
     filename: devMode ? 'javascript/[name].js' : 'javascript/[name].[contenthash:8].js' // 输出文件名，其中 name 为变量，值为入口文件名
@@ -131,9 +141,9 @@ const baseConfig = {
     // noParse: /jquery/,
   },
   resolve: {
-    extensions: ['.js', '.json', '.less', '.css', '.mjs'],
+    extensions: ['.tsx', '.ts', '.js', '.json', '.less', '.css', '.mjs'],
     alias: {
-      '@style': path.resolve(__dirname, '../src/styles/')
+      '@styles': path.resolve(__dirname, '../src/styles/')
     }
   },
   plugins: [

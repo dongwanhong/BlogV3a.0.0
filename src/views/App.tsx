@@ -8,7 +8,7 @@ export interface HelloProps {
 // 'HelloProps' describes the shape of props.
 // State is never set so we use the '{}' type.
 class App extends Component<HelloProps, {}> {
-  render() {
+  public render(): React.ReactNode {
     return (
       <h1>
         Hello from {this.props.compiler} and {this.props.framework}!

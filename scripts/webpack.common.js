@@ -22,11 +22,6 @@ const rules = [
     ]
   },
   {
-    test: /\.js$/,
-    enforce: 'pre',
-    loader: 'source-map-loader'
-  },
-  {
     test: /\.m?js|jsx$/,
     exclude: /node_modules/,
     use: [
@@ -36,8 +31,12 @@ const rules = [
     ]
   },
   {
-    test: /\.tsx?$/,
-    use: 'ts-loader',
+    test: /\.ts|tsx?$/,
+    use: [
+      {
+        loader: 'happypack/loader?id=ts'
+      }
+    ],
     exclude: /node_modules/
   },
   {
@@ -107,10 +106,28 @@ const ignorePluginCfg = {
   contextRegExp: /moment$/
 }
 
+const happyPackTSCfg = {
+  id: 'ts',
+  threadPool: happyThreadPool,
+  loaders: [
+    {
+      path: 'ts-loader',
+      query: { happyPackMode: true }
+    }
+  ]
+}
+
 const happyPackJSCfg = {
   id: 'js',
   threadPool: happyThreadPool,
-  loaders: ['babel-loader', 'eslint-loader']
+  loaders: [
+    'babel-loader',
+    'eslint-loader',
+    {
+      loader: 'source-map-loader',
+      enforce: 'pre'
+    }
+  ]
 }
 
 const happyPackStylesCfg = {
@@ -152,7 +169,8 @@ const baseConfig = {
     new webpack.ProvidePlugin(providePluginCfg),
     new webpack.IgnorePlugin(ignorePluginCfg),
     new HappyPack(happyPackStylesCfg),
-    new HappyPack(happyPackJSCfg)
+    new HappyPack(happyPackJSCfg),
+    new HappyPack(happyPackTSCfg)
   ]
 }
 

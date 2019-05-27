@@ -7,6 +7,7 @@ module.exports = function(api) {
 
   // 插件先于 Preset 执行，顺序由上往下而行
   const plugins = [
+    'lodash',
     [
       '@babel/plugin-proposal-decorators',
       {
@@ -27,7 +28,9 @@ module.exports = function(api) {
         useBuiltIns: 'usage',
         corejs: 3
       }
-    ]
+    ],
+    '@babel/preset-react',
+    '@babel/preset-typescript'
   ]
 
   return {

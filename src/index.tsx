@@ -1,10 +1,8 @@
-// eslint-disable-next-line
-import $ from 'jquery'
-import moment from 'moment'
-import 'moment/locale/zh-cn'
 import React from 'react'
 import ReactDOM from 'react-dom'
+import moment from 'moment'
 import App from './views/App'
+import 'moment/locale/zh-cn'
 import '@styles/app'
 
 moment.locale('zh-cn')

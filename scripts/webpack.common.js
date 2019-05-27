@@ -4,7 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HappyPack = require('happypack')
 const devMode = process.env.NODE_ENV !== 'production'
-const happyThreadPool = HappyPack.ThreadPool({ size: 3 })
+const happyThreadPool = HappyPack.ThreadPool({ size: 5 })
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 
 const rules = [
   {
@@ -22,22 +23,18 @@ const rules = [
     ]
   },
   {
-    test: /\.m?js|jsx$/,
+    test: /\.js$/,
+    use: ['source-map-loader'],
+    enforce: 'pre'
+  },
+  {
+    test: /\.m?js|jsx|ts|tsx$/,
     exclude: /node_modules/,
     use: [
       {
         loader: 'happypack/loader?id=js'
       }
     ]
-  },
-  {
-    test: /\.ts|tsx?$/,
-    use: [
-      {
-        loader: 'happypack/loader?id=ts'
-      }
-    ],
-    exclude: /node_modules/
   },
   {
     test: require.resolve('jquery'),
@@ -98,7 +95,9 @@ const miniCssExtractPluginCfg = {
 }
 
 const providePluginCfg = {
-  _clone: 'exports-loader?clone!lodash/clone'
+  // 配置 ProvidePlugin 插件，对指定模块进行自动按需加载
+  // eg：_clone: 'exports-loader?clone!lodash/clone'
+  // 如上行配置后可以在页面中直接使用 _clone，webpack 会自动载入，如不使用则不加载
 }
 
 const ignorePluginCfg = {
@@ -106,28 +105,10 @@ const ignorePluginCfg = {
   contextRegExp: /moment$/
 }
 
-const happyPackTSCfg = {
-  id: 'ts',
-  threadPool: happyThreadPool,
-  loaders: [
-    {
-      path: 'ts-loader',
-      query: { happyPackMode: true }
-    }
-  ]
-}
-
 const happyPackJSCfg = {
   id: 'js',
   threadPool: happyThreadPool,
-  loaders: [
-    'babel-loader',
-    'eslint-loader',
-    {
-      loader: 'source-map-loader',
-      enforce: 'pre'
-    }
-  ]
+  loaders: ['babel-loader', 'eslint-loader']
 }
 
 const happyPackStylesCfg = {
@@ -155,7 +136,7 @@ const baseConfig = {
   },
   module: {
     rules: rules
-    // noParse: /jquery/,
+    // noParse: /jquery/, // 对匹配的引入进行忽略
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.json', '.less', '.css', '.mjs'],
@@ -170,7 +151,7 @@ const baseConfig = {
     new webpack.IgnorePlugin(ignorePluginCfg),
     new HappyPack(happyPackStylesCfg),
     new HappyPack(happyPackJSCfg),
-    new HappyPack(happyPackTSCfg)
+    new LodashModuleReplacementPlugin()
   ]
 }
 

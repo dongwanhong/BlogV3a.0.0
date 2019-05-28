@@ -5,6 +5,15 @@ const common = require('./webpack.common')
 const devConfig = {
   mode: 'development',
   devtool: 'cheap-module-eval-source-map',
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        use: ['source-map-loader'],
+        enforce: 'pre'
+      }
+    ]
+  },
   devServer: {
     host: 'localhost',
     port: 9000,

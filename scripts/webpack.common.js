@@ -23,11 +23,6 @@ const rules = [
     ]
   },
   {
-    test: /\.js$/,
-    use: ['source-map-loader'],
-    enforce: 'pre'
-  },
-  {
     test: /\.m?js|jsx|ts|tsx$/,
     exclude: /node_modules/,
     use: [
@@ -141,6 +136,7 @@ const baseConfig = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.json', '.less', '.css', '.mjs'],
     alias: {
+      'react-dom': '@hot-loader/react-dom',
       '@styles': path.resolve(__dirname, '../src/styles/')
     }
   },

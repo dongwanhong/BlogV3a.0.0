@@ -1,25 +1,7 @@
-# Webpack Basis
+# BlogV3a.0.0
 
-A Webpack development environment with basic configuration.
+This is a website about sharing personal growth records and learning experiences.
 
-### `yarn start`
+Bloggers like to make friends and communicate with each other.
 
-Runs the app in the development mode.
-
-Open [http://localhost:9000/](http://localhost:9000/) to view it in the browser.
-
-The page will reload if you make edits.
-
-You will also see any lint errors in the console.
-
-### `yarn run build`
-
-Builds the app for production to the `dist` folder.
-
-The build is minified and the filenames include the hashes.
-
-### `yarn run build.dev`
-
-Builds the app for development to the `dist` folder.
-
-The generated files are not compressed.
+#### Contact me ：[Send Email](http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=zqqhoKm5pq2moI6oobajr6ei4K2how)

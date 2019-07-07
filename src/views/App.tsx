@@ -1,25 +1,17 @@
 import React, { Component } from 'react'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { hot } from 'react-hot-loader/root'
-
-export interface HelloProps {
-  compiler: string
-  framework: string
-}
+import Home from './Home'
+import Main from './Main'
 
 @hot
-// 'HelloProps' describes the shape of props.
-// State is never set so we use the '{}' type.
-class App extends Component<HelloProps, {}> {
-  public static defaultProps = {
-    compiler: 'TypeScript',
-    framework: 'React'
-  }
-
+class App extends Component {
   public render(): React.ReactNode {
     return (
-      <h1>
-        Hello from {this.props.compiler} and {this.props.framework}!
-      </h1>
+      <Router>
+        <Route path="/" exact component={Home} />
+        <Route path="/main/" exact component={Main} />
+      </Router>
     )
   }
 }

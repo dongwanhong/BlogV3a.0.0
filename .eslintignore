@@ -11,3 +11,10 @@
 /package-scripts.js
 /postcss.config.js
 package.json
+
+# Ignore Font files
+*.woff2
+*.woff2
+*.eot
+*.ttf
+*.otf

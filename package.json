@@ -19,6 +19,7 @@
     "stylelint:base": "stylelint '**/*.less' --syntax less",
     "stylelint": "yarn run stylelint:base",
     "stylelint:fix": "yarn run stylelint:base --fix",
+    "commit": "npx git cz",
     "predeploy": "yarn run build",
     "deploy": "gh-pages -d dist -b master -r https://github.com/Anani1994/anani1994.github.io.git",
     "release": "standard-version"
@@ -106,6 +107,7 @@
     "@types/react": "^16.8.18",
     "@types/react-dom": "^16.8.4",
     "@types/react-router-dom": "^4.3.4",
+    "bootstrap": "^4.3.1",
     "core-js": "3",
     "jquery": "^3.4.1",
     "lodash": "^4.17.11",
@@ -113,7 +115,8 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-hot-loader": "^4.8.8",
-    "react-router-dom": "^5.0.1"
+    "react-router-dom": "^5.0.1",
+    "url-parse": "^1.4.7"
   },
   "husky": {
     "hooks": {

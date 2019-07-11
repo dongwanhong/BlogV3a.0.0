@@ -8,43 +8,15 @@ interface NavItem {
   text: string
 }
 
-interface TopBarProps {
-  readonly navInfo: NavItem[]
-}
+export type NavList = readonly NavItem[]
 
-class TopBar extends Component<TopBarProps, {}> {
+class TopBar extends Component<{ navList: NavList }, {}> {
   public static defaultProps = {
-    navInfo: [
-      {
-        id: 1,
-        url: 'https://github.com/Anani1994',
-        text: 'Github'
-      },
-      {
-        id: 2,
-        url: '/',
-        text: '项目演示'
-      },
-      {
-        id: 3,
-        url: '/',
-        text: '博文'
-      },
-      {
-        id: 4,
-        url: 'https://anani1994.github.io/notebook/',
-        text: '笔记'
-      },
-      {
-        id: 5,
-        url: '/',
-        text: '设置'
-      }
-    ]
+    navList: []
   }
 
   public render(): React.ReactNode {
-    const { navInfo } = this.props
+    const { navList } = this.props
 
     return (
       <div className="top-bar container">
@@ -52,7 +24,7 @@ class TopBar extends Component<TopBarProps, {}> {
           码良的博客
         </Link>
         <div className="nav">
-          {navInfo.map(item => (
+          {navList.map(item => (
             <Link key={item.id} to={item.url} className="nav-item">
               {item.text}
             </Link>

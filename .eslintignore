@@ -14,7 +14,8 @@ package.json
 
 # Ignore Font files
 *.woff2
-*.woff2
+*.woff
 *.eot
 *.ttf
 *.otf
+*.svg

@@ -1,12 +1,5 @@
-import { INIT_NAV_LIST } from './actionTypes'
-import { NavList } from '../../../components/custom/TopBar'
+import { TOGGLE_PAGE_BTN } from './actionTypes'
 
-export interface NavListAction {
-  type: string
-  navList: NavList
-}
-
-export const getInitNavList = (navList: NavList): NavListAction => ({
-  type: INIT_NAV_LIST,
-  navList
+export const getToggleBtn = (): { type: string } => ({
+  type: TOGGLE_PAGE_BTN
 })

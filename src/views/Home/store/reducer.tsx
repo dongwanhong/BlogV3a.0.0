@@ -1,21 +1,19 @@
 import { fromJS } from 'immutable'
-import { INIT_NAV_LIST } from './actionTypes'
-import { NavList } from '../../../components/custom/TopBar'
+import { TOGGLE_PAGE_BTN } from './actionTypes'
 
 interface Action {
   type: string
-  navList: NavList
 }
 
 // 默认数据
 const defaultState = fromJS({
-  navList: []
+  showBtn: true
 })
 
 const reducer = (state = defaultState, action: Action): {} => {
   switch (action.type) {
-    case INIT_NAV_LIST:
-      return state.set('navList', action.navList)
+    case TOGGLE_PAGE_BTN:
+      return state.set('showBtn', !state.get('showBtn'))
     default:
       return state
   }

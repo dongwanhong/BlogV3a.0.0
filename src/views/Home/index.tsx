@@ -1,19 +1,24 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { CSSTransition } from 'react-transition-group'
 import { actionCreators } from './store'
+import { withAnimateRoute } from '../../components'
 
-const classNames = {
-  enter: 'animated',
-  enterActive: 'slideInDown',
-  exit: 'animated',
-  exitActive: 'slideOutUp'
+interface StateToProps {
+  showBtn: boolean
+  classNames: CSSTransition.CSSTransitionClassNames
 }
 
-class Home extends Component<{ showBtn: boolean; toggleShowBtn: Function }> {
+interface DispathToProps {
+  toggleShowBtn(): void
+}
+
+export type Props = StateToProps & DispathToProps
+
+class Home extends PureComponent<Props, {}> {
   public render(): React.ReactNode {
-    const { showBtn, toggleShowBtn } = this.props
+    const { showBtn, classNames, toggleShowBtn } = this.props
 
     return (
       <div className="home">
@@ -39,11 +44,12 @@ class Home extends Component<{ showBtn: boolean; toggleShowBtn: Function }> {
   }
 }
 
-const mapStateToProps = (state: { getIn: Function }): {} => ({
-  showBtn: state.getIn(['home', 'showBtn'])
+const mapStateToProps = (state: { getIn: Function }): StateToProps => ({
+  showBtn: state.getIn(['home', 'showBtn']),
+  classNames: state.getIn(['home', 'classNames']).toJS()
 })
 
-const mapDispatchToProps = (dispath: Function): {} => ({
+const mapDispatchToProps = (dispath: Function): DispathToProps => ({
   toggleShowBtn(): void {
     dispath(actionCreators.getToggleBtn())
   }
@@ -52,4 +58,4 @@ const mapDispatchToProps = (dispath: Function): {} => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Home)
+)(withAnimateRoute(Home))

@@ -1,14 +1,27 @@
 import { fromJS } from 'immutable'
+import { CSSTransition } from 'react-transition-group'
 import { TOGGLE_PAGE_BTN } from './actionTypes'
 
 interface Action {
-  type: string
+  readonly type: string
 }
 
-// 默认数据
-const defaultState = fromJS({
-  showBtn: true
-})
+interface State {
+  readonly showBtn: boolean
+  readonly classNames: CSSTransition.CSSTransitionClassNames
+}
+
+const originState: State = {
+  showBtn: true,
+  classNames: {
+    enter: 'animated',
+    enterActive: 'slideInDown',
+    exit: 'animated',
+    exitActive: 'slideOutUp'
+  }
+}
+
+const defaultState = fromJS(originState)
 
 const reducer = (state = defaultState, action: Action): {} => {
   switch (action.type) {

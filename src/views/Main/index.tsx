@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 
-class Main extends Component {
+class Main extends PureComponent {
   public render(): React.ReactNode {
     return <h1>main</h1>
   }

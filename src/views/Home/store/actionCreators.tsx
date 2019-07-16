@@ -1,5 +1,5 @@
-import { TOGGLE_PAGE_BTN } from './actionTypes'
+import { TOGGLE_PAGE_BTN, Action } from './types'
 
-export const getToggleBtn = (): { type: string } => ({
+export const getToggleBtn = (): Action => ({
   type: TOGGLE_PAGE_BTN
 })

@@ -1,14 +1,12 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
+import { Dispatch } from 'redux'
 import { Link } from 'react-router-dom'
 import { CSSTransition } from 'react-transition-group'
 import { actionCreators } from './store'
 import { withAnimateRoute } from '../../components'
-
-interface StateToProps {
-  showBtn: boolean
-  classNames: CSSTransition.CSSTransitionClassNames
-}
+import { State as StateToProps } from './store'
+import { AppState } from '../../store'
 
 interface DispathToProps {
   toggleShowBtn(): void
@@ -18,13 +16,13 @@ export type Props = StateToProps & DispathToProps
 
 class Home extends PureComponent<Props, {}> {
   public render(): React.ReactNode {
-    const { showBtn, classNames, toggleShowBtn } = this.props
+    const { showBtn, classNames, toggleShowBtn, timeout } = this.props
 
     return (
       <div className="home">
         <CSSTransition
           in={showBtn}
-          timeout={1000}
+          timeout={timeout}
           classNames={classNames}
           mountOnEnter={true}
           unmountOnExit={true}
@@ -44,12 +42,13 @@ class Home extends PureComponent<Props, {}> {
   }
 }
 
-const mapStateToProps = (state: { getIn: Function }): StateToProps => ({
+const mapStateToProps = (state: AppState): StateToProps => ({
   showBtn: state.getIn(['home', 'showBtn']),
+  timeout: state.getIn(['home', 'timeout']),
   classNames: state.getIn(['home', 'classNames']).toJS()
 })
 
-const mapDispatchToProps = (dispath: Function): DispathToProps => ({
+const mapDispatchToProps = (dispath: Dispatch): DispathToProps => ({
   toggleShowBtn(): void {
     dispath(actionCreators.getToggleBtn())
   }

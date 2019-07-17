@@ -11,7 +11,7 @@ type AnimateRouteComponentProps = Omit<RouteComponentProps, 'match' | 'staticCon
 }
 
 const mapStateToProps = (state: AppState): StateToProps => ({
-  unmountOnExit: state.getIn(['routeAnimater', 'showBtn']),
+  unmountOnExit: state.getIn(['routeAnimater', 'unmountOnExit']),
   timeout: state.getIn(['routeAnimater', 'timeout']),
   classNames: state.getIn(['routeAnimater', 'classNames']).toJS()
 })

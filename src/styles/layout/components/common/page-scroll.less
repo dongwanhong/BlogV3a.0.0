@@ -1,0 +1,14 @@
+.page-scroll {
+    position: relative;
+    overflow: hidden;
+
+    & > .scroll-container {
+        position: absolute;
+        width: 100%;
+        transition: top 1000ms ease-in;
+
+        & > .page-item {
+            width: 100%;
+        }
+    }
+}

@@ -26,6 +26,27 @@ class Utils {
       WrappedComponent
     )})`
   }
+
+  /**
+   * @description
+   * 节流函数
+   * @param {Function} method 需要执行的函数
+   * @param {number} delay 延迟执行的时间
+   * @param {object} context 函数执行的环境
+   * @returns {Function} 包装后的函数
+   */
+  public throttle(method: Function, delay: number, context?: object): () => void {
+    let wait = false
+    return function(): void {
+      if (!wait) {
+        method.apply(context, arguments)
+        wait = true
+        setTimeout(() => {
+          wait = false
+        }, delay)
+      }
+    }
+  }
 }
 
 export default new Utils()

@@ -15,6 +15,11 @@ interface DispathToProps {
 export type Props = StateToProps & DispathToProps
 
 class Home extends PureComponent<Props, {}> {
+  public componentWillUnmount(): void {
+    const { showBtn, toggleShowBtn } = this.props
+    if (showBtn) toggleShowBtn()
+  }
+
   public render(): React.ReactNode {
     const { showBtn, classNames, toggleShowBtn, timeout } = this.props
 

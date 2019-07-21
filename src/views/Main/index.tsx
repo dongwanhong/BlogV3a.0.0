@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import { PageScroll } from '../../components'
+import { withAnimateRoute } from '../../components'
 
 class Main extends PureComponent {
   public render(): React.ReactNode {
@@ -12,4 +13,4 @@ class Main extends PureComponent {
   }
 }
 
-export default Main
+export default withAnimateRoute(Main)

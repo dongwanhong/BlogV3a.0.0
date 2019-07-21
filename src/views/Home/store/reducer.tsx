@@ -2,7 +2,7 @@ import { fromJS } from 'immutable'
 import { State, TOGGLE_PAGE_BTN, Action } from './types'
 
 const originState: State = {
-  showBtn: true,
+  showBtn: false,
   timeout: 1000,
   classNames: {
     enter: 'animated',

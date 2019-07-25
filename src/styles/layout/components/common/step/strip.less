@@ -1,0 +1,47 @@
+.step-wrapper {
+
+    &.strip {
+
+        &>.step-item {
+            position: relative;
+            display: flex;
+            flex: 1 1 0;
+            padding: 0 1rem;
+            height: 2rem;
+            line-height: 2rem;
+            text-align: center;
+
+            &:not(:first-child) {
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: -1rem;
+                    border-style: solid;
+                    border-width: 1rem;
+                }
+            }
+
+            &:not(:last-child) {
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    right: -0.8rem;
+                    border-style: solid;
+                    border-width: 1rem;
+                }
+            }
+
+            .text {
+                align-self: flex-end;
+                padding-left: .2rem;
+                height: 1.5rem;
+                line-height: 1.5rem;
+                font-size: 12px;
+            }
+        }
+    }
+}

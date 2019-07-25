@@ -1,0 +1,39 @@
+.step-wrapper {
+
+    &.strip {
+
+        &>.step-item {
+            background: @bGroud-gray-active;
+
+            &:not(:first-child) {
+
+                &::before {
+                    border-color: @bGroud-gray-active @bGroud-gray-active @bGroud-gray-active @transparent;
+                }
+            }
+
+            &:not(:last-child) {
+
+                &::after {
+                    border-color: @white @white @white @bGroud-gray-active;
+                }
+            }
+
+            &.done {
+
+                &~.step-item {
+                    color: @text-muted;
+                    background: @bGroud-gray;
+
+                    &::after {
+                        border-left-color: @bGroud-gray;
+                    }
+
+                    &::before {
+                        border-color: @bGroud-gray @bGroud-gray @bGroud-gray @transparent;
+                    }
+                }
+            }
+        }
+    }
+}

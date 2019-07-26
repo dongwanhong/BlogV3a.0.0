@@ -1,12 +1,11 @@
 /**
  * @description
- * 指定每条步骤的提示信息
+ * 指定每条步骤的提示信息，当 extra 为真时标题和描述都无效
  * @param {string} title 可选的，标题
  * @param {string} description 可选的，对步骤的详情描述
  */
 
 import React, { Component, ReactNode } from 'react'
-import { setActiveStepType } from '../index'
 
 interface Props {
   title?: string
@@ -14,7 +13,7 @@ interface Props {
   index?: number
   activeIndex?: number
   extra?: boolean
-  setActiveStep?: setActiveStepType
+  onChange?: (index: number) => void
 }
 
 class StepItem extends Component<Props, {}> {
@@ -25,7 +24,7 @@ class StepItem extends Component<Props, {}> {
       index = 0,
       activeIndex = 0,
       extra,
-      setActiveStep = () => {}
+      onChange = () => {}
     } = this.props
     let classNames = 'step-item'
 
@@ -40,17 +39,14 @@ class StepItem extends Component<Props, {}> {
     }
 
     return (
-      <>
-        <div
-          onClick={() => {
-            setActiveStep(index)
-          }}
-          className={classNames}
-        >
-          <div className="title">{title}</div>
-          <div className="text">{description}</div>
-        </div>
-      </>
+      <div className={classNames} onClick={() => onChange(index)}>
+        {extra ? null : (
+          <>
+            <div className="title">{title}</div>
+            <div className="text">{description}</div>
+          </>
+        )}
+      </div>
     )
   }
 }

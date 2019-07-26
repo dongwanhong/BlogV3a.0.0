@@ -6,64 +6,36 @@
  * @param {'color' | 'number' | 'all'} content 可选的，在 'circle' 模式，指定圆圈中以数字或颜色填充，默认为数字
  * @param {boolean} line 可选的，是否添加横线，只在 'circle' 模式下的水平布局下的非单点高亮有效
  * @param {boolean} extra 可选的，配合在 content 为 'color' 的模式下进行单点高亮
+ * @param {(index: number) => void} onChange 可选的，点击每一步时执行的函数，参数为点击的步数，以零开始
  */
 
 import React, { PureComponent, ReactNode } from 'react'
 import StepItem from './components/StepItem'
 
-type modeType = 'circle' | 'strip'
-type contentType = 'color' | 'number' | 'all'
-type directionType = 'vertical' | 'horizontal'
-export type setActiveStepType = (index: number) => void
-
 interface Props {
-  mode?: modeType
-  direction?: directionType
-  content?: contentType
+  activeIndex?: number
+  mode?: 'circle' | 'strip'
+  direction?: 'vertical' | 'horizontal'
+  content?: 'color' | 'number' | 'all'
   line?: boolean
   extra?: boolean
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onChange?: (index: number) => any
+  onChange?: (index: number) => void
 }
 
-interface State {
-  activeIndex: number
-}
-
-class Step extends PureComponent<Props, State> {
+class Step extends PureComponent<Props, {}> {
   public static StepItem = StepItem
-  public state = {
-    activeIndex: 0
-  }
-
-  public constructor(props: Props) {
-    super(props)
-    this.setActiveStep = this.setActiveStep.bind(this)
-  }
-
-  public setActiveStep: setActiveStepType = (index: number): void => {
-    const { onChange } = this.props
-    const { activeIndex } = this.state
-    if (activeIndex === index) {
-      if (onChange) {
-        onChange(index)
-      }
-      return
-    }
-    this.setState(
-      () => ({ activeIndex: index }),
-      () => {
-        if (onChange) {
-          onChange(index)
-        }
-      }
-    )
-  }
 
   public render(): ReactNode {
-    const { setActiveStep } = this
-    const { children, mode = 'circle', content, direction = 'horizontal', line, extra } = this.props
-    const { activeIndex } = this.state
+    const {
+      children,
+      mode = 'strip',
+      direction = 'horizontal',
+      content,
+      line,
+      extra,
+      activeIndex,
+      onChange
+    } = this.props
     const classNames: (number | string | undefined)[] = [mode, direction, 'step-wrapper']
 
     if (content === 'all') {
@@ -89,7 +61,7 @@ class Step extends PureComponent<Props, State> {
       >
         {React.Children.map(children, (oChildren, index) =>
           React.isValidElement(oChildren)
-            ? React.cloneElement(oChildren, { index, activeIndex, setActiveStep, extra })
+            ? React.cloneElement(oChildren, { index, activeIndex, extra, onChange })
             : null
         )}
       </div>

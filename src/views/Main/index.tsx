@@ -24,7 +24,7 @@ class Main extends PureComponent<Props, {}> {
     const count = 4
     if (isDown && activeIndex + 1 < count) {
       setActiveIndex(activeIndex + 1)
-    } else if (!isDown && activeIndex >= 0) {
+    } else if (!isDown && activeIndex > 0) {
       setActiveIndex(activeIndex - 1)
     }
   }

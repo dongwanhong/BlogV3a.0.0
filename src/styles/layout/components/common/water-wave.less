@@ -1,0 +1,70 @@
+.wave-container {
+    height: 100%;
+    background-size: 100% 100%;
+}
+
+.wave-wrapper {
+    position: absolute;
+    width: 10rem;
+    height: 10rem;
+
+    &>.wave {
+        position: absolute; // 定位使 z-index 生效
+        top: calc((100% - 1rem) / 2);
+        left: calc((100% - 1rem) / 2);
+        width: 1rem;
+        height: 1rem;
+        border-radius: 10rem; // 设置最大形态的值使得一直保持圆形
+        background-attachment: fixed;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: 100% 100%; // 背景铺满与 .wave-container 的背景进行层叠
+
+        &:nth-child(1) {
+            z-index: 1; // 堆叠递增以使得后续动画可见
+            animation: water-wave 1000ms linear 200ms 1 normal forwards;
+            background-size: 100% 105%;
+        }
+
+        &:nth-child(2) {
+            z-index: 2;
+            animation: water-wave 1000ms linear 300ms 1 normal forwards;
+            background-size: 100% 102%;
+        }
+
+        &:nth-child(3) {
+            z-index: 3;
+            animation: water-wave 1000ms linear 500ms 1 normal forwards;
+            background-size: 100% 104%;
+        }
+
+        &:nth-child(4) {
+            z-index: 4;
+            animation: water-wave 1000ms linear 700ms 1 normal forwards;
+            background-size: 100% 102%;
+        }
+
+        &:nth-child(5) {
+            z-index: 5;
+            animation: water-wave 1000ms linear 900ms 1 normal forwards;
+            background-size: 100% 100%; // 设置不同大小的背景产生视觉上水波的震幅
+        }
+    }
+}
+
+@keyframes water-wave {
+
+    from {
+        top: calc((100% - 1rem) / 2); // 计算中心纵坐标
+        left: calc((100% - 1rem) / 2); // 计算中心横坐标
+        width: 1rem;
+        height: 1rem;
+    }
+
+    to {
+        top: calc((100% - 10rem) / 2);
+        left: calc((100% - 10rem) / 2);
+        width: 10rem;
+        height: 10rem;
+    }
+}

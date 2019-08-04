@@ -35,7 +35,7 @@ class Utils {
    * @param {object} context 函数执行的环境
    * @returns {Function} 包装后的函数
    */
-  public throttle(method: Function, delay: number, context?: object): () => void {
+  public throttle(method: Function, delay: number = 1000, context?: object): () => void {
     let wait = false
     return function(): void {
       if (!wait) {
@@ -57,10 +57,11 @@ class Utils {
    */
   public random(min: number, max: number, precision: number = 0): number {
     const ret = Math.random() * (max - min) + min
+    const divisor = 10 ** precision
     if (precision === 0) {
       return Math.round(ret)
     }
-    return Math.round(ret * 10 ** precision) / precision
+    return Math.round(ret * divisor) / divisor
   }
 
   /**

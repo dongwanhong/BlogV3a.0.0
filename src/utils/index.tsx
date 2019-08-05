@@ -1,5 +1,7 @@
 import util from './util'
 import Rain from './rain'
 
-export { Rain }
+import * as RainType from './rain/types'
+
+export { Rain, RainType }
 export default util

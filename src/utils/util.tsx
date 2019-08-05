@@ -78,6 +78,16 @@ class Utils {
       iteratee.call(context, array[length], length, array)
     }
   }
+
+  /**
+   * @description
+   * 判断传入的值是否是 undefined
+   * @param {any} value 需要被检测的值
+   * @returns {boolean}
+   */
+  public isUndefined<T>(value: T): boolean {
+    return value === undefined
+  }
 }
 
 export default new Utils()

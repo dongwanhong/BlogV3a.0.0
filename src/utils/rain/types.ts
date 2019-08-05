@@ -1,4 +1,7 @@
 import { RefObject } from 'react'
+import Rain from './index'
+
+export type RainType = Required<Partial<Rain>>
 
 export interface Config {
   ele: RefObject<HTMLCanvasElement>

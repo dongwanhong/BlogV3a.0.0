@@ -12,7 +12,7 @@ import util from '../util'
 const defaultConfig: DefaultConfig = {
   width: document.documentElement.clientWidth,
   height: document.documentElement.clientHeight,
-  color: 'rgb(255, 255, 255)',
+  color: 'rgba(255, 255, 255, 0.5)',
   skyColor: 'rgba(161, 189, 241, 0.4)',
   count: 50, // 同时存在的雨滴数
   tally: 5 // 水花基数
@@ -86,10 +86,11 @@ class Rain {
    * @returns {void}
    */
   public reboot(): void {
-    const { stop, start, config } = this
+    const { stop, init, start, config } = this
     config.width = document.documentElement.clientWidth
     config.height = document.documentElement.clientHeight
     stop()
+    init()
     start()
   }
 

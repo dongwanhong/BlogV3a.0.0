@@ -4,9 +4,10 @@ import { Dispatch } from 'redux'
 import { Link } from 'react-router-dom'
 import { CSSTransition } from 'react-transition-group'
 import { actionCreators } from './store'
-import { withAnimateRoute } from '../../components'
+import { withAnimateRoute, Rain, WaterWave } from '../../components'
 import { State as StateToProps } from './store'
 import { AppState } from '../../store'
+import bgImage from '../../images/pages/home/bg-home.jpg'
 
 interface DispathToProps {
   toggleShowBtn(): void
@@ -24,25 +25,24 @@ class Home extends PureComponent<Props, {}> {
     const { showBtn, classNames, toggleShowBtn, timeout } = this.props
 
     return (
-      <div className="home">
-        <CSSTransition
-          in={showBtn}
-          timeout={timeout}
-          classNames={classNames}
-          mountOnEnter={true}
-          unmountOnExit={true}
-        >
-          <div className="toggle-btn animated">
-            <Link to="/main" target="_self">
-              <em className="icon icon-book" />
-            </Link>
-          </div>
-        </CSSTransition>
-        <div className="content" onClick={toggleShowBtn.bind(this)}>
-          <p>If you can't explain it simply,</p>
-          <p>you don't understand it well enough.</p>
+      <WaterWave url={bgImage}>
+        <div className="home" onClick={toggleShowBtn}>
+          <Rain />
+          <CSSTransition
+            in={showBtn}
+            timeout={timeout}
+            classNames={classNames}
+            mountOnEnter={true}
+            unmountOnExit={true}
+          >
+            <div className="toggle-btn">
+              <Link to="/main" target="_self">
+                <em className="icon icon-book" />
+              </Link>
+            </div>
+          </CSSTransition>
         </div>
-      </div>
+      </WaterWave>
     )
   }
 }

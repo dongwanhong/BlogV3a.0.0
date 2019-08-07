@@ -2,6 +2,39 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/Anani1994/BlogV3a.0.0/compare/v1.1.0...v1.2.0) (2019-08-07)
+
+
+### Bug Fixes
+
+* export 'State' was not found in './types' & 路由跳转失效 ([b10e94c](https://github.com/Anani1994/BlogV3a.0.0/commit/b10e94c))
+* 跳转后返回 Home 组件时的跳转按钮依旧显示 & Home 组件和 Main 组件同时显示 ([76bad9e](https://github.com/Anani1994/BlogV3a.0.0/commit/76bad9e))
+* **home*:** 组件 Main 返回 Home 时可见 Step 组件按钮 & TS 中引入图片资源提示错误 ([3ade223](https://github.com/Anani1994/BlogV3a.0.0/commit/3ade223))
+* **main:** 滚动到顶部后继续滚动会导致下次向下滚动时需触发两次才会滚动 ([da9103c](https://github.com/Anani1994/BlogV3a.0.0/commit/da9103c))
+
+
+### Features
+
+* 使用 redux 和 immutable 管理数据 ([9051abd](https://github.com/Anani1994/BlogV3a.0.0/commit/9051abd))
+* 基于 react-router-dom 创建路由使用基础" ([ba3a415](https://github.com/Anani1994/BlogV3a.0.0/commit/ba3a415))
+* 完善首页基本内容，完成简单的路由跳转 ([711e2bc](https://github.com/Anani1994/BlogV3a.0.0/commit/711e2bc))
+* 对首页的基础内容进行简单布局 ([8d14b3f](https://github.com/Anani1994/BlogV3a.0.0/commit/8d14b3f))
+* 封装高阶组件 RouteAnimated 实现路由切换动画 ([e1f3e73](https://github.com/Anani1994/BlogV3a.0.0/commit/e1f3e73))
+* 构建全屏滚动组件的基本功能 ([1a9d18b](https://github.com/Anani1994/BlogV3a.0.0/commit/1a9d18b))
+* ***.less:** 将布局样式和颜色样式进行分离 ([db9aa3c](https://github.com/Anani1994/BlogV3a.0.0/commit/db9aa3c))
+* **home*:** 使用 Rain 组件和水波组件完成首页样式 ([4b8e931](https://github.com/Anani1994/BlogV3a.0.0/commit/4b8e931))
+* **main*:** 在 Main 中结合使用步骤组件和全屏滚动组件 ([e35315f](https://github.com/Anani1994/BlogV3a.0.0/commit/e35315f))
+* **page scroll:** 使用 Props 管理全屏滚动组件以避免使用派生 State ([0971410](https://github.com/Anani1994/BlogV3a.0.0/commit/0971410))
+* **step*:** 完成步骤条组件的基本功能 ([d8e22e6](https://github.com/Anani1994/BlogV3a.0.0/commit/d8e22e6))
+* **step*:** 调整和新增步骤组件的条形样式 ([64c8073](https://github.com/Anani1994/BlogV3a.0.0/commit/64c8073))
+* **step*:** 调整步骤组件样式、设置在 dot 模式下不渲染标题和描述 ([27879ec](https://github.com/Anani1994/BlogV3a.0.0/commit/27879ec))
+* **util:** 完成工具雨类的实现 ([1e4e12c](https://github.com/Anani1994/BlogV3a.0.0/commit/1e4e12c))
+* **util*:** 基于雨类创建 Rain 组件 ([580ab6d](https://github.com/Anani1994/BlogV3a.0.0/commit/580ab6d))
+* **utils:** 调整工具类结构，创建雨类基本结构 ([ed4ef4c](https://github.com/Anani1994/BlogV3a.0.0/commit/ed4ef4c))
+* **water-wave*:** 添加 WaterWave 水波组件 ([348a31f](https://github.com/Anani1994/BlogV3a.0.0/commit/348a31f))
+
+
+
 ## 1.1.0 (2019-07-03)
 
 

@@ -88,6 +88,48 @@ class Utils {
   public isUndefined<T>(value: T): boolean {
     return value === undefined
   }
+
+  /**
+   * 以(x,y)为圆心绘制一条弧线
+   * @param {CanvasRenderingContext2D} ctx 2D上下文，必需的
+   * @param {number} x 可选的，圆心横坐标
+   * @param {number} y 可选的，圆心纵坐标
+   * @param {number} radius 可选的，半径
+   * @param {number} m 可选的，起始角度(用弧度表示)
+   * @param {number} n 可选的，结束角度(用弧度表示)
+   * @param {boolean} counterclockwise 可选的，是否按逆时针方向计算
+   * @returns {void}
+   */
+  public drawCircle(
+    ctx: CanvasRenderingContext2D,
+    x = 0,
+    y = 0,
+    radius = 5,
+    m = 0,
+    n = 2 * Math.PI,
+    counterclockwise = false
+  ): void {
+    ctx.beginPath()
+    ctx.arc(x, y, radius, m, n, counterclockwise)
+    ctx.fill()
+  }
+
+  /**
+   * @description
+   * 绘制直线
+   * @param {CanvasRenderingContext2D} ctx 2D上下文，必需的
+   * @param {number} x 起始横坐标
+   * @param {number} y 起始纵坐标
+   * @param {number} m 节点横坐标
+   * @param {number} n 节点纵坐标
+   * @returns {void}
+   */
+  public drawLine(ctx: CanvasRenderingContext2D, x = 0, y = 0, m = 0, n = 0): void {
+    ctx.beginPath()
+    ctx.moveTo(x, y)
+    ctx.lineTo(m, n)
+    ctx.stroke()
+  }
 }
 
 export default new Utils()

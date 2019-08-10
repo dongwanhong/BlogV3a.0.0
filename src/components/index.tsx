@@ -7,6 +7,7 @@ import { PageScroll, PageItem } from './common/PageScroll'
 import { Step, StepItem } from './common/Step'
 import WaterWave from './common/WateWave'
 import Rain from './common/Rain'
+import StarrySky from './common/StarrySky'
 // Custom
 import TopBar from './custom/TopBar'
 import Footer from './custom/Footer'
@@ -20,6 +21,7 @@ export {
   StepItem,
   WaterWave,
   Rain,
+  StarrySky,
   TopBar,
   Footer
 }

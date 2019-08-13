@@ -1,5 +1,3 @@
-// Color system
-
 @blue:    #007bff;
 @indigo:  #6610f2;
 @purple:  #6f42c1;
@@ -34,24 +32,29 @@
 @dark:          @gray-800;
 
 // ================================================
-// @cyan @green @red @yellow
+// @dark @white @red @green @yellow @cyan
+// ================================================
 
-// 字体颜色状态组
-@text-white:                  @white;
-@text-white-hove:             @gray-200;
-@text-shadow-white:           @gray-600;
-
-@text-muted:                  @secondary;
+// 黑色
 @text-dart:                   @dark;
+@bGroud-dark:                 @dark;
 
-// 边框颜色状态组
+// 白色组
+@text-white:                  @white;
+@text-white-hover:            @gray-300;
+
 @border-white:                @white;
 
-// 边框异色状态组：gray->cyan
+// 次要色
+@text-muted:                  @secondary;
+
+// 灰色组：gray->cyan
+@text-gray:                   @gray-300;
+@text-gray-hover:             @white;
+
 @border-gray:                 @gray-300;
 @border-gray-active:          lighten(@cyan, 20%);
 
-// 背景异色状态组：gray->cyan
 @bGroud-gray:                 @gray-300;
 @bGroud-gray-hover:           lighten(@cyan, 35%);
 @bGroud-gray-active:          lighten(@cyan, 20%);

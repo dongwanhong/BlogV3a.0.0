@@ -1,11 +1,9 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
-import { Step, PageScroll } from '../../components'
-import { withAnimateRoute } from '../../components'
-import { State as StateToProps } from './store'
+import { withAnimateRoute, Step, PageScroll, TopBar } from '../../components'
+import { State as StateToProps, actionCreators } from './store'
 import { AppState } from '../../store'
-import { actionCreators } from './store'
 
 export interface DispathToProps {
   setActiveIndex: (index: number) => void
@@ -13,7 +11,7 @@ export interface DispathToProps {
 
 type Props = StateToProps & DispathToProps
 
-class Main extends PureComponent<Props, {}> {
+class Resume extends PureComponent<Props, {}> {
   public constructor(props: Props) {
     super(props)
     this.setActivePage = this.setActivePage.bind(this)
@@ -31,10 +29,13 @@ class Main extends PureComponent<Props, {}> {
 
   public render(): React.ReactNode {
     const { setActivePage } = this
-    const { activeIndex, setActiveIndex } = this.props
+    const { activeIndex, setActiveIndex, navList } = this.props
 
     return (
-      <div className="main">
+      <div className="resume">
+        <div className="top-bar-warpper">
+          <TopBar navList={navList} />
+        </div>
         <div className="step-container">
           <Step
             mode="circle"
@@ -62,7 +63,8 @@ class Main extends PureComponent<Props, {}> {
 }
 
 const mapStateToProps = (state: AppState): StateToProps => ({
-  activeIndex: state.getIn(['main', 'activeIndex'])
+  activeIndex: state.getIn(['resume', 'activeIndex']),
+  navList: state.getIn(['resume', 'navList']).toJS()
 })
 
 const mapDispatchToProps = (dispath: Dispatch): DispathToProps => ({
@@ -74,4 +76,4 @@ const mapDispatchToProps = (dispath: Dispatch): DispathToProps => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withAnimateRoute(Main))
+)(withAnimateRoute(Resume))

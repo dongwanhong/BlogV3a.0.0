@@ -1,11 +1,9 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
-import { Link } from 'react-router-dom'
 import { CSSTransition } from 'react-transition-group'
-import { actionCreators } from './store'
-import { withAnimateRoute, Rain, WaterWave } from '../../components'
-import { State as StateToProps } from './store'
+import { withAnimateRoute, WaterWave, Rain, TopBar } from '../../components'
+import { State as StateToProps, actionCreators } from './store'
 import { AppState } from '../../store'
 import bgImage from '../../images/pages/home/bg-home.jpg'
 
@@ -27,7 +25,6 @@ class Home extends PureComponent<Props, {}> {
     return (
       <WaterWave url={bgImage}>
         <div className="home" onClick={toggleShowBtn}>
-          <Rain />
           <CSSTransition
             in={showBtn}
             timeout={timeout}
@@ -35,12 +32,9 @@ class Home extends PureComponent<Props, {}> {
             mountOnEnter={true}
             unmountOnExit={true}
           >
-            <div className="toggle-btn">
-              <Link to="/main" target="_self">
-                <em className="icon icon-book" />
-              </Link>
-            </div>
+            <TopBar />
           </CSSTransition>
+          <Rain />
         </div>
       </WaterWave>
     )

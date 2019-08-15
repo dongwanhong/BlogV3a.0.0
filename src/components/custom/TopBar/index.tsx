@@ -28,7 +28,7 @@ class TopBar extends Component<Props, {}> {
     },
     {
       id: 3,
-      url: '/',
+      url: '/article-list',
       text: '博文'
     },
     {

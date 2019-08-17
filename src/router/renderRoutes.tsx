@@ -1,6 +1,7 @@
 import React from 'react'
 import { Switch, Route, RouteComponentProps, SwitchProps, match } from 'react-router'
 import { Location } from 'history'
+import DocumentTitle from 'react-document-title'
 
 export interface RouteConfigComponentProps<Params extends { [K in keyof Params]?: string } = {}>
   extends RouteComponentProps<Params> {
@@ -9,13 +10,16 @@ export interface RouteConfigComponentProps<Params extends { [K in keyof Params]?
 
 interface RouteConfig {
   key?: React.Key
+  path?: string
+  exact?: boolean
+  meta?: {
+    title?: string
+  }
+  strict?: boolean
+  routes?: RouteConfig[]
   location?: Location
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   component?: React.ComponentType<RouteConfigComponentProps<any>> | React.ComponentType
-  path?: string
-  exact?: boolean
-  strict?: boolean
-  routes?: RouteConfig[]
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   render?: (props: RouteConfigComponentProps<any>) => React.ReactNode
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -52,13 +56,22 @@ const renderRoutes: RenderRoutes = (routes, extraProps = {}, switchProps = {}) =
           path={route.path}
           exact={route.exact}
           strict={route.strict}
-          render={props =>
-            route.render ? (
-              route.render({ ...props, ...extraProps, route: route })
-            ) : route.component ? (
-              <route.component {...props} {...extraProps} route={route} />
-            ) : null
-          }
+          render={props => {
+            if (route.render) {
+              return route.render({ ...props, ...extraProps, route: route })
+            } else if (route.component) {
+              return (
+                <>
+                  {route.meta && route.meta.title ? (
+                    <DocumentTitle title={route.meta.title} />
+                  ) : null}
+                  <route.component {...props} {...extraProps} route={route} />
+                </>
+              )
+            } else {
+              return null
+            }
+          }}
         />
       ))}
     </Switch>

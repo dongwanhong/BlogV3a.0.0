@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { CSSTransition } from 'react-transition-group'
+import DocumentTitle from 'react-document-title'
 import { withAnimateRoute, WaterWave, Rain, TopBar } from '../../components'
 import { State as StateToProps, actionCreators } from './store'
 import { AppState } from '../../store'
@@ -23,20 +24,22 @@ class Home extends PureComponent<Props, {}> {
     const { showBtn, classNames, toggleShowBtn, timeout } = this.props
 
     return (
-      <WaterWave url={bgImage}>
-        <div className="home" onClick={toggleShowBtn}>
-          <CSSTransition
-            in={showBtn}
-            timeout={timeout}
-            classNames={classNames}
-            mountOnEnter={true}
-            unmountOnExit={true}
-          >
-            <TopBar />
-          </CSSTransition>
-          <Rain />
-        </div>
-      </WaterWave>
+      <DocumentTitle title="码良的博客">
+        <WaterWave url={bgImage}>
+          <div className="home" onClick={toggleShowBtn}>
+            <CSSTransition
+              in={showBtn}
+              timeout={timeout}
+              classNames={classNames}
+              mountOnEnter={true}
+              unmountOnExit={true}
+            >
+              <TopBar />
+            </CSSTransition>
+            <Rain />
+          </div>
+        </WaterWave>
+      </DocumentTitle>
     )
   }
 }

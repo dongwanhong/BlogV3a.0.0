@@ -1042,6 +1042,13 @@
   resolved "https://registry.npm.taobao.org/@types/q/download/@types/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"
   integrity sha1-aQoUdbhPKohP0HzXl8APXzE1bqg=
 
+"@types/react-document-title@^2.0.3":
+  version "2.0.3"
+  resolved "https://registry.npm.taobao.org/@types/react-document-title/download/@types/react-document-title-2.0.3.tgz#32d0b3d0d36a9041d13b01106c64309388a0153a"
+  integrity sha1-MtCz0NNqkEHROwEQbGQwk4igFTo=
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-dom@^16.8.4":
   version "16.8.4"
   resolved "https://registry.npm.taobao.org/@types/react-dom/download/@types/react-dom-16.8.4.tgz#7fb7ba368857c7aa0f4e4511c4710ca2c5a12a88"
@@ -3879,6 +3886,11 @@ execall@^1.0.0:
   integrity sha1-c9CQTjlbPKsGWLCNCewlMH8pu3M=
   dependencies:
     clone-regexp "^1.0.0"
+
+exenv@^1.2.1:
+  version "1.2.2"
+  resolved "https://registry.npm.taobao.org/exenv/download/exenv-1.2.2.tgz#2ae78e85d9894158670b03d47bec1f03bd91bb9d"
+  integrity sha1-KueOhdmJQVhnCwPUe+wfA72Ru50=
 
 expand-brackets@^2.1.4:
   version "2.1.4"
@@ -7942,7 +7954,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.5.6, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.npm.taobao.org/prop-types/download/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha1-UsQedbjIfnK52TYOAga5ncv/psU=
@@ -8144,6 +8156,14 @@ rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-document-title@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.npm.taobao.org/react-document-title/download/react-document-title-2.0.3.tgz#bbf922a0d71412fc948245e4283b2412df70f2b9"
+  integrity sha1-u/kioNcUEvyUgkXkKDskEt9w8rk=
+  dependencies:
+    prop-types "^15.5.6"
+    react-side-effect "^1.0.2"
+
 react-dom@^16.8.6:
   version "16.8.6"
   resolved "https://registry.npm.taobao.org/react-dom/download/react-dom-16.8.6.tgz#71d6303f631e8b0097f56165ef608f051ff6e10f"
@@ -8219,6 +8239,14 @@ react-router@5.0.1:
     react-is "^16.6.0"
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
+
+react-side-effect@^1.0.2:
+  version "1.1.5"
+  resolved "https://registry.npm.taobao.org/react-side-effect/download/react-side-effect-1.1.5.tgz#f26059e50ed9c626d91d661b9f3c8bb38cd0ff2d"
+  integrity sha1-8mBZ5Q7ZxibZHWYbnzyLs4zQ/y0=
+  dependencies:
+    exenv "^1.2.1"
+    shallowequal "^1.0.1"
 
 react-transition-group@^4.2.1:
   version "4.2.1"
@@ -8917,7 +8945,7 @@ sha.js@^2.4.0, sha.js@^2.4.8:
     inherits "^2.0.1"
     safe-buffer "^5.0.1"
 
-shallowequal@^1.0.2:
+shallowequal@^1.0.1, shallowequal@^1.0.2:
   version "1.1.0"
   resolved "https://registry.npm.taobao.org/shallowequal/download/shallowequal-1.1.0.tgz#188d521de95b9087404fd4dcb68b13df0ae4e7f8"
   integrity sha1-GI1SHelbkIdAT9TctosT3wrk5/g=

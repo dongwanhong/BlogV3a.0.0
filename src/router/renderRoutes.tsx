@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { Switch, Route, RouteComponentProps, SwitchProps, match } from 'react-router'
 import { Location } from 'history'
 import DocumentTitle from 'react-document-title'
@@ -18,8 +18,10 @@ interface RouteConfig {
   strict?: boolean
   routes?: RouteConfig[]
   location?: Location
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  component?: React.ComponentType<RouteConfigComponentProps<any>> | React.ComponentType
+  component?:
+    | React.ComponentType<RouteConfigComponentProps<any>> // eslint-disable-line @typescript-eslint/no-explicit-any
+    | React.ComponentType
+    | React.LazyExoticComponent<any> // eslint-disable-line @typescript-eslint/no-explicit-any
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   render?: (props: RouteConfigComponentProps<any>) => React.ReactNode
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -62,10 +64,12 @@ const renderRoutes: RenderRoutes = (routes, extraProps = {}, switchProps = {}) =
             } else if (route.component) {
               return (
                 <>
-                  {route.meta && route.meta.title ? (
-                    <DocumentTitle title={route.meta.title} />
-                  ) : null}
-                  <route.component {...props} {...extraProps} route={route} />
+                  <Suspense fallback={<div>Loading...</div>}>
+                    {route.meta && route.meta.title ? (
+                      <DocumentTitle title={route.meta.title} />
+                    ) : null}
+                    <route.component {...props} {...extraProps} route={route} />
+                  </Suspense>
                 </>
               )
             } else {

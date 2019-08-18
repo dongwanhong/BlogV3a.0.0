@@ -1,12 +1,12 @@
+import { lazy } from 'react'
 import renderRoutesCore from './renderRoutes'
-import ArticleList from '../views/ArticleList'
 
 const routes = [
   {
     key: 'articleList',
     path: '/article-list',
     exact: true,
-    component: ArticleList,
+    component: lazy(() => import('../views/ArticleList')),
     meta: {
       title: '博文'
     }

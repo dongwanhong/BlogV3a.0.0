@@ -2,6 +2,7 @@ import React, { Suspense } from 'react'
 import { Switch, Route, RouteComponentProps, SwitchProps, match } from 'react-router'
 import { Location } from 'history'
 import DocumentTitle from 'react-document-title'
+import { FormattedMessage } from 'react-intl'
 
 export interface RouteConfigComponentProps<Params extends { [K in keyof Params]?: string } = {}>
   extends RouteComponentProps<Params> {
@@ -66,7 +67,9 @@ const renderRoutes: RenderRoutes = (routes, extraProps = {}, switchProps = {}) =
                 <>
                   <Suspense fallback={<div>Loading...</div>}>
                     {route.meta && route.meta.title ? (
-                      <DocumentTitle title={route.meta.title} />
+                      <FormattedMessage id={route.meta.title}>
+                        {txt => <DocumentTitle title={txt as string} />}
+                      </FormattedMessage>
                     ) : null}
                     <route.component {...props} {...extraProps} route={route} />
                   </Suspense>

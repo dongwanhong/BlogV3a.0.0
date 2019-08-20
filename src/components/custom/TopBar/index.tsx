@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from '../../index'
+import { injectIntl, WrappedComponentProps } from 'react-intl'
 
 interface NavItem {
   [propName: string]: string | number
@@ -10,54 +11,52 @@ interface NavItem {
 
 export type NavList = readonly NavItem[]
 
-interface Props {
+interface Props extends WrappedComponentProps<'intl'> {
   navList?: NavList
 }
 
 class TopBar extends Component<Props, {}> {
-  public static navList: NavList = [
-    {
-      id: 1,
-      url: 'https://github.com/dongwanhong',
-      text: 'Github'
-    },
-    {
-      id: 2,
-      url: '/',
-      text: '项目演示'
-    },
-    {
-      id: 3,
-      url: '/article-list',
-      text: '博文'
-    },
-    {
-      id: 4,
-      url: 'https://dongwanhong.github.io/notebook/',
-      text: '笔记'
-    },
-    {
-      id: 5,
-      url: '/',
-      text: '关于我'
-    },
-    {
-      id: 6,
-      url: '/',
-      text: '设置'
-    }
-  ]
-
   public render(): React.ReactNode {
-    let { navList } = this.props
+    let { navList, intl } = this.props
     if (!navList) {
-      navList = TopBar.navList
+      navList = [
+        {
+          id: 1,
+          url: 'https://github.com/dongwanhong',
+          text: intl.formatMessage({ id: 'topbar.github' })
+        },
+        {
+          id: 2,
+          url: '/',
+          text: intl.formatMessage({ id: 'topbar.project' })
+        },
+        {
+          id: 3,
+          url: '/article-list',
+          text: intl.formatMessage({ id: 'topbar.article' })
+        },
+        {
+          id: 4,
+          url: 'https://dongwanhong.github.io/notebook/',
+          text: intl.formatMessage({ id: 'topbar.note' })
+        },
+        {
+          id: 5,
+          url: '/',
+          text: intl.formatMessage({ id: 'topbar.resume' })
+        },
+        {
+          id: 6,
+          url: '/',
+          text: intl.formatMessage({ id: 'topbar.setting' })
+        }
+      ]
     }
 
     return (
       <div className="top-bar">
         <Link to="/" className="title">
-          码良的博客
+          {intl.formatMessage({ id: 'topbar.main' })}
         </Link>
         <div className="nav">
           {navList.map(item => (
@@ -71,4 +70,4 @@ class TopBar extends Component<Props, {}> {
   }
 }
 
-export default TopBar
+export default injectIntl(TopBar)

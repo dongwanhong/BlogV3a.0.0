@@ -8,7 +8,7 @@ const routes = [
     exact: true,
     component: lazy(() => import('../views/ArticleList')),
     meta: {
-      title: '博文'
+      title: 'topbar.main' // 使用国际化中的键
     }
   }
 ]

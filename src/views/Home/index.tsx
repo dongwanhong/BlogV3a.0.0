@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { CSSTransition } from 'react-transition-group'
 import DocumentTitle from 'react-document-title'
+import { injectIntl, WrappedComponentProps } from 'react-intl'
 import { withAnimateRoute, WaterWave, Rain, TopBar } from '../../components'
 import { State as StateToProps, actionCreators } from './store'
 import { AppState } from '../../store'
@@ -12,7 +13,7 @@ interface DispathToProps {
   toggleShowBtn(): void
 }
 
-export type Props = StateToProps & DispathToProps
+export type Props = StateToProps & DispathToProps & WrappedComponentProps<'intl'>
 
 class Home extends PureComponent<Props, {}> {
   public componentWillUnmount(): void {
@@ -21,10 +22,11 @@ class Home extends PureComponent<Props, {}> {
   }
 
   public render(): React.ReactNode {
-    const { showBtn, classNames, toggleShowBtn, timeout } = this.props
+    const { showBtn, classNames, toggleShowBtn, timeout, intl } = this.props
+    const title = intl.formatMessage({ id: 'doc.main' })
 
     return (
-      <DocumentTitle title="码良的博客">
+      <DocumentTitle title={title}>
         <WaterWave url={bgImage}>
           <div className="home" onClick={toggleShowBtn}>
             <CSSTransition
@@ -59,4 +61,4 @@ const mapDispatchToProps = (dispath: Dispatch): DispathToProps => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withAnimateRoute(Home))
+)(withAnimateRoute(injectIntl(Home)))

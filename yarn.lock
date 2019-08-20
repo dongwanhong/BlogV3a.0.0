@@ -939,6 +939,11 @@
   dependencies:
     find-up "^2.1.0"
 
+"@formatjs/intl-relativetimeformat@^2.6.3":
+  version "2.6.3"
+  resolved "https://registry.npm.taobao.org/@formatjs/intl-relativetimeformat/download/@formatjs/intl-relativetimeformat-2.6.3.tgz#f272083821f7bc0c078b28c225aede758212611b"
+  integrity sha1-8nIIOCH3vAwHiyjCJa7edYISYRs=
+
 "@hot-loader/react-dom@^16.8.6":
   version "16.8.6"
   resolved "https://registry.npm.taobao.org/@hot-loader/react-dom/download/@hot-loader/react-dom-16.8.6.tgz#7923ba27db1563a7cc48d4e0b2879a140df461ea"
@@ -997,13 +1002,18 @@
   resolved "https://registry.npm.taobao.org/@types/history/download/@types/history-4.7.2.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fhistory%2Fdownload%2F%40types%2Fhistory-4.7.2.tgz#0e670ea254d559241b6eeb3894f8754991e73220"
   integrity sha1-DmcOolTVWSQbbus4lPh1SZHnMiA=
 
-"@types/hoist-non-react-statics@^3.3.0":
+"@types/hoist-non-react-statics@^3.3.0", "@types/hoist-non-react-statics@^3.3.1":
   version "3.3.1"
   resolved "https://registry.npm.taobao.org/@types/hoist-non-react-statics/download/@types/hoist-non-react-statics-3.3.1.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fhoist-non-react-statics%2Fdownload%2F%40types%2Fhoist-non-react-statics-3.3.1.tgz#1124aafe5118cb591977aeb1ceaaed1070eb039f"
   integrity sha1-ESSq/lEYy1kZd66xzqrtEHDrA58=
   dependencies:
     "@types/react" "*"
     hoist-non-react-statics "^3.3.0"
+
+"@types/invariant@^2.2.30":
+  version "2.2.30"
+  resolved "https://registry.npm.taobao.org/@types/invariant/download/@types/invariant-2.2.30.tgz#20efa342807606ada5483731a8137cb1561e5fe9"
+  integrity sha1-IO+jQoB2Bq2lSDcxqBN8sVYeX+k=
 
 "@types/jquery@^3.3.29":
   version "3.3.29"
@@ -1094,6 +1104,14 @@
   version "16.8.18"
   resolved "https://registry.npm.taobao.org/@types/react/download/@types/react-16.8.18.tgz#fe66fb748b0b6ca9709d38b87b2d1356d960a511"
   integrity sha1-/mb7dIsLbKlwnTi4ey0TVtlgpRE=
+  dependencies:
+    "@types/prop-types" "*"
+    csstype "^2.2.0"
+
+"@types/react@^16.0.0":
+  version "16.9.1"
+  resolved "https://registry.npm.taobao.org/@types/react/download/@types/react-16.9.1.tgz?cache=0&sync_timestamp=1565360527564&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact%2Fdownload%2F%40types%2Freact-16.9.1.tgz#862c83b4c9d5cd116e42fd9a4f3694843cd2c051"
+  integrity sha1-hiyDtMnVzRFuQv2aTzaUhDzSwFE=
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
@@ -5231,7 +5249,30 @@ interpret@^1.0.0, interpret@^1.1.0:
   resolved "https://registry.npm.taobao.org/interpret/download/interpret-1.2.0.tgz#d5061a6224be58e8083985f5014d844359576296"
   integrity sha1-1QYaYiS+WOgIOYX1AU2EQ1lXYpY=
 
-invariant@^2.2.2, invariant@^2.2.4:
+intl-format-cache@^4.1.10:
+  version "4.1.10"
+  resolved "https://registry.npm.taobao.org/intl-format-cache/download/intl-format-cache-4.1.10.tgz?cache=0&sync_timestamp=1565609269307&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fintl-format-cache%2Fdownload%2Fintl-format-cache-4.1.10.tgz#a1b7fb4e59915685b8bcc61f24b8759894fd8709"
+  integrity sha1-obf7TlmRVoW4vMYfJLh1mJT9hwk=
+
+intl-locales-supported@^1.4.5:
+  version "1.4.5"
+  resolved "https://registry.npm.taobao.org/intl-locales-supported/download/intl-locales-supported-1.4.5.tgz#be9774e6d4ea518f000165ecfe78c78d5bee7de5"
+  integrity sha1-vpd05tTqUY8AAWXs/njHjVvufeU=
+
+intl-messageformat-parser@^3.0.7:
+  version "3.0.7"
+  resolved "https://registry.npm.taobao.org/intl-messageformat-parser/download/intl-messageformat-parser-3.0.7.tgz?cache=0&sync_timestamp=1565609269975&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fintl-messageformat-parser%2Fdownload%2Fintl-messageformat-parser-3.0.7.tgz#d28493501a1bc40a094239b7ef26fe9412558e72"
+  integrity sha1-0oSTUBobxAoJQjm37yb+lBJVjnI=
+
+intl-messageformat@^6.1.5:
+  version "6.1.5"
+  resolved "https://registry.npm.taobao.org/intl-messageformat/download/intl-messageformat-6.1.5.tgz?cache=0&sync_timestamp=1565669537503&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fintl-messageformat%2Fdownload%2Fintl-messageformat-6.1.5.tgz#0f80387dda5ff9bd82d4a1ccf908b026621b364b"
+  integrity sha1-D4A4fdpf+b2C1KHM+QiwJmIbNks=
+  dependencies:
+    intl-format-cache "^4.1.10"
+    intl-messageformat-parser "^3.0.7"
+
+invariant@^2.1.1, invariant@^2.2.2, invariant@^2.2.4:
   version "2.2.4"
   resolved "https://registry.npm.taobao.org/invariant/download/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
   integrity sha1-YQ88ksk1nOHbYW5TgAjSP/NRWOY=
@@ -8189,6 +8230,24 @@ react-hot-loader@^4.8.8:
     shallowequal "^1.0.2"
     source-map "^0.7.3"
 
+react-intl@^3.1.8:
+  version "3.1.8"
+  resolved "https://registry.npm.taobao.org/react-intl/download/react-intl-3.1.8.tgz#4343e43684a4bc5966b5a7ad1e39c86b31018c4f"
+  integrity sha1-Q0PkNoSkvFlmtaetHjnIazEBjE8=
+  dependencies:
+    "@formatjs/intl-relativetimeformat" "^2.6.3"
+    "@types/hoist-non-react-statics" "^3.3.1"
+    "@types/invariant" "^2.2.30"
+    "@types/react" "^16.0.0"
+    hoist-non-react-statics "^3.3.0"
+    intl-format-cache "^4.1.10"
+    intl-locales-supported "^1.4.5"
+    intl-messageformat "^6.1.5"
+    intl-messageformat-parser "^3.0.7"
+    invariant "^2.1.1"
+    react "^16.3.0"
+    shallow-equal "^1.1.0"
+
 react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.6:
   version "16.8.6"
   resolved "https://registry.npm.taobao.org/react-is/download/react-is-16.8.6.tgz#5bbc1e2d29141c9fbdfed456343fe2bc430a6a16"
@@ -8256,6 +8315,15 @@ react-transition-group@^4.2.1:
     "@babel/runtime" "^7.4.5"
     dom-helpers "^3.4.0"
     loose-envify "^1.4.0"
+    prop-types "^15.6.2"
+
+react@^16.3.0:
+  version "16.9.0"
+  resolved "https://registry.npm.taobao.org/react/download/react-16.9.0.tgz?cache=0&sync_timestamp=1565317892814&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Freact%2Fdownload%2Freact-16.9.0.tgz#40ba2f9af13bc1a38d75dbf2f4359a5185c4f7aa"
+  integrity sha1-QLovmvE7waONddvy9DWaUYXE96o=
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
     prop-types "^15.6.2"
 
 react@^16.8.6:
@@ -8944,6 +9012,11 @@ sha.js@^2.4.0, sha.js@^2.4.8:
   dependencies:
     inherits "^2.0.1"
     safe-buffer "^5.0.1"
+
+shallow-equal@^1.1.0:
+  version "1.2.0"
+  resolved "https://registry.npm.taobao.org/shallow-equal/download/shallow-equal-1.2.0.tgz#fd828d2029ff4e19569db7e19e535e94e2d1f5cc"
+  integrity sha1-/YKNICn/ThlWnbfhnlNelOLR9cw=
 
 shallowequal@^1.0.1, shallowequal@^1.0.2:
   version "1.1.0"

@@ -1,5 +1,5 @@
 const navbars: Record<string, string> = {
-  'topbar.main': "DongWanHong's blog",
+  'topbar.main': "XiaoJiu's blog",
   'topbar.github': 'GitHub',
   'topbar.project': 'Projects',
   'topbar.article': 'Articles',

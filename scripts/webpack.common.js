@@ -126,6 +126,7 @@ const baseConfig = {
   context: path.resolve(__dirname, '../'),
   entry: './src/index.tsx', // 入口文件，默认 main 作为名称
   output: {
+    publicPath: devMode ? '/' : 'https://dongwanhong.github.io/',
     path: path.resolve(__dirname, '../dist'), // 指定输出文件所在目录
     filename: devMode ? 'javascript/[name].js' : 'javascript/[name].[contenthash:8].js' // 输出文件名，其中 name 为变量，值为入口文件名
   },
@@ -137,7 +138,14 @@ const baseConfig = {
     extensions: ['.tsx', '.ts', '.js', '.json', '.less', '.css', '.mjs'],
     alias: {
       'react-dom': '@hot-loader/react-dom',
-      '@styles': path.resolve(__dirname, '../src/styles/')
+      '@': path.resolve(__dirname, '../src/'),
+      '@images': path.resolve(__dirname, '../src/images/'),
+      '@locale': path.resolve(__dirname, '../src/locale/'),
+      '@router': path.resolve(__dirname, '../src/router/'),
+      '@store': path.resolve(__dirname, '../src/store/'),
+      '@styles': path.resolve(__dirname, '../src/styles/'),
+      '@utils': path.resolve(__dirname, '../src/utils/'),
+      '@views': path.resolve(__dirname, '../src/views/')
     }
   },
   plugins: [

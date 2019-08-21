@@ -111,6 +111,7 @@
     "@types/react-router-dom": "^4.3.4",
     "@types/react-transition-group": "^2.9.2",
     "@types/redux-immutable": "^4.0.1",
+    "@types/url-parse": "^1.4.3",
     "animate.css": "^3.7.2",
     "bootstrap": "^4.3.1",
     "core-js": "3",

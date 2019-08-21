@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import { hot } from 'react-hot-loader/root'
 import store from '../store'
 import Home from './Home'
-import renderRoutes from '../router'
+import renderRoutes, { routes } from '../router'
 import LocaleProvider from '../locale'
 
 @hot
@@ -16,7 +16,7 @@ class App extends PureComponent {
           <Router>
             {/* Do not use `Switch` component to avoid failing to implement exit animation */}
             <Route path="/" exact children={props => <Home {...props} />} />
-            {renderRoutes()}
+            {renderRoutes(routes)}
           </Router>
         </LocaleProvider>
       </Provider>

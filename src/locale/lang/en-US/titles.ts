@@ -1,5 +1,6 @@
 const titles: Record<string, string> = {
-  'doc.main': "DongWanHong's blog"
+  'doc.main': "XiaoJiu's blog",
+  'article.demo': 'Articles-Test Page'
 }
 
 export default titles

@@ -1,5 +1,5 @@
 const navbars: Record<string, string> = {
-  'topbar.main': '董万宏的博客',
+  'topbar.main': '小九的博客',
   'topbar.github': 'GitHub',
   'topbar.project': '项目',
   'topbar.article': '博文',

@@ -9,7 +9,7 @@ export interface RouteConfigComponentProps<Params extends { [K in keyof Params]?
   route?: RouteConfig
 }
 
-interface RouteConfig {
+export interface RouteConfig {
   key?: React.Key
   path?: string
   exact?: boolean
@@ -64,16 +64,14 @@ const renderRoutes: RenderRoutes = (routes, extraProps = {}, switchProps = {}) =
               return route.render({ ...props, ...extraProps, route: route })
             } else if (route.component) {
               return (
-                <>
-                  <Suspense fallback={<div>Loading...</div>}>
-                    {route.meta && route.meta.title ? (
-                      <FormattedMessage id={route.meta.title}>
-                        {txt => <DocumentTitle title={txt as string} />}
-                      </FormattedMessage>
-                    ) : null}
-                    <route.component {...props} {...extraProps} route={route} />
-                  </Suspense>
-                </>
+                <Suspense fallback={<div>Loading...</div>}>
+                  {route.meta && route.meta.title ? (
+                    <FormattedMessage id={route.meta.title}>
+                      {txt => <DocumentTitle title={txt as string} />}
+                    </FormattedMessage>
+                  ) : null}
+                  <route.component {...props} {...extraProps} route={route} />
+                </Suspense>
               )
             } else {
               return null

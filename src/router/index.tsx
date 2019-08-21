@@ -1,5 +1,6 @@
 import { lazy } from 'react'
-import renderRoutesCore from './renderRoutes'
+import renderRoutes from './renderRoutes'
+import articles from './modules/atricles'
 
 const routes = [
   {
@@ -10,11 +11,10 @@ const routes = [
     meta: {
       title: 'topbar.main' // 使用国际化中的键
     }
-  }
+  },
+  ...articles
 ]
 
-const renderRoutes = (): JSX.Element | null => {
-  return renderRoutesCore(routes)
-}
+export { routes }
 
 export default renderRoutes

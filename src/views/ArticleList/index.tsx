@@ -1,8 +1,9 @@
 import React, { PureComponent, ReactChild } from 'react'
+import { Link } from '../../components'
 
 class ArticleList extends PureComponent {
   public render(): ReactChild {
-    return <div>hello</div>
+    return <Link to="/articles/demo">文章 Demo</Link>
   }
 }
 

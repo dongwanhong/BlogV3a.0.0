@@ -10,6 +10,7 @@ const Link = (props: LinkProps): React.ReactElement => {
     ...props,
     to: pathname + query
   }
+
   return origin === window.location.origin ? (
     <RouterLink {...linkProps} />
   ) : (

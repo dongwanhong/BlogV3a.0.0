@@ -130,6 +130,17 @@ class Utils {
     ctx.lineTo(m, n)
     ctx.stroke()
   }
+
+  /**
+   * @description
+   * 检测输入的值是否是函数
+   * @param {any} value 被检测的值
+   * @returns {boolean}
+   */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  public isFunction(value: any): boolean {
+    return typeof value === 'function'
+  }
 }
 
 export default new Utils()

@@ -1,0 +1,23 @@
+ul.tag-container {
+    display: flex;
+    justify-content: flex-start;
+    padding: 0;
+    width: 100%;
+    list-style: none;
+
+    .tag-item {
+        padding: 0 .5rem;
+        height: 1.5rem;
+        border-radius: .5rem;
+        border: 1px solid;
+        cursor: pointer;
+
+        &.disabled {
+            cursor: not-allowed;
+        }
+
+        &:not(:last-child) {
+            margin-right: .5rem;
+        }
+    }
+}

@@ -9,6 +9,7 @@ import WaterWave from './common/WateWave'
 import Rain from './common/Rain'
 import StarrySky from './common/StarrySky'
 import { TagBall, TagItem } from './common/TagBall'
+import Tag from './common/Tag'
 // Custom
 import TopBar from './custom/TopBar'
 import Footer from './custom/Footer'
@@ -25,6 +26,7 @@ export {
   StarrySky,
   TagBall,
   TagItem,
+  Tag,
   TopBar,
   Footer
 }

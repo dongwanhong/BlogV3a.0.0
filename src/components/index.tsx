@@ -13,6 +13,7 @@ import Tag from './common/Tag'
 // Custom
 import TopBar from './custom/TopBar'
 import Footer from './custom/Footer'
+import { Bowen } from './custom/Bowen'
 
 export {
   Link,
@@ -28,5 +29,6 @@ export {
   TagItem,
   Tag,
   TopBar,
-  Footer
+  Footer,
+  Bowen
 }

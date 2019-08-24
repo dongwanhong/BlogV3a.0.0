@@ -1,0 +1,82 @@
+#toc {
+    list-style-position: inside;
+    // 定位
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+
+    .title {
+        display: inline-block;
+        height: 2rem;
+        line-height: 2rem;
+    }
+
+    .toc-item {
+        padding-left: .2rem;
+        cursor: pointer;
+
+        &.active,
+        &:hover {
+            border-left: .5rem solid;
+        }
+    }
+}
+
+article#bowen {
+    display: flex;
+    flex-direction: column;
+    padding-right: 17px;
+    margin-right: -17px;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+
+    header {
+        margin: 2rem 0;
+        text-align: center;
+
+        .title {
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .description {
+            font-size: 1rem;
+            font-style: italic;
+        }
+    }
+
+    section {
+        flex: 1;
+
+        a.title {
+            text-decoration: none;
+
+            h4 {
+                padding: .3rem 0 .3rem .5rem;
+                border-left: .5rem solid;
+            }
+        }
+
+        p {
+            text-indent: 2rem;
+        }
+    }
+
+    footer {
+        justify-items: flex-end;
+        text-align: center;
+        padding: 2rem 0;
+    }
+}
+
+#fixed-tools {
+    position: fixed;
+    width: 1rem;
+    right: 1.5rem;
+    bottom: 2rem;
+
+    .backtop {
+        cursor: pointer;
+    }
+}

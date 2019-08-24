@@ -1,0 +1,35 @@
+article#bowen {
+
+    .description {
+        color: @text-muted;
+    }
+
+    section {
+
+        a.title {
+            color: @text-dark;
+
+            h4 {
+                border-left-color: @border-cyan;
+                background: @bGroud-gray;
+            }
+        }
+    }
+
+    footer {
+        color: @text-muted;
+    }
+}
+
+#toc {
+
+    .toc-item {
+        border-left: .5rem solid @transparent;
+
+        &.active,
+        &:hover {
+            border-left-color: @border-cyan;
+            background-color: @bGroud-gray;
+        }
+    }
+}

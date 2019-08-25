@@ -10,10 +10,11 @@ import Rain from './common/Rain'
 import StarrySky from './common/StarrySky'
 import { TagBall, TagItem } from './common/TagBall'
 import Tag from './common/Tag'
+import SyntaxHighlighter from './common/SyntaxHighlighter'
 // Custom
 import TopBar from './custom/TopBar'
 import Footer from './custom/Footer'
-import { Bowen } from './custom/Bowen'
+import { Bowen, Header, Content, Title, Reference, Footer as BowenFooter } from './custom/Bowen'
 
 export {
   Link,
@@ -28,7 +29,13 @@ export {
   TagBall,
   TagItem,
   Tag,
+  SyntaxHighlighter,
   TopBar,
   Footer,
-  Bowen
+  Bowen,
+  Header,
+  Content,
+  Title,
+  Reference,
+  BowenFooter
 }

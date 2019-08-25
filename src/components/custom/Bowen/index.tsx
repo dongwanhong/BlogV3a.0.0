@@ -74,4 +74,4 @@ class Bowen extends PureComponent<Props, {}> {
   }
 }
 
-export { Bowen, Header }
+export { Bowen, Header, Content, Title, Reference, Footer }

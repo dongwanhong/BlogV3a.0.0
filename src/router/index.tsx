@@ -7,7 +7,7 @@ const routes = [
     key: 'articleList',
     path: '/article-list',
     exact: true,
-    component: lazy(() => import('../views/ArticleList')),
+    component: lazy(() => import('@views/articles/ArticleList')),
     meta: {
       title: 'topbar.main' // 使用国际化中的键
     }

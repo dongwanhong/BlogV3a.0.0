@@ -1,5 +1,5 @@
 import React, { PureComponent, ReactChild } from 'react'
-import { TopBar } from '@/components'
+import { TopBar, Pagination } from '@/components'
 import ArticleItem from './components/ArticleItem'
 import image from '@images/doraemon.png'
 
@@ -21,7 +21,7 @@ class ArticleList extends PureComponent {
         <TopBar />
         <div className="container">
           <div className="row">
-            <div className="col-lg-9 col-xs-12">
+            <div className="list-wrapper col-lg-9 col-xs-12">
               {/* <div className="text-title">
                 If you can't explain it simply, you don't understand it well enough.
               </div> */}
@@ -33,6 +33,7 @@ class ArticleList extends PureComponent {
                   to={test[0].to}
                 />
               </div>
+              <Pagination total={210} />
             </div>
             <div className="col-lg-3 col-xs-12">e</div>
           </div>

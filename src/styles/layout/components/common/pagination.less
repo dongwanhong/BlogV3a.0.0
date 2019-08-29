@@ -1,11 +1,13 @@
 .pagination {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     padding: 0;
     list-style: none;
 
     .pagination-item {
         padding: 0.5rem 1em;
+        margin-bottom: .5rem; // 换行后的垂直间歇
         cursor: pointer;
 
         &.disabled {
@@ -27,16 +29,20 @@
         }
     }
 
-    select {
-        margin-left: .5rem;
-        padding: .5rem;
-        height: 100%;
-        border-radius: .25rem;
-        appearance: none;
+    .pagination-size {
+        margin-bottom: .5rem;
 
-        option {
-            height: 1rem;
+        select {
             margin-left: .5rem;
+            padding: .5rem;
+            height: 100%;
+            border-radius: .25rem;
+            appearance: none;
+
+            option {
+                height: 1rem;
+                margin-left: .5rem;
+            }
         }
     }
 }

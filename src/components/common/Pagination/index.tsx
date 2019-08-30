@@ -79,7 +79,7 @@ class Pagination extends Component<Props, State> {
     } else {
       newNum = baseNum + step
       if (newNum < 0) {
-        newNum = 0
+        newNum = 1
       }
     }
     this.setState({ baseNum: newNum, pageNum: newNum })

@@ -75,12 +75,12 @@ class TagBall extends PureComponent<Props, State> {
     this.getCircleCenter = this.getCircleCenter.bind(this)
     this.getRandomCoordinates = this.getRandomCoordinates.bind(this)
     this.config = this.handleConfig()
-    window.addEventListener('mousemove', this.getAngle)
   }
 
   public componentDidMount(): void {
     this.getRandomCoordinates()
     this.start()
+    this.ele.current && this.ele.current.addEventListener('mousemove', this.getAngle)
   }
 
   public componentWillUnmount(): void {
@@ -232,7 +232,7 @@ class TagBall extends PureComponent<Props, State> {
    * @returns {void}
    */
   public destory(): void {
-    window.removeEventListener('mousemove', this.getAngle)
+    this.ele.current && this.ele.current.removeEventListener('mousemove', this.getAngle)
   }
 
   public render(): ReactChild {

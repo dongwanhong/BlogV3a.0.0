@@ -1,14 +1,34 @@
 .page-scroll {
     position: relative;
     overflow: hidden;
+    perspective: 1000px;
 
-    & > .scroll-container {
+    &>.scroll-container {
         position: absolute;
         width: 100%;
         transition: top 1000ms ease-in;
+        transform-style: preserve-3d;
 
-        & > .page-item {
+        &>.page-item {
             width: 100%;
+
+            &:nth-child(odd) {
+                background: darkcyan;
+                transform: scale(.9);
+            }
+
+            &:nth-child(even) {
+                background: gold;
+                transform: translateZ(-300px) rotateX(15deg);
+            }
+
+            &:nth-child(3) {
+                background: honeydew;
+            }
+
+            &:nth-child(4) {
+                background: saddlebrown;
+            }
         }
     }
 }

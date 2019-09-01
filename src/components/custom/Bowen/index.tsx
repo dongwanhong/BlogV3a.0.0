@@ -54,10 +54,10 @@ class Bowen extends PureComponent<Props, {}> {
     const styles = { scrollBehavior: 'smooth' } as React.CSSProperties
 
     return (
-      <>
+      <div className="bowen-wrapper container">
         <article
           id="bowen"
-          className="container"
+          // className="col-lg-12"
           style={slideType === 'css' ? styles : {}}
           onScroll={() => handleScroller()}
         >
@@ -69,7 +69,7 @@ class Bowen extends PureComponent<Props, {}> {
           </div>
         </article>
         {toTop ? <Bowen.ToTop /> : null}
-      </>
+      </div>
     )
   }
 }

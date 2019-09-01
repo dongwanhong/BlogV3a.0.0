@@ -22,14 +22,26 @@
     }
 }
 
+.bowen-wrapper {
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
 article#bowen {
     display: flex;
     flex-direction: column;
-    padding-right: 17px;
-    margin-right: -17px;
+    // 隐藏方式一
+    width: calc(100% + 17px);
     height: 100%;
     overflow-x: hidden;
     overflow-y: scroll;
+    // 隐藏方式二
+    // overflow: -moz-scrollbars-none; // Firefox
+    // -ms-overflow-style: none; // IE 10+
+    // &::-webkit-scrollbar {
+    //     width: 0 !important
+    // }
 
     header {
         margin: 2rem 0;

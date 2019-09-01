@@ -27,7 +27,10 @@ function handleScroll(): void {
   // 获取距离
   const tops = Array.from(titles).map(item => item.getBoundingClientRect().top)
   // tops.forEach((top, index) => top < config.top && i === index)
-  i = tops.findIndex(top => top < config.top)
+  // i = tops.findIndex(top => top < config.top)
+  tops.forEach((top, index) => {
+    if (top < config.top) i = index
+  })
   // 由于存在计算延迟
   // 所以在高亮判断时可以提供一定的误差
   if (offsetHeight + srcrollTop >= scrollHeight - 50) i = tops.length - 1

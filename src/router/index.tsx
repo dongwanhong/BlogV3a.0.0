@@ -15,6 +15,6 @@ const routes = [
   ...articles
 ]
 
-export { routes }
+export { routes, articles }
 
 export default renderRoutes

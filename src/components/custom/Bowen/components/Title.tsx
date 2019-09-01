@@ -2,7 +2,7 @@ import React, { createRef, RefObject, PureComponent, ReactChild } from 'react'
 import config from '../config'
 
 interface Props {
-  name: string
+  id: string
   text: string
 }
 
@@ -35,11 +35,11 @@ class Title extends PureComponent<Props, {}> {
 
   public render(): ReactChild {
     const { eleRef, startScroll } = this
-    const { name, text } = this.props
+    const { id, text } = this.props
 
     return (
-      <a className="title" href={`#${name}`} onClick={eve => startScroll(eve)}>
-        <h4 ref={eleRef} id={name}>
+      <a className="title" href={`#${id}`} onClick={eve => startScroll(eve)}>
+        <h4 ref={eleRef} id={id}>
           {text}
         </h4>
       </a>

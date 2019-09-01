@@ -4,32 +4,50 @@ import { connect } from 'react-redux'
 import { AppState } from '@/store'
 import { State as StateToProps } from '@views/Config/store/types'
 import ArticleItem from './components/ArticleItem'
+import { articles } from '@/router'
 import image from '@images/doraemon.png'
+
+interface ArticleConfig {
+  key: string | number
+  title: string
+  src: string
+  to: string
+  des: string
+}
 
 type Props = StateToProps
 
 interface State {
   width: number
   height: number
+  filteredArticles: ArticleConfig[]
 }
 
-const test = [
-  {
-    des: `配置 react-router-dom 我们开发一个 React
-  工程肯定不是一两个“页面”就可以满足需求的，所以我们需要一个在多个“页面”中跳转的功能，在使用
-  React 构建的单页面应用中，要想实现页面间`,
-    to: 'sdfs',
-    src: image,
-    title: '我是文章的标题'
+const adjustedArticles: ArticleConfig[] = []
+articles.forEach((item, index) => {
+  if (!item.show) return
+  const newItem: ArticleConfig & { title: string } = {
+    key: item.key || item.path || index,
+    title: item.title,
+    src: item.src || image,
+    to: item.path || '/404',
+    des: item.des
   }
-]
+  adjustedArticles.push(newItem)
+})
 
 class ArticleList extends PureComponent<Props, State> {
   public ele: RefObject<HTMLDivElement>
 
   public state: State = {
     width: 0,
-    height: 0
+    height: 0,
+    filteredArticles: adjustedArticles
+  }
+
+  public constructor(props: Props) {
+    super(props)
+    this.ele = createRef()
   }
 
   public componentDidMount(): void {
@@ -39,16 +57,12 @@ class ArticleList extends PureComponent<Props, State> {
     this.setState({ width: defaultWidth, height: defaultHeight })
   }
 
-  public constructor(props: Props) {
-    super(props)
-    this.ele = createRef()
-  }
-
   public render(): ReactChild {
     const { ele } = this
     const { tags } = this.props
-    const { width, height } = this.state
+    const { width, height, filteredArticles } = this.state
     const size = Math.min(width, height)
+    const total = filteredArticles.length
 
     return (
       <div className="article-list">
@@ -61,14 +75,17 @@ class ArticleList extends PureComponent<Props, State> {
                 <div>you don't understand it well enough.</div>
               </div>
               <div className="article-wrapper">
-                <ArticleItem
-                  title={test[0].title}
-                  src={test[0].src}
-                  des={test[0].des}
-                  to={test[0].to}
-                />
+                {filteredArticles.map(item => (
+                  <ArticleItem
+                    key={item.key}
+                    title={item.title}
+                    src={item.src}
+                    des={item.des}
+                    to={item.to}
+                  />
+                ))}
               </div>
-              <Pagination total={210} />
+              <Pagination total={total} />
             </div>
             <div ref={ele} className="col-lg-3 col-xs-12">
               {width ? (

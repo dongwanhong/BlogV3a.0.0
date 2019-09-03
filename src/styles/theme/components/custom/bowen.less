@@ -18,18 +18,22 @@ article#bowen {
 
     footer {
         color: @text-muted;
+        border-top-color: @border-gray;
     }
-}
 
-#toc {
+    aside {
 
-    .toc-item {
-        border-left: .5rem solid @transparent;
+        #toc {
 
-        &.active,
-        &:hover {
-            border-left-color: @border-cyan;
-            background-color: @bGroud-gray;
+            .toc-item {
+                border-left: .5rem solid @transparent;
+
+                &.active,
+                &:hover {
+                    border-left-color: @border-cyan;
+                    background-color: @bGroud-gray;
+                }
+            }
         }
     }
 }

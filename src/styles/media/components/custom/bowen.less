@@ -1,0 +1,51 @@
+@width: 1rem;
+@height: 5rem;
+
+@media (max-width: 575px) {
+
+    article#bowen {
+        padding: 1rem;
+        padding-right: calc(1rem + 17px);
+
+        aside {
+            z-index: 9;
+            left: 0;
+            padding: 1rem .5rem;
+            max-width: calc(100% - @width); // 预留箭头按钮空间
+            transform: translate3d(-100%, -50%, 0);
+
+            .toc-arrow {
+                display: block;
+                position: absolute;
+                top: 50%;
+                right: -@width;
+                transform: translateY(-50%);
+                width: @width;
+                height: @height;
+                line-height: @height;
+                text-align: center;
+                background: @cyan;
+            }
+
+            &.toc-enter,
+            &.toc-exit-done {
+                transform: translate3d(-100%, -50%, 0);
+            }
+
+            &.toc-enter-active {
+                transform: translate3d(0, -50%, 0);
+                transition: transform 500ms;
+            }
+
+            &.toc-exit,
+            &.toc-enter-done {
+                transform: translate3d(0, -50%, 0);
+            }
+
+            &.toc-exit-active {
+                transform: translate3d(-100%, -50%, 0);
+                transition: transform 500ms;
+            }
+        }
+    }
+}

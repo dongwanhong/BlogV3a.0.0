@@ -1,4 +1,5 @@
 import React, { PureComponent, ReactChild } from 'react'
+import { CSSTransition } from 'react-transition-group'
 import config from '../config'
 
 const top = config.top
@@ -10,15 +11,25 @@ export interface TocItem {
 }
 
 interface Props {
+  title?: string
   tocs: TocItem[]
 }
 
-class Toc extends PureComponent<Props, {}> {
+interface State {
+  showToc: boolean
+}
+
+class Toc extends PureComponent<Props, State> {
   public requestId: number
+
+  public state: State = {
+    showToc: false
+  }
 
   public constructor(props: Props) {
     super(props)
     this.requestId = 0
+    this.toggleToc = this.toggleToc.bind(this)
   }
 
   public componentDidMount(): void {
@@ -52,19 +63,38 @@ class Toc extends PureComponent<Props, {}> {
     scrollCore()
   }
 
+  public toggleToc(): void {
+    const { showToc } = this.state
+    this.setState({ showToc: !showToc })
+  }
+
   public render(): ReactChild {
-    const { tocs } = this.props
+    const { toggleToc } = this
+    const { showToc } = this.state
+    const { tocs, title } = this.props
 
     return (
-      <aside>
-        <ul id="toc">
-          {tocs.map((item, index) => (
-            <li key={item.text} className="toc-item" onClick={() => this.setActive(index)}>
-              {item.text}
-            </li>
-          ))}
-        </ul>
-      </aside>
+      <CSSTransition
+        in={showToc}
+        timeout={1000}
+        classNames={'toc'}
+        // mountOnEnter={true}
+        // unmountOnExit={true}
+      >
+        <aside>
+          {title ? <div className="title">{title}</div> : null}
+          <ul id="toc">
+            {tocs.map((item, index) => (
+              <li key={item.text} className="toc-item" onClick={() => this.setActive(index)}>
+                {item.text}
+              </li>
+            ))}
+          </ul>
+          <div className="toc-arrow" onClick={toggleToc}>
+            {showToc ? '«' : '»'}
+          </div>
+        </aside>
+      </CSSTransition>
     )
   }
 }

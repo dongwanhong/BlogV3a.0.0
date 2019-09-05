@@ -1,13 +1,22 @@
 import React, { Component, ReactChild } from 'react'
+import utils from '@/utils'
 import config from '../config'
 
-class ToTop extends Component<{}, {}> {
+interface State {
+  show: boolean
+}
+
+class ToTop extends Component<{}, State> {
   protected requestId: number
+
+  public state: State = {
+    show: false
+  }
 
   public constructor(props: {}) {
     super(props)
     this.requestId = 0
-    this.cancelAnimationFrame = this.cancelAnimationFrame.bind(this)
+    this.cancelAnimationFrame = utils.throttle(this.cancelAnimationFrame.bind(this), 4)
   }
 
   public componentDidMount(): void {
@@ -19,6 +28,14 @@ class ToTop extends Component<{}, {}> {
   }
 
   public cancelAnimationFrame(): void {
+    const ele = document.querySelector('#bowen')
+    const { show } = this.state
+    if (!ele) return
+    if (ele.scrollTop > 200 && !show) {
+      this.setState({ show: true })
+    } else if (ele.scrollTop < 200 && show) {
+      this.setState({ show: false })
+    }
     cancelAnimationFrame(this.requestId)
   }
 
@@ -37,11 +54,15 @@ class ToTop extends Component<{}, {}> {
   }
 
   public render(): ReactChild {
+    const { show } = this.state
+
     return (
       <div id="fixed-tools">
-        <div className="backtop" onClick={() => this.toTop(config.step)}>
-          回到顶部
-        </div>
+        {show ? (
+          <div className="backtop" onClick={() => this.toTop(config.step)}>
+            ^
+          </div>
+        ) : null}
       </div>
     )
   }

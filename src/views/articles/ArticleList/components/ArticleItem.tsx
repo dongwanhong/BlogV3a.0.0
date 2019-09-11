@@ -21,7 +21,9 @@ const ArticleItem: SFC<Props> = props => {
       </div>
       <div className="article-content row">
         <div className="article-left col-lg-4 col-xs-12">
-          <img src={src} alt={alt || ''} />
+          <div className="img-container">
+            <img src={src} alt={alt || ''} />
+          </div>
         </div>
         <div className="article-right col-lg-8 col-xs-12">
           <div className="short-des">{`摘要：${des}`}</div>

@@ -6,14 +6,29 @@
     height: 50px;
     line-height: 50px;
 
-    a {
-        text-decoration: none;
-    }
-
     .title {
         display: inline-block;
-        font-size: 1.25rem;;
+        font-size: 1.25rem;
         font-weight: 700;
+    }
+
+    a {
+        text-decoration: none;
+
+        .iconfont {
+            margin-right: .25rem;
+        }
+    }
+
+    .navbar-toggle {
+        display: none;
+        margin-top: 5px;
+        width: 50px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 1.25rem;
+        text-align: center;
+        border: 1px solid;
     }
 
     .nav-item:not(:first-child):not(:last-child) {

@@ -7,6 +7,8 @@ import ArticleItem from './components/ArticleItem'
 import { articles } from '@/router'
 import image from '@images/doraemon.png'
 
+const isPhone = document.documentElement.clientWidth <= 1200
+
 interface ArticleConfig {
   key: string | number
   title: string
@@ -88,7 +90,7 @@ class ArticleList extends PureComponent<Props, State> {
               <Pagination total={total} />
             </div>
             <div ref={ele} className="col-lg-3 col-xs-12">
-              {width ? (
+              {width && !isPhone ? (
                 <TagBall width={size} height={size}>
                   {tags.map(tag => (
                     <TagItem key={tag.id}>{tag.text}</TagItem>

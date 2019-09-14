@@ -12,6 +12,7 @@ import { TagBall, TagItem } from './common/TagBall'
 import Tag from './common/Tag'
 import SyntaxHighlighter from './common/SyntaxHighlighter'
 import Pagination from './common/Pagination'
+import Icon from './common/Icon'
 // Custom
 import TopBar from './custom/TopBar'
 import Footer from './custom/Footer'
@@ -39,5 +40,6 @@ export {
   Title,
   Reference,
   BowenFooter,
-  Pagination
+  Pagination,
+  Icon
 }

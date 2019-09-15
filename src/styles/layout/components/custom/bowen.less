@@ -2,11 +2,19 @@
     padding: 0;
     height: 100%;
     overflow: hidden;
+
+    .top-bar {
+        z-index: 99;
+        position: absolute;
+        left: 0;
+        right: 0;
+    }
 }
 
 article#bowen {
     display: flex;
     flex-direction: column;
+    padding-top: 50px;
     // 隐藏方式一
     width: calc(100% + 17px);
     height: 100%;
@@ -61,7 +69,7 @@ article#bowen {
 
     aside {
         // 定位
-        position: fixed;
+        position: sticky;
         top: 50%;
         transform: translateY(-50%);
         padding-right: 1rem;

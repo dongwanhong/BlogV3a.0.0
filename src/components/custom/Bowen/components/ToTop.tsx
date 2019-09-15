@@ -16,18 +16,31 @@ class ToTop extends Component<{}, State> {
   public constructor(props: {}) {
     super(props)
     this.requestId = 0
+    this.toggleShowBtn = utils.throttle(this.toggleShowBtn.bind(this), 4)
     this.cancelAnimationFrame = utils.throttle(this.cancelAnimationFrame.bind(this), 4)
   }
 
   public componentDidMount(): void {
-    window.addEventListener('wheel', this.cancelAnimationFrame)
+    const ele = document.querySelector('#bowen')
+    if (!ele) return
+    ele.addEventListener('wheel', this.cancelAnimationFrame)
+    ele.addEventListener('scroll', this.toggleShowBtn)
+    ele.addEventListener('touchstart', this.cancelAnimationFrame)
   }
 
   public componentWillUnmount(): void {
-    window.removeEventListener('wheel', this.cancelAnimationFrame)
+    const ele = document.querySelector('#bowen')
+    if (!ele) return
+    ele.removeEventListener('wheel', this.cancelAnimationFrame)
+    ele.removeEventListener('touchstart', this.cancelAnimationFrame)
+    ele.removeEventListener('scroll', this.toggleShowBtn)
   }
 
   public cancelAnimationFrame(): void {
+    cancelAnimationFrame(this.requestId)
+  }
+
+  public toggleShowBtn(): void {
     const ele = document.querySelector('#bowen')
     const { show } = this.state
     if (!ele) return
@@ -36,7 +49,6 @@ class ToTop extends Component<{}, State> {
     } else if (ele.scrollTop < 200 && show) {
       this.setState({ show: false })
     }
-    cancelAnimationFrame(this.requestId)
   }
 
   public toTopCore(step: number): void {

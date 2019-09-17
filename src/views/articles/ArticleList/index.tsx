@@ -2,12 +2,10 @@ import React, { PureComponent, ReactChild, RefObject, createRef } from 'react'
 import { TopBar, Pagination, TagBall, TagItem } from '@/components'
 import { connect } from 'react-redux'
 import { AppState } from '@/store'
-import { State as StateToProps } from '@views/Config/store/types'
+import { State as StateToProps } from '@views/Config/store'
 import ArticleItem from './components/ArticleItem'
 import { articles } from '@/router'
 import image from '@images/doraemon.png'
-
-const isPhone = document.documentElement.clientWidth <= 1200
 
 interface ArticleConfig {
   key: string | number
@@ -61,7 +59,7 @@ class ArticleList extends PureComponent<Props, State> {
 
   public render(): ReactChild {
     const { ele } = this
-    const { tags } = this.props
+    const { tags, isMobileTerminal } = this.props
     const { width, height, filteredArticles } = this.state
     const size = Math.min(width, height)
     const total = filteredArticles.length
@@ -90,7 +88,7 @@ class ArticleList extends PureComponent<Props, State> {
               <Pagination total={total} />
             </div>
             <div ref={ele} className="col-lg-3 col-xs-12">
-              {width && !isPhone ? (
+              {width && !isMobileTerminal ? (
                 <TagBall width={size} height={size}>
                   {tags.map(tag => (
                     <TagItem key={tag.id}>{tag.text}</TagItem>
@@ -106,6 +104,7 @@ class ArticleList extends PureComponent<Props, State> {
 }
 
 const mapStateToProps = (state: AppState): StateToProps => ({
+  isMobileTerminal: state.getIn(['config', 'isMobileTerminal']),
   tags: state.getIn(['config', 'tags']).toJS()
 })
 

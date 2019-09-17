@@ -10,10 +10,14 @@ import { AppState } from '../../store'
 import bgImage from '../../images/pages/home/bg-home.jpg'
 
 interface DispathToProps {
-  toggleShowBtn(): void
+  toggleShowBtn(eve?: React.MouseEvent<HTMLDivElement, MouseEvent>): void
 }
 
-export type Props = StateToProps & DispathToProps & WrappedComponentProps<'intl'>
+type RetStateToProps = StateToProps & {
+  isMobileTerminal: boolean
+}
+
+export type Props = RetStateToProps & DispathToProps & WrappedComponentProps<'intl'>
 
 class Home extends PureComponent<Props, {}> {
   public componentWillUnmount(): void {
@@ -22,13 +26,13 @@ class Home extends PureComponent<Props, {}> {
   }
 
   public render(): React.ReactNode {
-    const { showBtn, classNames, toggleShowBtn, timeout, intl } = this.props
+    const { showBtn, classNames, toggleShowBtn, timeout, intl, isMobileTerminal } = this.props
     const title = intl.formatMessage({ id: 'doc.main' })
 
     return (
       <DocumentTitle title={title}>
-        <WaterWave url={bgImage}>
-          <div className="home" onClick={toggleShowBtn}>
+        {isMobileTerminal ? (
+          <div className="home" onClick={e => toggleShowBtn(e)}>
             <CSSTransition
               in={showBtn}
               timeout={timeout}
@@ -40,20 +44,37 @@ class Home extends PureComponent<Props, {}> {
             </CSSTransition>
             <Rain />
           </div>
-        </WaterWave>
+        ) : (
+          <WaterWave url={bgImage}>
+            <div className="home" onClick={e => toggleShowBtn(e)}>
+              <CSSTransition
+                in={showBtn}
+                timeout={timeout}
+                classNames={classNames}
+                mountOnEnter={true}
+                unmountOnExit={true}
+              >
+                <TopBar />
+              </CSSTransition>
+              <Rain />
+            </div>
+          </WaterWave>
+        )}
       </DocumentTitle>
     )
   }
 }
 
-const mapStateToProps = (state: AppState): StateToProps => ({
+const mapStateToProps = (state: AppState): RetStateToProps => ({
+  isMobileTerminal: state.getIn(['config', 'isMobileTerminal']),
   showBtn: state.getIn(['home', 'showBtn']),
   timeout: state.getIn(['home', 'timeout']),
   classNames: state.getIn(['home', 'classNames']).toJS()
 })
 
 const mapDispatchToProps = (dispath: Dispatch): DispathToProps => ({
-  toggleShowBtn(): void {
+  toggleShowBtn(e): void {
+    if (e && (e.target as Element).nodeName.toLocaleLowerCase() !== 'canvas') return
     dispath(actionCreators.getToggleBtn())
   }
 })

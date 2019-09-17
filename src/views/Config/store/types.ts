@@ -4,5 +4,6 @@ export interface Tag {
 }
 
 export interface State {
+  isMobileTerminal: boolean
   tags: Tag[]
 }

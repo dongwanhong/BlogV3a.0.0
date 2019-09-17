@@ -2,6 +2,9 @@ import { fromJS } from 'immutable'
 import { State } from './types'
 
 const originState: State = {
+  isMobileTerminal: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    navigator.userAgent
+  ),
   tags: [
     { id: 1, text: 'HTML' },
     { id: 2, text: 'CSS' },

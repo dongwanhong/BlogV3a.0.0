@@ -1,11 +1,12 @@
 import React, { Component, ReactChild } from 'react'
 import utils from '@/utils'
 
-interface TagInfo {
-  key: string | number
+export interface TagInfo {
+  id: string | number
   text: string
   active?: boolean
-  disabled: boolean
+  disabled?: boolean
+  // [prop: string]: string | number | boolean | undefined | number[]
 }
 
 interface Props {
@@ -53,7 +54,7 @@ class Tag extends Component<Props, {}> {
             classNames.push('disabled')
           }
           return (
-            <li key={item.key} className={classNames.join(' ')} onClick={() => handleClick(item)}>
+            <li key={item.id} className={classNames.join(' ')} onClick={() => handleClick(item)}>
               {item.text}
             </li>
           )

@@ -1,8 +1,9 @@
 import React, { PureComponent, ReactChild, RefObject, createRef } from 'react'
-import { TopBar, Pagination, TagBall, TagItem } from '@/components'
 import { connect } from 'react-redux'
 import { AppState } from '@/store'
-import { State as StateToProps } from '@views/Config/store'
+import { TopBar, Pagination, TagBall, TagItem, Tag } from '@/components'
+import { State as StateToProps, Tag as BallTagType } from '@views/Config/store'
+import { TagInfo } from '@/components/common/Tag'
 import ArticleItem from './components/ArticleItem'
 import { articles } from '@/router'
 import image from '@images/doraemon.png'
@@ -13,6 +14,12 @@ interface ArticleConfig {
   src: string
   to: string
   des: string
+  tags: string[]
+  types: string[]
+}
+
+type TagInfoer = TagInfo & {
+  tags: number[]
 }
 
 type Props = StateToProps
@@ -20,6 +27,10 @@ type Props = StateToProps
 interface State {
   width: number
   height: number
+  mount: boolean
+  tags: BallTagType[]
+  activeTagIndex: number
+  types: TagInfoer[]
   filteredArticles: ArticleConfig[]
 }
 
@@ -31,23 +42,41 @@ articles.forEach((item, index) => {
     title: item.title,
     src: item.src || image,
     to: item.path || '/404',
-    des: item.des
+    des: item.des,
+    types: item.types,
+    tags: item.tags
   }
   adjustedArticles.push(newItem)
 })
 
 class ArticleList extends PureComponent<Props, State> {
   public ele: RefObject<HTMLDivElement>
+  private filteredArticlesByType: ArticleConfig[]
 
   public state: State = {
     width: 0,
     height: 0,
+    mount: true,
+    activeTagIndex: -1,
+    tags: [],
+    types: this.getDefaultTypes(),
     filteredArticles: adjustedArticles
   }
 
   public constructor(props: Props) {
     super(props)
     this.ele = createRef()
+    this.filteredArticlesByType = []
+    this.changTags = this.changTags.bind(this)
+    this.filterArticlesBYTag = this.filterArticlesBYTag.bind(this)
+    this.filterArticlesBYType = this.filterArticlesBYType.bind(this)
+  }
+
+  private getDefaultTypes(): TagInfoer[] {
+    return this.props.types.map(item => {
+      ;(item as TagInfoer).active = false
+      return item
+    })
   }
 
   public componentDidMount(): void {
@@ -57,10 +86,50 @@ class ArticleList extends PureComponent<Props, State> {
     this.setState({ width: defaultWidth, height: defaultHeight })
   }
 
+  protected changTags(tagInfo: TagInfoer): void {
+    this.filterArticlesBYType(tagInfo)
+    this.activeSelectTag(tagInfo)
+  }
+
+  private activeSelectTag(tagInfo: TagInfoer): void {
+    const { types } = this.state
+    const newTypes = types.map(
+      (item): TagInfoer => {
+        item.active = false
+        if (item.text === tagInfo.text) {
+          item.active = true
+        }
+        return item
+      }
+    )
+    this.setState(() => ({ types: newTypes }))
+  }
+
+  protected filterArticlesBYType(tagInfo: TagInfoer): void {
+    const { tags } = this.props
+    const newArticles = adjustedArticles.filter(item => item.types.includes(tagInfo.text))
+    const retTags = tags.filter(item => tagInfo.tags.includes(item.id))
+    this.setState(
+      () => ({ tags: retTags, filteredArticles: newArticles, activeTagIndex: -1, mount: false }),
+      () => {
+        this.filteredArticlesByType = newArticles
+        this.setState(() => ({
+          mount: true
+        }))
+      }
+    )
+  }
+
+  protected filterArticlesBYTag(item: BallTagType, index: number): void {
+    const { filteredArticlesByType } = this
+    const newArticles = filteredArticlesByType.filter(oItem => oItem.tags.includes(item.text))
+    this.setState(() => ({ filteredArticles: newArticles, activeTagIndex: index }))
+  }
+
   public render(): ReactChild {
-    const { ele } = this
-    const { tags, isMobileTerminal } = this.props
-    const { width, height, filteredArticles } = this.state
+    const { ele, changTags, filterArticlesBYTag } = this
+    const { isMobileTerminal } = this.props
+    const { tags, types, width, height, filteredArticles, activeTagIndex, mount } = this.state
     const size = Math.min(width, height)
     const total = filteredArticles.length
 
@@ -88,10 +157,17 @@ class ArticleList extends PureComponent<Props, State> {
               <Pagination total={total} />
             </div>
             <div ref={ele} className="col-lg-3 col-xs-12">
-              {width && !isMobileTerminal ? (
+              {<Tag onChange={tagInfo => changTags(tagInfo as TagInfoer)} tags={types} />}
+              {width && !isMobileTerminal && tags.length && mount ? (
                 <TagBall width={size} height={size}>
-                  {tags.map(tag => (
-                    <TagItem key={tag.id}>{tag.text}</TagItem>
+                  {tags.map((tag, index) => (
+                    <TagItem
+                      key={tag.id}
+                      className={activeTagIndex === index ? 'active' : ''}
+                      onClick={() => filterArticlesBYTag(tag, index)}
+                    >
+                      {tag.text}
+                    </TagItem>
                   ))}
                 </TagBall>
               ) : null}
@@ -105,7 +181,8 @@ class ArticleList extends PureComponent<Props, State> {
 
 const mapStateToProps = (state: AppState): StateToProps => ({
   isMobileTerminal: state.getIn(['config', 'isMobileTerminal']),
-  tags: state.getIn(['config', 'tags']).toJS()
+  tags: state.getIn(['config', 'tags']).toJS(),
+  types: state.getIn(['config', 'types']).toJS()
 })
 
 export default connect(

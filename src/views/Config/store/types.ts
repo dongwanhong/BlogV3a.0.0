@@ -3,7 +3,14 @@ export interface Tag {
   text: string
 }
 
+export interface Type {
+  id: number
+  text: string
+  tags: number[]
+}
+
 export interface State {
   isMobileTerminal: boolean
   tags: Tag[]
+  types: Type[]
 }

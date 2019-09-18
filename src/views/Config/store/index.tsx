@@ -1,6 +1,6 @@
 import reducer from './reducer'
-import { State } from './types'
+import { State, Type, Tag } from './types'
 
 // microsoft/TypeScript/issues/28481
 export type State = State
-export { reducer }
+export { reducer, Type, Tag }

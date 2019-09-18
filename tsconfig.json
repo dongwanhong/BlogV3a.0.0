@@ -45,6 +45,7 @@
       "@/*": ["src/*"],
       "@views/*": ["src/views/*"],
       "@images/*": ["src/images/*"],
+      "@components/*": ["src/components/*"],
       "@locale/*": ["src/locale/*"],
       "@router/*": ["src/router/*"],
       "@store/*": ["src/store/*"],

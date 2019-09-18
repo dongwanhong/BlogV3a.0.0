@@ -139,6 +139,7 @@ const baseConfig = {
     alias: {
       'react-dom': '@hot-loader/react-dom',
       '@': path.resolve(__dirname, '../src/'),
+      '@components': path.resolve(__dirname, '../src/components/'),
       '@images': path.resolve(__dirname, '../src/images/'),
       '@locale': path.resolve(__dirname, '../src/locale/'),
       '@router': path.resolve(__dirname, '../src/router/'),

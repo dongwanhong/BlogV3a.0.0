@@ -5,6 +5,31 @@ const originState: State = {
   isMobileTerminal: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
     navigator.userAgent
   ),
+  types: [
+    {
+      id: 1,
+      text: '前端开发',
+      tags: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    },
+    { id: 2, text: '开发工具', tags: [18, 19] },
+    { id: 3, text: 'Python 开发', tags: [12] },
+    {
+      id: 4,
+      text: '数据库',
+      tags: [15, 16, 17]
+    },
+    {
+      id: 5,
+      text: '后端开发',
+      tags: [10, 11, 12]
+    },
+    { id: 6, text: '小程序开发', tags: [] },
+    { id: 7, text: '区块链', tags: [] },
+    { id: 8, text: '人工智能', tags: [] },
+    { id: 9, text: '服务器', tags: [13, 14] },
+    { id: 10, text: '移动端', tags: [] },
+    { id: 11, text: '计算机基础', tags: [] }
+  ],
   tags: [
     { id: 1, text: 'HTML' },
     { id: 2, text: 'CSS' },

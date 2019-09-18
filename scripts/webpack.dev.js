@@ -15,10 +15,10 @@ const devConfig = {
     ]
   },
   devServer: {
-    host: '192.168.1.6',
+    host: 'localhost',
     port: 9000,
     // 确定应该从哪里提供 bundle，并且此选项优先
-    publicPath: 'http://192.168.1.6:9000/',
+    publicPath: 'http://localhost:9000/',
     // 服务器从哪里提供内容（静态文件）
     contentBase: path.resolve(__dirname, '../public'),
     // 将处理实时重载的脚本被插入到你的包(bundle)中，并且构建消息将会出现在浏览器控制台

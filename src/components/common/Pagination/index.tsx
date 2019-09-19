@@ -101,7 +101,10 @@ class Pagination extends Component<Props, State> {
 
     return (
       <ul className={classNames.join(' ')}>
-        <li className="pagination-item" onClick={() => this.goTo(-5)}>
+        <li
+          className={btnNum < 1 || pageNum === 1 ? 'pagination-item disabled' : 'pagination-item'}
+          onClick={() => this.goTo(-5)}
+        >
           «
         </li>
         {Array(btnNum)
@@ -118,7 +121,12 @@ class Pagination extends Component<Props, State> {
               </li>
             )
           })}
-        <li className="pagination-item" onClick={() => this.goTo(+5)}>
+        <li
+          className={
+            btnNum < 1 || pageNum === btnNum ? 'pagination-item disabled' : 'pagination-item'
+          }
+          onClick={() => this.goTo(+5)}
+        >
           »
         </li>
         <li className="pagination-size">

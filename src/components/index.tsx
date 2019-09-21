@@ -13,6 +13,7 @@ import Tag from './common/Tag'
 import SyntaxHighlighter from './common/SyntaxHighlighter'
 import Pagination from './common/Pagination'
 import Icon from './common/Icon'
+import Empty from './common/Empty'
 // Custom
 import TopBar from './custom/TopBar'
 import Footer from './custom/Footer'
@@ -41,5 +42,6 @@ export {
   Reference,
   BowenFooter,
   Pagination,
-  Icon
+  Icon,
+  Empty
 }

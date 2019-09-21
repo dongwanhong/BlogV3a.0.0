@@ -1,7 +1,7 @@
 import React, { PureComponent, ReactChild, RefObject, createRef } from 'react'
 import { connect } from 'react-redux'
 import { AppState } from '@/store'
-import { TopBar, Pagination, TagBall, TagItem, Tag } from '@/components'
+import { TopBar, Pagination, TagBall, TagItem, Tag, Empty } from '@/components'
 import { State as StateToProps, Tag as BallTagType } from '@views/Config/store'
 import { TagInfo } from '@/components/common/Tag'
 import ArticleItem from './components/ArticleItem'
@@ -153,6 +153,7 @@ class ArticleList extends PureComponent<Props, State> {
                     to={item.to}
                   />
                 ))}
+                {!filteredArticles.length && <Empty />}
               </div>
               <Pagination total={total} />
             </div>

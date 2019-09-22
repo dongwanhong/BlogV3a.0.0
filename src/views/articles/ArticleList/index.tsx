@@ -4,6 +4,7 @@ import { AppState } from '@/store'
 import { TopBar, Pagination, TagBall, TagItem, Tag, Empty } from '@/components'
 import { State as StateToProps, Tag as BallTagType } from '@views/Config/store'
 import { TagInfo } from '@/components/common/Tag'
+import { Params } from '@/components/common/Pagination'
 import ArticleItem from './components/ArticleItem'
 import { articles } from '@/router'
 import image from '@images/doraemon.png'
@@ -31,6 +32,8 @@ interface State {
   tags: BallTagType[]
   activeTagIndex: number
   types: TagInfoer[]
+  pageNum: number
+  pageSize: number
   filteredArticles: ArticleConfig[]
 }
 
@@ -59,6 +62,8 @@ class ArticleList extends PureComponent<Props, State> {
     mount: true,
     activeTagIndex: -1,
     tags: [],
+    pageNum: 1,
+    pageSize: 10,
     types: this.getDefaultTypes(),
     filteredArticles: adjustedArticles
   }
@@ -67,7 +72,9 @@ class ArticleList extends PureComponent<Props, State> {
     super(props)
     this.ele = createRef()
     this.filteredArticlesByType = []
+
     this.changTags = this.changTags.bind(this)
+    this.handlePaginationChange = this.handlePaginationChange.bind(this)
     this.filterArticlesBYTag = this.filterArticlesBYTag.bind(this)
     this.filterArticlesBYType = this.filterArticlesBYType.bind(this)
   }
@@ -126,10 +133,28 @@ class ArticleList extends PureComponent<Props, State> {
     this.setState(() => ({ filteredArticles: newArticles, activeTagIndex: index }))
   }
 
+  private handlePaginationChange(p: Params): void {
+    const { pageNum = 1, pageSize = 10 } = p || {}
+    this.setState(() => ({
+      pageNum,
+      pageSize
+    }))
+  }
+
   public render(): ReactChild {
-    const { ele, changTags, filterArticlesBYTag } = this
+    const { ele, changTags, filterArticlesBYTag, handlePaginationChange } = this
     const { isMobileTerminal } = this.props
-    const { tags, types, width, height, filteredArticles, activeTagIndex, mount } = this.state
+    const {
+      tags,
+      types,
+      width,
+      height,
+      filteredArticles,
+      activeTagIndex,
+      mount,
+      pageNum,
+      pageSize
+    } = this.state
     const size = Math.min(width, height)
     const total = filteredArticles.length
 
@@ -144,7 +169,7 @@ class ArticleList extends PureComponent<Props, State> {
                 <div>you don't understand it well enough.</div>
               </div>
               <div className="article-wrapper">
-                {filteredArticles.map(item => (
+                {filteredArticles.slice((pageNum - 1) * pageSize, pageNum * pageSize).map(item => (
                   <ArticleItem
                     key={item.key}
                     title={item.title}
@@ -155,7 +180,7 @@ class ArticleList extends PureComponent<Props, State> {
                 ))}
                 {!filteredArticles.length && <Empty />}
               </div>
-              <Pagination total={total} />
+              <Pagination total={total} onChange={handlePaginationChange} />
             </div>
             <div ref={ele} className="col-lg-3 col-xs-12">
               {<Tag onChange={tagInfo => changTags(tagInfo as TagInfoer)} tags={types} />}

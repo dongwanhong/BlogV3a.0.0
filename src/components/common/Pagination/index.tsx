@@ -1,6 +1,6 @@
 import React, { Component, ReactChild, ChangeEvent } from 'react'
 
-interface Params {
+export interface Params {
   total: number
   pageNum: number
   pageSize: number
@@ -34,7 +34,16 @@ class Pagination extends Component<Props, State> {
   }
 
   public handleChange(eve: ChangeEvent<HTMLSelectElement>): void {
-    this.setState({ pageSize: Number(eve.target.value) })
+    const newPageSize = Number(eve.target.value)
+    this.setState({ pageNum: 1, pageSize: newPageSize, baseNum: 1 }, () => {
+      const { onChange, total } = this.props
+      const params = {
+        total: total || 0,
+        pageNum: 1,
+        pageSize: newPageSize
+      }
+      if (onChange) onChange(params)
+    })
   }
 
   public handleClick(newPageNum: number, update: boolean = true): void {
@@ -69,9 +78,11 @@ class Pagination extends Component<Props, State> {
     const btnNum = this.getBtnNum() // 显示的按钮数
     const { baseNum } = this.state // 按钮值的基数
     let newNum = 0 // 新按钮值的基数
+    let toTail = false
     if (step > 0) {
       newNum = baseNum + step + btnNum
       if (newNum > btnTotalNum) {
+        toTail = true
         newNum = btnTotalNum - btnNum + 1
       } else {
         newNum = step + baseNum
@@ -82,7 +93,7 @@ class Pagination extends Component<Props, State> {
         newNum = 1
       }
     }
-    this.setState({ baseNum: newNum, pageNum: newNum })
+    this.setState({ baseNum: newNum, pageNum: toTail ? btnTotalNum : newNum })
     this.handleClick(newNum, false)
   }
 

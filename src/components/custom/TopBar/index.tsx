@@ -101,7 +101,7 @@ class TopBar extends Component<Props, State> {
           <Icon icon="iconunie63a" />
         </div>
         <CSSTransition in={showNavList} timeout={1000} classNames={classNames} unmountOnExit={true}>
-          <nav className="nav">
+          <nav className="nav" onClick={toggleNav}>
             {navList.map(item => (
               <Link key={item.id} to={item.url} className="nav-item">
                 <Icon icon={item.icon} />

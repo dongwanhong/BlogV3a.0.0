@@ -6,9 +6,9 @@ const originState: State = {
   timeout: 1000,
   classNames: {
     enter: 'animated',
-    enterActive: 'slideInLeft',
+    enterActive: 'fadeIn',
     exit: 'animated',
-    exitActive: 'slideOutLeft'
+    exitActive: 'fadeOut'
   }
 }
 

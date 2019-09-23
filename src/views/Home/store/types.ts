@@ -1,4 +1,4 @@
-import { CSSTransition } from 'react-transition-group'
+import { CSSTransitionClassNames } from 'react-transition-group/CSSTransition'
 
 export const TOGGLE_PAGE_BTN = 'TOGGLE_PAGE_BTN'
 
@@ -9,5 +9,5 @@ export interface Action {
 export interface State {
   showBtn: boolean
   timeout: number
-  classNames: CSSTransition.CSSTransitionClassNames
+  classNames: CSSTransitionClassNames
 }

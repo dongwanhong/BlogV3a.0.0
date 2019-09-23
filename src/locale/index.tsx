@@ -10,9 +10,7 @@ interface Messages {
   [x: string]: Record<string, string>
 }
 
-interface Props {
-  lang: string
-}
+type Props = StateToProps
 
 const messages: Messages = {
   'zh-CN': zhCN,
@@ -34,7 +32,4 @@ const mapStateToProps = (state: AppState): StateToProps => ({
   lang: state.getIn(['local', 'lang'])
 })
 
-export default connect(
-  mapStateToProps,
-  null
-)(LocaleProvider)
+export default connect<StateToProps, void, void, AppState>(mapStateToProps)(LocaleProvider)

@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 import { Link } from '../../index'
 import { injectIntl, WrappedComponentProps } from 'react-intl'
 import { CSSTransition } from 'react-transition-group'
+import { CSSTransitionClassNames } from 'react-transition-group/CSSTransition'
+import { connect } from 'react-redux'
+import { AppState } from '@/store'
 import { Icon } from '@/components'
 
-const isPhone = document.documentElement.clientWidth <= 1200
-
-const classNames: CSSTransition.CSSTransitionClassNames = {
+const classNames: CSSTransitionClassNames = {
   enter: 'animated',
   enterActive: 'slideInLeft',
   exit: 'animated',
@@ -23,9 +24,15 @@ interface NavItem {
 
 export type NavList = readonly NavItem[]
 
-interface Props extends WrappedComponentProps<'intl'> {
+interface StateToProps {
+  isMobileTerminal: boolean
+}
+
+interface OwnProps {
   navList?: NavList
 }
+
+type Props = WrappedComponentProps<'intl'> & StateToProps & OwnProps
 
 interface State {
   showNavList: boolean
@@ -33,7 +40,7 @@ interface State {
 
 class TopBar extends Component<Props, State> {
   public state: State = {
-    showNavList: !isPhone
+    showNavList: !this.props.isMobileTerminal
   }
 
   public constructor(props: Props) {
@@ -42,6 +49,7 @@ class TopBar extends Component<Props, State> {
   }
 
   private toggleNav(): void {
+    if (!this.props.isMobileTerminal) return
     const { showNavList } = this.state
     this.setState(() => ({ showNavList: !showNavList }))
   }
@@ -78,13 +86,13 @@ class TopBar extends Component<Props, State> {
         },
         {
           id: 5,
-          url: '/',
+          url: '/resume',
           text: intl.formatMessage({ id: 'topbar.resume' }),
           icon: 'iconguanyuwomen'
         },
         {
           id: 6,
-          url: '/',
+          url: '/config',
           text: intl.formatMessage({ id: 'topbar.setting' }),
           icon: 'iconshezhi'
         }
@@ -115,4 +123,11 @@ class TopBar extends Component<Props, State> {
   }
 }
 
-export default injectIntl(TopBar)
+const mapStateToProps = (state: AppState): StateToProps => ({
+  isMobileTerminal: state.getIn(['config', 'isMobileTerminal'])
+})
+
+export default connect<StateToProps, {}, OwnProps, AppState>(
+  mapStateToProps,
+  {}
+)(injectIntl(TopBar))

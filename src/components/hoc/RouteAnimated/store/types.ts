@@ -1,7 +1,7 @@
-import { CSSTransition } from 'react-transition-group'
+import { CSSTransitionClassNames } from 'react-transition-group/CSSTransition'
 
 export interface State {
   timeout: number
   unmountOnExit: boolean
-  classNames: CSSTransition.CSSTransitionClassNames
+  classNames: CSSTransitionClassNames
 }

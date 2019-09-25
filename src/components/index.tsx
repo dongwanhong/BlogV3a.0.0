@@ -14,6 +14,7 @@ import SyntaxHighlighter from './common/SyntaxHighlighter'
 import Pagination from './common/Pagination'
 import Icon from './common/Icon'
 import Empty from './common/Empty'
+import BlockUI from './common/BlockUI'
 // Custom
 import TopBar from './custom/TopBar'
 import Footer from './custom/Footer'
@@ -43,5 +44,6 @@ export {
   BowenFooter,
   Pagination,
   Icon,
-  Empty
+  Empty,
+  BlockUI
 }

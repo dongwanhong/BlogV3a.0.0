@@ -3,6 +3,7 @@ import { Switch, Route, RouteComponentProps, SwitchProps, match } from 'react-ro
 import { Location } from 'history'
 import DocumentTitle from 'react-document-title'
 import { FormattedMessage } from 'react-intl'
+import { BlockUI } from '@/components'
 
 export interface RouteConfigComponentProps<Params extends { [K in keyof Params]?: string } = {}>
   extends RouteComponentProps<Params> {
@@ -64,7 +65,7 @@ const renderRoutes: RenderRoutes = (routes, extraProps = {}, switchProps = {}) =
               return route.render({ ...props, ...extraProps, route: route })
             } else if (route.component) {
               return (
-                <Suspense fallback={<div>Loading...</div>}>
+                <Suspense fallback={<BlockUI />}>
                   {route.meta && route.meta.title ? (
                     <FormattedMessage id={route.meta.title}>
                       {txt => <DocumentTitle title={txt as string} />}

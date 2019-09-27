@@ -1,9 +1,8 @@
 import React, { PureComponent } from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { hot } from 'react-hot-loader/root'
 import store from '../store'
-import Home from './Home'
 import renderRoutes, { routes } from '../router'
 import LocaleProvider from '../locale'
 
@@ -15,7 +14,6 @@ class App extends PureComponent {
         <LocaleProvider>
           <Router>
             {/* Do not use `Switch` component to avoid failing to implement exit animation */}
-            <Route path="/" exact children={props => <Home {...props} />} />
             {renderRoutes(routes)}
           </Router>
         </LocaleProvider>

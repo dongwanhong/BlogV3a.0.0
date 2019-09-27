@@ -15,6 +15,7 @@ import Pagination from './common/Pagination'
 import Icon from './common/Icon'
 import Empty from './common/Empty'
 import BlockUI from './common/BlockUI'
+import NotFound from './custom/error-pages/404'
 // Custom
 import TopBar from './custom/TopBar'
 import Footer from './custom/Footer'
@@ -45,5 +46,6 @@ export {
   Pagination,
   Icon,
   Empty,
-  BlockUI
+  BlockUI,
+  NotFound
 }

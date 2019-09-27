@@ -1,0 +1,37 @@
+.page-404 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
+    .page-left,
+    .page-right {
+        height: 50%;
+        max-width: 400px;
+        max-height: 200px;
+    }
+
+    .page-left {
+        flex: 1;
+        background-image: url('https://ws1.sinaimg.cn/large/dac84c10ly1g757824n8jj20sp095jre.jpg');
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+    }
+
+    .page-right {
+        flex: 3;
+        position: relative;
+        padding-left: 2rem;
+
+        .text {
+            position: absolute;
+            bottom: 0;
+            text-indent: 2rem;
+
+            p:first-child {
+                margin-bottom: .5rem;
+            }
+        }
+    }
+}

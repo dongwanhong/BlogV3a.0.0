@@ -3,7 +3,8 @@ import { Switch, Route, RouteComponentProps, SwitchProps, match } from 'react-ro
 import { Location } from 'history'
 import DocumentTitle from 'react-document-title'
 import { FormattedMessage } from 'react-intl'
-import { BlockUI } from '@/components'
+import { BlockUI, NotFound } from '@/components'
+import Home from '@views/Home'
 
 export interface RouteConfigComponentProps<Params extends { [K in keyof Params]?: string } = {}>
   extends RouteComponentProps<Params> {
@@ -75,11 +76,13 @@ const renderRoutes: RenderRoutes = (routes, extraProps = {}, switchProps = {}) =
                 </Suspense>
               )
             } else {
-              return null
+              return <NotFound />
             }
           }}
         />
       ))}
+      <Route path="/" exact children={props => <Home {...props} />} />
+      <NotFound />
     </Switch>
   ) : null
 }

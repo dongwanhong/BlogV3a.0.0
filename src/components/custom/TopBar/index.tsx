@@ -68,7 +68,7 @@ class TopBar extends Component<Props, State> {
         },
         {
           id: 2,
-          url: '/',
+          url: '/project',
           text: intl.formatMessage({ id: 'topbar.project' }),
           icon: 'iconrepo'
         },

@@ -5,7 +5,7 @@ import { CSSTransition } from 'react-transition-group'
 import { CSSTransitionClassNames } from 'react-transition-group/CSSTransition'
 import { connect } from 'react-redux'
 import { AppState } from '@/store'
-import { Icon } from '@/components'
+import { Icon, Draweer } from '@/components'
 
 const classNames: CSSTransitionClassNames = {
   enter: 'animated',
@@ -36,16 +36,20 @@ type Props = WrappedComponentProps<'intl'> & StateToProps & OwnProps
 
 interface State {
   showNavList: boolean
+  showConfig: boolean
 }
 
 class TopBar extends Component<Props, State> {
   public state: State = {
-    showNavList: !this.props.isMobileTerminal
+    showNavList: !this.props.isMobileTerminal,
+    showConfig: false
   }
 
   public constructor(props: Props) {
     super(props)
     this.toggleNav = this.toggleNav.bind(this)
+    this.toggleConfig = this.toggleConfig.bind(this)
+    this.handleConfigClick = this.handleConfigClick.bind(this)
   }
 
   private toggleNav(): void {
@@ -54,9 +58,18 @@ class TopBar extends Component<Props, State> {
     this.setState(() => ({ showNavList: !showNavList }))
   }
 
+  private handleConfigClick(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void {
+    e.preventDefault()
+    this.setState(() => ({ showConfig: true }))
+  }
+
+  public toggleConfig(): void {
+    this.setState(() => ({ showConfig: false }))
+  }
+
   public render(): React.ReactNode {
-    const { toggleNav } = this
-    const { showNavList } = this.state
+    const { toggleNav, handleConfigClick, toggleConfig } = this
+    const { showNavList, showConfig } = this.state
     let { navList, intl } = this.props
     if (!navList) {
       navList = [
@@ -89,12 +102,6 @@ class TopBar extends Component<Props, State> {
           url: '/resume',
           text: intl.formatMessage({ id: 'topbar.resume' }),
           icon: 'iconguanyuwomen'
-        },
-        {
-          id: 6,
-          url: '/config',
-          text: intl.formatMessage({ id: 'topbar.setting' }),
-          icon: 'iconshezhi'
         }
       ]
     }
@@ -116,6 +123,11 @@ class TopBar extends Component<Props, State> {
                 {item.text}
               </Link>
             ))}
+            <Link key={6} to="/config" className="nav-item" onClick={e => handleConfigClick(e)}>
+              <Icon icon="iconshezhi" />
+              {intl.formatMessage({ id: 'topbar.setting' })}
+            </Link>
+            <Draweer show={showConfig} onClose={toggleConfig} />
           </nav>
         </CSSTransition>
       </div>

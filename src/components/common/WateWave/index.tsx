@@ -22,6 +22,7 @@ class WaterWave extends PureComponent<Props, {}> {
   public handleClick(eve: MouseEvent): void {
     const { eleRef } = this
     if (!eleRef.current) return
+    if (eve.target !== eve.currentTarget) return
     const top = eve.pageY - 80
     const left = eve.pageX - 80
     const { url } = this.props

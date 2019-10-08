@@ -127,9 +127,9 @@ class TopBar extends Component<Props, State> {
               <Icon icon="iconshezhi" />
               {intl.formatMessage({ id: 'topbar.setting' })}
             </Link>
-            <Draweer show={showConfig} onClose={toggleConfig} />
           </nav>
         </CSSTransition>
+        <Draweer show={showConfig} onClose={toggleConfig} />
       </div>
     )
   }

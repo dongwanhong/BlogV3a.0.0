@@ -29,7 +29,9 @@ const Draweer: SFC<Props> = props => {
       <div className="drawer-container" onClick={e => handleMaskClick(e, onClose)}>
         <div className="drawer-content">
           {title ? <div className="drawer-header">{title}</div> : null}
-          <div className="drawer-body">{children}</div>
+          <div className="drawer-body" style={footnote ? {} : { height: '100%' }}>
+            {children}
+          </div>
           {footnote ? <div className="drawer-footer">{footnote}</div> : null}
         </div>
       </div>

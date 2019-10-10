@@ -21,6 +21,7 @@ import TopBar from './custom/TopBar'
 import Footer from './custom/Footer'
 import { Bowen, Header, Content, Title, Reference, Footer as BowenFooter } from './custom/Bowen'
 import NotFound from './custom/error-pages/404'
+import Comment from './custom/Comment'
 
 export {
   Link,
@@ -46,6 +47,7 @@ export {
   BowenFooter,
   Pagination,
   NotFound,
+  Comment,
   Icon,
   Empty,
   BlockUI,

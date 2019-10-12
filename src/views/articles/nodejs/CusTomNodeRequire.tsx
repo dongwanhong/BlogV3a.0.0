@@ -1,5 +1,5 @@
 import React, { PureComponent, ReactChild } from 'react'
-import { Bowen, SyntaxHighlighter } from '@/components'
+import { Bowen, SyntaxHighlighter, Comment } from '@/components'
 
 const refs = [
   {
@@ -418,6 +418,7 @@ class CusTomNodeRequire extends PureComponent<{}, {}> {
           <Bowen.Title id="CusTomNodeRequire-6" text="参考资料" />
           <Bowen.Reference refs={refs} />
         </Bowen.Content>
+        <Comment />
         <Bowen.Footer />
       </Bowen>
     )

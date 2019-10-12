@@ -19,7 +19,8 @@ class Comment extends React.PureComponent<Props, {}> {
       theme: 'github-light',
       crossorigin: 'anonymous',
       async: true,
-      label: 'Comment'
+      label: 'Comment',
+      ele: '#comment-container'
     },
     onCreate: () => {},
     onError: () => {},
@@ -31,7 +32,11 @@ class Comment extends React.PureComponent<Props, {}> {
   public render(): ReactChild {
     const { onError, onLoad, url = 'https://utteranc.es/client.js', attributes } = this.props
 
-    return <Script url={url} onError={onError} onLoad={onLoad} attributes={attributes} />
+    return (
+      <div id="comment-container">
+        <Script url={url} onError={onError} onLoad={onLoad} attributes={attributes} />
+      </div>
+    )
   }
 }
 

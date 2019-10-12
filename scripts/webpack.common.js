@@ -24,7 +24,7 @@ const rules = [
   },
   {
     test: /\.m?js|jsx|ts|tsx$/,
-    exclude: /node_modules/,
+    include: /(src|node_modules\/react\-load\-script)/,
     use: [
       {
         loader: 'happypack/loader?id=js'
@@ -103,7 +103,7 @@ const ignorePluginCfg = {
 const happyPackJSCfg = {
   id: 'js',
   threadPool: happyThreadPool,
-  loaders: ['babel-loader', 'eslint-loader']
+  loaders: ['babel-loader', 'script-loader', 'eslint-loader']
 }
 
 const happyPackStylesCfg = {
@@ -129,6 +129,9 @@ const baseConfig = {
     publicPath: devMode ? '/' : 'https://dongwanhong.github.io/',
     path: path.resolve(__dirname, '../dist'), // 指定输出文件所在目录
     filename: devMode ? 'javascript/[name].js' : 'javascript/[name].[contenthash:8].js' // 输出文件名，其中 name 为变量，值为入口文件名
+  },
+  resolveLoader: {
+    modules: ['node_modules', path.resolve(__dirname, '../loaders')]
   },
   module: {
     rules: rules

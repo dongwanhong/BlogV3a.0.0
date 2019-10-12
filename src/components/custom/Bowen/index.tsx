@@ -1,7 +1,7 @@
 import React, { PureComponent, ReactChild } from 'react'
 import config from './config'
 import utils from '@/utils'
-import { TopBar, Comment } from '@/components'
+import { TopBar } from '@/components'
 import Header from './components/Header'
 import Content from './components/Content'
 import Title from './components/Title'
@@ -73,7 +73,6 @@ class Bowen extends PureComponent<Props, {}> {
             </div>
           </div>
         </article>
-        <Comment />
         {toTop ? <Bowen.ToTop /> : null}
       </div>
     )

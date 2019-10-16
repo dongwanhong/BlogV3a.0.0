@@ -1,5 +1,5 @@
 import React, { PureComponent, ReactChild } from 'react'
-import { Bowen, SyntaxHighlighter, Comment } from '@/components'
+import { Bowen, SyntaxHighlighter, Comment, Counter } from '@/components'
 
 const refs = [
   {
@@ -286,10 +286,13 @@ const othLoad = `
 
 class CusTomNodeRequire extends PureComponent<{}, {}> {
   public render(): ReactChild {
+    const title = '理清 Nodejs 中的 require 函数'
+
     return (
       <Bowen tocs={tocs}>
+        <Counter title={title} />
         <Bowen.Header
-          title="理清 Nodejs 中的 require 函数"
+          title={title}
           description="Nodejs 遵循 CommonJS 规范，通过内置的 require 函数加载各个模块，因此理解 require 函数的实现对学习 Nodejs 至关重要。"
         />
         <Bowen.Content>

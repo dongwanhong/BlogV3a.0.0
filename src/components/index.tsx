@@ -22,6 +22,7 @@ import Footer from './custom/Footer'
 import { Bowen, Header, Content, Title, Reference, Footer as BowenFooter } from './custom/Bowen'
 import NotFound from './custom/error-pages/404'
 import Comment from './custom/Comment'
+import Counter from './custom/Counter'
 
 export {
   Link,
@@ -48,6 +49,7 @@ export {
   Pagination,
   NotFound,
   Comment,
+  Counter,
   Icon,
   Empty,
   BlockUI,

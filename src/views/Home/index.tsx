@@ -4,7 +4,7 @@ import { Dispatch } from 'redux'
 import { CSSTransition } from 'react-transition-group'
 import DocumentTitle from 'react-document-title'
 import { injectIntl, WrappedComponentProps } from 'react-intl'
-import { withAnimateRoute, WaterWave, Rain, TopBar } from '../../components'
+import { withAnimateRoute, WaterWave, Rain, TopBar, Footer } from '../../components'
 import { State as StateToProps, actionCreators } from './store'
 import { AppState } from '../../store'
 import bgImage from '../../images/pages/home/bg-home.jpg'
@@ -42,6 +42,15 @@ class Home extends PureComponent<Props, {}> {
             >
               <TopBar />
             </CSSTransition>
+            <CSSTransition
+              in={showBtn}
+              timeout={timeout}
+              classNames={classNames}
+              mountOnEnter={true}
+              unmountOnExit={true}
+            >
+              <Footer />
+            </CSSTransition>
             <Rain />
           </div>
         ) : (
@@ -55,6 +64,15 @@ class Home extends PureComponent<Props, {}> {
                 unmountOnExit={true}
               >
                 <TopBar />
+              </CSSTransition>
+              <CSSTransition
+                in={showBtn}
+                timeout={timeout}
+                classNames={classNames}
+                mountOnEnter={true}
+                unmountOnExit={true}
+              >
+                <Footer />
               </CSSTransition>
               <Rain />
             </div>

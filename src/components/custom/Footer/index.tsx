@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
+import { Counter } from '@/components'
 
 class Footer extends Component<{}, {}> {
   public render(): React.ReactNode {
     return (
       <div className="footer">
-        {`Copyright © 2019-${new Date().getFullYear()} 码良 anani1994.github.io all right reserved`}
+        {`Copyright © 2019-${new Date().getFullYear()} XiaoJiu dongwanhong.github.io all right reserved`}
+        <Counter ele="home" title="小九的博客" des="访问量" showTime={false} />
       </div>
     )
   }

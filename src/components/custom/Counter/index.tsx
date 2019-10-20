@@ -8,9 +8,11 @@ import React, { ReactChild } from 'react'
 import Script from 'react-load-script'
 
 interface Props {
-  title: string
-  ele?: string
+  title: string // 页面标题或描述
+  ele?: string // 阅读量系统所需，同时指定动态 script 添加位置
   url?: string
+  des?: string
+  showTime?: boolean
   attributes?: {
     [prop: string]: string
   }
@@ -51,16 +53,30 @@ class Counter extends React.PureComponent<Props, {}> {
       attributes = {},
       onError,
       // onLoad,
-      title
+      title,
+      ele,
+      des,
+      showTime = true
     } = this.props
+    if (attributes.ele === '#') {
+      attributes.ele = `#${ele}` || 'body' // 默认添加动态 script 到 body 内部
+    }
 
     return (
       <>
         <div className="counter-container">
-          <div id={attributes.ele.slice(1)} className="leancloud_visitors" data-flag-title={title}>
-            <span className="cn-colon">发布日期</span>
-            <span className="sub-time">2019-09-26</span>
-            <span className="post-meta-item-text cn-colon">阅读量</span>
+          <div
+            id={ele || attributes.ele.slice(1)}
+            className="leancloud_visitors"
+            data-flag-title={title}
+          >
+            {showTime && (
+              <>
+                <span className="cn-colon">发布日期</span>
+                <span className="sub-time">2019-09-26</span>
+              </>
+            )}
+            <span className="post-meta-item-text cn-colon">{des ? des : '阅读量'}</span>
             <span className="leancloud-visitors-count">+1</span>
           </div>
         </div>

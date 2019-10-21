@@ -13,6 +13,9 @@ interface Props {
   url?: string
   des?: string
   showTime?: boolean
+  showTakeTime?: boolean
+  time?: string
+  takeTime?: number
   attributes?: {
     [prop: string]: string
   }
@@ -56,7 +59,13 @@ class Counter extends React.PureComponent<Props, {}> {
       title,
       ele,
       des,
-      showTime = true
+      showTime = false,
+      showTakeTime = false,
+      time = new Date()
+        .toLocaleString()
+        .replace(/\//g, '-')
+        .slice(0, 9),
+      takeTime = 0
     } = this.props
     if (attributes.ele === '#') {
       attributes.ele = `#${ele}` || 'body' // 默认添加动态 script 到 body 内部
@@ -73,11 +82,17 @@ class Counter extends React.PureComponent<Props, {}> {
             {showTime && (
               <>
                 <span className="cn-colon">发布日期</span>
-                <span className="sub-time">2019-09-26</span>
+                <span className="sub-time">{time}</span>
               </>
             )}
             <span className="post-meta-item-text cn-colon">{des ? des : '阅读量'}</span>
             <span className="leancloud-visitors-count">+1</span>
+            {showTakeTime && (
+              <>
+                <span className="cn-colon">读完需要</span>
+                <span>{takeTime} 分钟</span>
+              </>
+            )}
           </div>
         </div>
 

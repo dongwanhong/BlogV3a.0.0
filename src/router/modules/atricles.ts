@@ -1,8 +1,8 @@
 import { lazy } from 'react'
 import nodejs from './article/nodejs'
-import { ArticleRouteConfig } from '../types'
+import { RetArticleRouteConfig } from '../types'
 
-const articles: ArticleRouteConfig[] = [
+const articles: RetArticleRouteConfig[] = [
   {
     key: 'articleDemo',
     path: '/articles/demo',

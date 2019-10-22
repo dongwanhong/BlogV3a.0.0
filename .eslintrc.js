@@ -54,5 +54,13 @@ module.exports = {
         allowTypedFunctionExpressions: true
       }
     ]
-  }
+  },
+  overrides: [
+    {
+      files: ['loaders/*.js'],
+      rules: {
+        '@typescript-eslint/no-var-requires': 'off'
+      }
+    }
+  ]
 }

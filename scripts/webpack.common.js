@@ -103,7 +103,7 @@ const ignorePluginCfg = {
 const happyPackJSCfg = {
   id: 'js',
   threadPool: happyThreadPool,
-  loaders: ['babel-loader', 'script-loader', 'eslint-loader']
+  loaders: ['babel-loader', 'update-time-loader', 'script-loader', 'eslint-loader']
 }
 
 const happyPackStylesCfg = {

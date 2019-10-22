@@ -1,5 +1,12 @@
 import React, { PureComponent, ReactChild } from 'react'
 import { Bowen, SyntaxHighlighter, Comment, Counter } from '@/components'
+import { ArticleRouteConfig } from '@/router/types'
+
+interface State {
+  takeTime: number
+}
+
+type Props = ArticleRouteConfig
 
 interface State {
   takeTime: number
@@ -288,7 +295,7 @@ const othLoad = `
  module.load(filename);
 `.trim()
 
-class CusTomNodeRequire extends PureComponent<{}, State> {
+class CusTomNodeRequire extends PureComponent<Props, State> {
   public readonly state = {
     takeTime: 0
   }
@@ -306,10 +313,17 @@ class CusTomNodeRequire extends PureComponent<{}, State> {
   public render(): ReactChild {
     const title = '理清 Nodejs 中的 require 函数'
     const { takeTime } = this.state
+    const { birthTime } = this.props
 
     return (
       <Bowen tocs={tocs}>
-        <Counter showTakeTime={true} takeTime={takeTime} title={title} />
+        <Counter
+          showTime={true}
+          time={birthTime}
+          showTakeTime={true}
+          takeTime={takeTime}
+          title={title}
+        />
         <Bowen.Header
           title={title}
           description="Nodejs 遵循 CommonJS 规范，通过内置的 require 函数加载各个模块，因此理解 require 函数的实现对学习 Nodejs 至关重要。"

@@ -16,6 +16,7 @@ module.exports = function(api) {
     ],
     '@babel/plugin-proposal-class-properties',
     '@babel/plugin-syntax-dynamic-import',
+    '@babel/plugin-transform-modules-commonjs',
     'react-hot-loader/babel'
   ]
   // Preset 执行顺序相反由下向上而行

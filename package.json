@@ -120,7 +120,7 @@
     "core-js": "3",
     "immutable": "^4.0.0-rc.12",
     "jquery": "^3.4.1",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.13",
     "moment": "^2.24.0",
     "react": "^16.8.6",
     "react-document-title": "^2.0.3",

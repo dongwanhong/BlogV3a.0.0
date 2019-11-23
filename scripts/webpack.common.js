@@ -24,7 +24,8 @@ const rules = [
   },
   {
     test: /\.m?js|jsx|ts|tsx$/,
-    include: /(src|node_modules\/react\-load\-script)/,
+    // fix: https://github.com/jantimon/html-webpack-plugin/issues/773
+    include: /src(?!.*\.html|.*\.less)|node_modules\/react\-load\-script/,
     use: [
       {
         loader: 'happypack/loader?id=js'

@@ -19,3 +19,9 @@ package.json
 *.ttf
 *.otf
 *.svg
+
+# Ignore Picture files
+*.png
+*.jpg
+*.jpeg
+*.gif

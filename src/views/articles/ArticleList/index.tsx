@@ -79,6 +79,11 @@ class ArticleList extends PureComponent<Props, State> {
     this.filterArticlesBYType = this.filterArticlesBYType.bind(this)
   }
 
+  public componentWillMount(): void {
+    const { types } = this.state
+    this.changTags(types[0])
+  }
+
   private getDefaultTypes(): TagInfoer[] {
     return this.props.types.map(item => {
       ;(item as TagInfoer).active = false
@@ -113,8 +118,11 @@ class ArticleList extends PureComponent<Props, State> {
   }
 
   protected filterArticlesBYType(tagInfo: TagInfoer): void {
+    let newArticles = [...adjustedArticles]
     const { tags } = this.props
-    const newArticles = adjustedArticles.filter(item => item.types.includes(tagInfo.text))
+    if (tagInfo.text !== '全部') {
+      newArticles = adjustedArticles.filter(item => item.types.includes(tagInfo.text))
+    }
     const retTags = tags.filter(item => tagInfo.tags.includes(item.id))
     this.setState(
       () => ({ tags: retTags, filteredArticles: newArticles, activeTagIndex: -1, mount: false }),

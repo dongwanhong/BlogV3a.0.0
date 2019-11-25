@@ -1,11 +1,38 @@
 import { fromJS } from 'immutable'
 import { State } from './types'
 
+const tags = [
+  { id: 1, text: 'HTML' },
+  { id: 2, text: 'CSS' },
+  { id: 3, text: 'JavaScript' },
+  { id: 4, text: 'jQuery' },
+  { id: 5, text: 'AJAX' },
+  { id: 6, text: 'React' },
+  { id: 7, text: 'Vue' },
+  { id: 8, text: 'AngularJS' },
+  { id: 9, text: 'TypeScript' },
+  { id: 10, text: 'Node.js' },
+  { id: 11, text: 'Java' },
+  { id: 12, text: 'Python' },
+  { id: 13, text: 'Linux' },
+  { id: 14, text: 'Docker' },
+  { id: 15, text: 'SQL' },
+  { id: 16, text: 'MySQL' },
+  { id: 17, text: 'MongoDB' },
+  { id: 18, text: 'Git' },
+  { id: 19, text: 'Chrome' }
+]
+
 const originState: State = {
   isMobileTerminal: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
     navigator.userAgent
   ),
   types: [
+    {
+      id: 0,
+      text: '全部',
+      tags: tags.map(item => item.id)
+    },
     {
       id: 1,
       text: '前端开发',
@@ -30,27 +57,7 @@ const originState: State = {
     { id: 10, text: '移动端', tags: [] },
     { id: 11, text: '计算机基础', tags: [] }
   ],
-  tags: [
-    { id: 1, text: 'HTML' },
-    { id: 2, text: 'CSS' },
-    { id: 3, text: 'JavaScript' },
-    { id: 4, text: 'jQuery' },
-    { id: 5, text: 'AJAX' },
-    { id: 6, text: 'React' },
-    { id: 7, text: 'Vue' },
-    { id: 8, text: 'AngularJS' },
-    { id: 9, text: 'TypeScript' },
-    { id: 10, text: 'Node.js' },
-    { id: 11, text: 'Java' },
-    { id: 12, text: 'Python' },
-    { id: 13, text: 'Linux' },
-    { id: 14, text: 'Docker' },
-    { id: 15, text: 'SQL' },
-    { id: 16, text: 'MySQL' },
-    { id: 17, text: 'MongoDB' },
-    { id: 18, text: 'Git' },
-    { id: 19, text: 'Chrome' }
-  ]
+  tags
 }
 
 const defaultState = fromJS(originState)

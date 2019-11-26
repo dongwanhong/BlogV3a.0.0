@@ -2,10 +2,6 @@ import React, { PureComponent, ReactChild } from 'react'
 import { Bowen, SyntaxHighlighter, Comment, Counter } from '@/components'
 import { ArticleRouteConfig } from '@/router/types'
 
-interface State {
-  takeTime: number
-}
-
 type Props = ArticleRouteConfig
 
 interface State {

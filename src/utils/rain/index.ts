@@ -24,18 +24,20 @@ class Rain {
   public waterDrops: WaterDrop[] // 水滴数组，存储所有的水滴
   public requestID: number // 动画请求 ID，一个非零整数
   public droplets: Droplet[] // 水滴数组，存储打击地面产生的水滴
+  public isStop: boolean
 
   public constructor(config: Config) {
     this.ctx = null
     this.requestID = 0
     this.waterDrops = []
     this.droplets = []
+    this.isStop = false
     this.config = Object.assign({}, defaultConfig, config)
     // 为方法绑定执行上下文
     this.init = this.init.bind(this)
     this.start = this.start.bind(this)
     this.stop = this.stop.bind(this)
-    this.reboot = util.throttle(this.reboot.bind(this))
+    this.handleResize = util.throttle(this.handleResize.bind(this), 4)
     this.animation = this.animation.bind(this)
     this.createCanvas = this.createCanvas.bind(this)
     this.drawSky = this.drawSky.bind(this)
@@ -46,7 +48,7 @@ class Rain {
     this.moveDroplets = this.moveDroplets.bind(this)
     this.destory = this.destory.bind(this)
     // 绑定 resize 事件
-    window.addEventListener('resize', this.reboot)
+    window.addEventListener('resize', this.handleResize)
     // 初始化
     this.init()
   }
@@ -72,11 +74,24 @@ class Rain {
 
   /**
    * @description
+   * 继续执行动画
+   * @returns {void}
+   */
+  public goOn(): void {
+    if (!this.isStop) return
+    const { animation } = this
+    this.isStop = false
+    this.requestID = requestAnimationFrame(animation)
+  }
+
+  /**
+   * @description
    * 停止动画
    * @returns {void}
    */
   public stop(): void {
     const { requestID } = this
+    this.isStop = true
     cancelAnimationFrame(requestID)
   }
 
@@ -92,6 +107,16 @@ class Rain {
     stop()
     init()
     start()
+  }
+
+  /**
+   * @description
+   * 处理窗口大小改变
+   * @returns {void}
+   */
+  protected handleResize(): void {
+    if (this.isStop) return
+    this.reboot()
   }
 
   /**
@@ -138,7 +163,7 @@ class Rain {
    * 清空天空
    * @returns {void}
    */
-  protected clearSky(): void {
+  public clearSky(): void {
     if (!this.ctx) return
     const { width, height } = this.config
     this.ctx.clearRect(0, 0, width, height)
@@ -306,7 +331,7 @@ class Rain {
    * @returns {void}
    */
   public destory(): void {
-    window.removeEventListener('resize', this.reboot)
+    window.removeEventListener('resize', this.handleResize)
   }
 }
 

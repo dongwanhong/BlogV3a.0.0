@@ -11,6 +11,7 @@ import bgImage from '../../images/pages/home/bg-home.jpg'
 
 interface DispathToProps {
   toggleShowBtn(eve?: React.MouseEvent<HTMLDivElement, MouseEvent>): void
+  changeRainRunStatus(eve?: React.MouseEvent<HTMLDivElement, MouseEvent>): void
 }
 
 type RetStateToProps = StateToProps & {
@@ -26,7 +27,15 @@ class Home extends PureComponent<Props, {}> {
   }
 
   public render(): React.ReactNode {
-    const { showBtn, classNames, toggleShowBtn, timeout, intl, isMobileTerminal } = this.props
+    const {
+      showBtn,
+      classNames,
+      toggleShowBtn,
+      timeout,
+      intl,
+      isMobileTerminal,
+      running
+    } = this.props
     const title = intl.formatMessage({ id: 'doc.main' })
 
     return (
@@ -51,7 +60,7 @@ class Home extends PureComponent<Props, {}> {
             >
               <Footer />
             </CSSTransition>
-            <Rain />
+            <Rain running={running} />
           </div>
         ) : (
           <WaterWave url={bgImage}>
@@ -74,7 +83,7 @@ class Home extends PureComponent<Props, {}> {
               >
                 <Footer />
               </CSSTransition>
-              <Rain />
+              <Rain running={running} />
             </div>
           </WaterWave>
         )}
@@ -86,6 +95,7 @@ class Home extends PureComponent<Props, {}> {
 const mapStateToProps = (state: AppState): RetStateToProps => ({
   isMobileTerminal: state.getIn(['config', 'isMobileTerminal']),
   showBtn: state.getIn(['home', 'showBtn']),
+  running: state.getIn(['home', 'running']),
   timeout: state.getIn(['home', 'timeout']),
   classNames: state.getIn(['home', 'classNames']).toJS()
 })
@@ -94,6 +104,10 @@ const mapDispatchToProps = (dispath: Dispatch): DispathToProps => ({
   toggleShowBtn(e): void {
     if (e && (e.target as Element).nodeName.toLocaleLowerCase() !== 'canvas') return
     dispath(actionCreators.getToggleBtn())
+  },
+  changeRainRunStatus(e): void {
+    if (e && (e.target as Element).nodeName.toLocaleLowerCase() !== 'canvas') return
+    dispath(actionCreators.getToggleRainAnimation())
   }
 })
 

@@ -1,9 +1,11 @@
-import React, { PureComponent, ReactChild, RefObject, createRef } from 'react'
+import React, { Component, ReactChild, RefObject, createRef } from 'react'
 import util, { Rain as RainFun, RainType } from '../../../utils'
 
-type Props = Omit<RainType.Config, 'ele'>
+type Props = Omit<RainType.Config, 'ele'> & {
+  running?: boolean
+}
 
-class Rain extends PureComponent<Props, {}> {
+class Rain extends Component<Props, {}> {
   public eleRef: RefObject<HTMLCanvasElement>
   public rain: RainType.RainType | undefined
 
@@ -26,6 +28,27 @@ class Rain extends PureComponent<Props, {}> {
     !isUndefined(tally) && (config.tally = tally)
     this.rain = new RainFun(config)
     this.rain.start()
+  }
+
+  public shouldComponentUpdate(nextProps: Props): boolean {
+    const { running } = this.props
+    if (nextProps.running === running) {
+      return false
+    }
+    return true
+  }
+
+  public componentWillUpdate(nextProps: Props): void {
+    const { running } = nextProps
+    if (!this.rain) {
+      return
+    }
+    if (running) {
+      this.rain.stop()
+      this.rain.clearSky()
+      return
+    }
+    this.rain.goOn()
   }
 
   public componentWillUnmount(): void {

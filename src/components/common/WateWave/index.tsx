@@ -5,10 +5,18 @@
  */
 
 import React, { PureComponent, ReactChild, createRef, MouseEvent, RefObject } from 'react'
+import { connect } from 'react-redux'
+import { AppState } from '@/store'
 
-interface Props {
+interface StateToProps {
+  running: boolean
+}
+
+interface OwnProps {
   url: string
 }
+
+type Props = StateToProps & OwnProps
 
 class WaterWave extends PureComponent<Props, {}> {
   public eleRef: RefObject<HTMLDivElement>
@@ -21,10 +29,13 @@ class WaterWave extends PureComponent<Props, {}> {
 
   public handleClick(eve: MouseEvent): void {
     const { eleRef } = this
+    const { running } = this.props
     if (!eleRef.current) return
     // if (eve.target !== eve.currentTarget) return
     // 针对首页的使用情况
     if ((eve.target as HTMLElement).tagName !== 'CANVAS') return
+    // 同步雨天的开关
+    if (!running) return
     const top = eve.pageY - 80
     const left = eve.pageX - 80
     const { url } = this.props
@@ -60,4 +71,8 @@ class WaterWave extends PureComponent<Props, {}> {
   }
 }
 
-export default WaterWave
+const mapStateToProps = (state: AppState): StateToProps => ({
+  running: state.getIn(['home', 'running'])
+})
+
+export default connect(mapStateToProps)(WaterWave)

@@ -22,7 +22,9 @@ class WaterWave extends PureComponent<Props, {}> {
   public handleClick(eve: MouseEvent): void {
     const { eleRef } = this
     if (!eleRef.current) return
-    if (eve.target !== eve.currentTarget) return
+    // if (eve.target !== eve.currentTarget) return
+    // 针对首页的使用情况
+    if ((eve.target as HTMLElement).tagName !== 'CANVAS') return
     const top = eve.pageY - 80
     const left = eve.pageX - 80
     const { url } = this.props

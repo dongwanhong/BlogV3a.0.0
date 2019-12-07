@@ -24,7 +24,7 @@ const tags = [
 ]
 
 const originState: State = {
-  isMobileTerminal: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+  isMobileTerminal: /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
     navigator.userAgent
   ),
   types: [

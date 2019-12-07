@@ -1,0 +1,32 @@
+.btn-primary {
+    color: @text-white;
+    border-color: @border-cyan;
+    background-color: @border-cyan;
+}
+
+label.checkbox {
+
+    input[type="checkbox"] {
+        border-color: @border-gray;
+        background-color: @bGround-white;
+        box-shadow: @border-white 0 0 0 0 inset;
+
+        &:disabled {
+            opacity: .45;
+        }
+
+        &::before {
+            box-shadow: 0 1px 3px @dark;
+            background-color: @bGround-white;
+        }
+
+        &:checked {
+            border-color: @border-success;
+            background-color: @bGroud-success;
+        }
+
+        &.animation:checked {
+            background-color: @bGroud-success;
+        }
+    }
+}

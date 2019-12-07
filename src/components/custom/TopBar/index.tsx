@@ -1,17 +1,23 @@
 import React, { Component } from 'react'
-import { Link } from '../../index'
 import { injectIntl, WrappedComponentProps } from 'react-intl'
 import { CSSTransition } from 'react-transition-group'
 import { CSSTransitionClassNames } from 'react-transition-group/CSSTransition'
+import { Dispatch } from 'redux'
 import { connect } from 'react-redux'
+import { Link } from '../../index'
 import { AppState } from '@/store'
 import { Icon, Draweer } from '@/components'
+import { actionCreators as homeActionCreators } from '@views/Home/store'
 
 const classNames: CSSTransitionClassNames = {
   enter: 'animated',
   enterActive: 'slideInLeft',
   exit: 'animated',
   exitActive: 'slideOutLeft'
+}
+
+interface DispathToProps {
+  changeRainRunStatus(): void
 }
 
 interface NavItem {
@@ -26,13 +32,14 @@ export type NavList = readonly NavItem[]
 
 interface StateToProps {
   isMobileTerminal: boolean
+  running: boolean
 }
 
 interface OwnProps {
   navList?: NavList
 }
 
-type Props = WrappedComponentProps<'intl'> & StateToProps & OwnProps
+type Props = WrappedComponentProps<'intl'> & StateToProps & DispathToProps & OwnProps
 
 interface State {
   showNavList: boolean
@@ -70,7 +77,7 @@ class TopBar extends Component<Props, State> {
   public render(): React.ReactNode {
     const { toggleNav, handleConfigClick, toggleConfig } = this
     const { showNavList, showConfig } = this.state
-    let { navList, intl } = this.props
+    let { navList, intl, changeRainRunStatus, running } = this.props
     if (!navList) {
       navList = [
         {
@@ -81,15 +88,15 @@ class TopBar extends Component<Props, State> {
         },
         {
           id: 2,
-          url: '/project',
-          text: intl.formatMessage({ id: 'topbar.project' }),
-          icon: 'iconrepo'
-        },
-        {
-          id: 3,
           url: '/article-list',
           text: intl.formatMessage({ id: 'topbar.article' }),
           icon: 'iconbook'
+        },
+        {
+          id: 3,
+          url: 'https://dongwanhong.github.io/source-code/',
+          text: intl.formatMessage({ id: 'topbar.project' }),
+          icon: 'iconrepo'
         },
         {
           id: 4,
@@ -129,17 +136,41 @@ class TopBar extends Component<Props, State> {
             </Link>
           </nav>
         </CSSTransition>
-        <Draweer show={showConfig} onClose={toggleConfig} />
+        <Draweer
+          title="页面配置"
+          footnote="More than a coder, more than a designer."
+          show={showConfig}
+          onClose={toggleConfig}
+        >
+          <p>
+            <label onClick={e => changeRainRunStatus()} className="checkbox">
+              <span className="text">首页雨天动画 </span>
+              <input
+                className="animation"
+                type="checkbox"
+                defaultChecked={running}
+                disabled={window.location.pathname !== '/'}
+              />
+            </label>
+          </p>
+        </Draweer>
       </div>
     )
   }
 }
 
 const mapStateToProps = (state: AppState): StateToProps => ({
-  isMobileTerminal: state.getIn(['config', 'isMobileTerminal'])
+  isMobileTerminal: state.getIn(['config', 'isMobileTerminal']),
+  running: state.getIn(['home', 'running'])
 })
 
-export default connect<StateToProps, {}, OwnProps, AppState>(
+const mapDispatchToProps = (dispath: Dispatch): DispathToProps => ({
+  changeRainRunStatus(): void {
+    dispath(homeActionCreators.getToggleRainAnimation())
+  }
+})
+
+export default connect<StateToProps, DispathToProps, OwnProps, AppState>(
   mapStateToProps,
-  {}
+  mapDispatchToProps
 )(injectIntl(TopBar))

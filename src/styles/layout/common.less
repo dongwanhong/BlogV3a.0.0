@@ -8,3 +8,84 @@ ul.decimal {
         content: '：';
     }
 }
+
+// ===================== 按钮 =====================
+
+button {
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.btn {
+    display: inline-block;
+    padding: .375rem .75rem;
+    line-height: 1.5;
+    font-size: 1rem;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid;
+    border-radius: .25rem;
+}
+
+// ===================== 复选框 =====================
+@track-width: 57px;
+@track-height: 26px;
+@pellet-size: @track-height - 2;
+
+label.checkbox {
+    vertical-align: middle;
+
+    .text {
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: .25rem;
+    }
+
+    input[type="checkbox"] {
+        position: relative;
+        display: inline-block;
+        width: @track-width;
+        height: @track-height;
+        border: 1px solid;
+        border-radius: @track-height;
+        background-clip: content-box;
+        vertical-align: middle;
+        user-select: none;
+        outline: none;
+        -webkit-appearance: none;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: @pellet-size;
+            height: @pellet-size;
+            border-radius: 50%;
+        }
+
+        &:checked::before {
+            left: @track-width - @pellet-size - 2px;
+        }
+
+        &.animation {
+            transition: background-color ease 0.4s;
+        }
+
+        &.animation::before {
+            transition: left 0.3s;
+        }
+
+        &.animation:checked {
+            transition: border-color 0.4s, background-color ease 0.4s;
+        }
+
+        &.animation:checked::before {
+            transition: left 0.3s;
+        }
+    }
+}

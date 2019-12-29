@@ -1,4 +1,5 @@
 import React, { Component, ReactChild } from 'react'
+import { injectIntl, WrappedComponentProps } from 'react-intl'
 import utils from '@/utils'
 
 export interface TagInfo {
@@ -6,13 +7,16 @@ export interface TagInfo {
   text: string
   active?: boolean
   disabled?: boolean
+  intlId?: string
   // [prop: string]: string | number | boolean | undefined | number[]
 }
 
-interface Props {
+interface OwnProps {
   tags: TagInfo[]
   onChange?: (tag: TagInfo) => void
 }
+
+type Props = OwnProps & WrappedComponentProps
 
 class Tag extends Component<Props, {}> {
   public constructor(props: Props) {
@@ -41,7 +45,7 @@ class Tag extends Component<Props, {}> {
 
   public render(): ReactChild {
     const { handleClick } = this
-    const { tags } = this.props
+    const { tags, intl } = this.props
 
     return (
       <ul className="tag-container">
@@ -55,7 +59,7 @@ class Tag extends Component<Props, {}> {
           }
           return (
             <li key={item.id} className={classNames.join(' ')} onClick={() => handleClick(item)}>
-              {item.text}
+              {item.intlId ? intl.formatMessage({ id: item.intlId }) : item.text}
             </li>
           )
         })}
@@ -64,4 +68,4 @@ class Tag extends Component<Props, {}> {
   }
 }
 
-export default Tag
+export default injectIntl(Tag)

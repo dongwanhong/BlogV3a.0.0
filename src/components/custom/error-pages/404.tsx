@@ -1,19 +1,21 @@
 import React, { SFC } from 'react'
 import { Link } from 'react-router-dom'
+import { injectIntl, WrappedComponentProps } from 'react-intl'
 
-const NotFound: SFC<{}> = () => (
+const NotFound: SFC<WrappedComponentProps> = props => (
   <div className="page-404">
     <div className="page-left" />
     <div className="page-right">
       <div className="text">
-        <p>哎呀，网页走丢啦。</p>
+        <p>{props.intl.formatMessage({ id: 'notFound.text1' })}</p>
         <p>
-          我们正在联系火星总部以寻找您访问的页面，您可以点击 <Link to="/">返回首页</Link>{' '}
-          继续查看其它页面。
+          {props.intl.formatMessage({ id: 'notFound.text2' })}{' '}
+          <Link to="/">{props.intl.formatMessage({ id: 'notFound.text3' })}</Link>{' '}
+          {props.intl.formatMessage({ id: 'notFound.text4' })}
         </p>
       </div>
     </div>
   </div>
 )
 
-export default NotFound
+export default injectIntl(NotFound)

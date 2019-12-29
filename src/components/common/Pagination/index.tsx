@@ -1,4 +1,5 @@
 import React, { Component, ReactChild, ChangeEvent } from 'react'
+import { injectIntl, WrappedComponentProps } from 'react-intl'
 
 export interface Params {
   total: number
@@ -6,7 +7,7 @@ export interface Params {
   pageSize: number
 }
 
-interface Props {
+interface OwnProps {
   total?: number // 总条数
   pageNum?: number // 当前显示页
   pageSize?: number // 每页显示条数
@@ -15,6 +16,8 @@ interface Props {
   gap?: boolean
   bordered?: boolean
 }
+
+type Props = OwnProps & WrappedComponentProps
 
 interface State {
   baseNum: number // 按钮的基数
@@ -99,7 +102,7 @@ class Pagination extends Component<Props, State> {
 
   public render(): ReactChild {
     const { baseNum, pageNum, pageSize } = this.state
-    const { bordered = true, gap = true } = this.props
+    const { bordered = true, gap = true, intl } = this.props
     let btnNum = this.getBtnNum()
     const classNames = ['pagination']
 
@@ -142,10 +145,10 @@ class Pagination extends Component<Props, State> {
         </li>
         <li className="pagination-size">
           <select value={pageSize} onChange={eve => this.handleChange(eve)}>
-            <option value="10">10 条/页</option>
-            <option value="20">20 条/页</option>
-            <option value="30">30 条/页</option>
-            <option value="40">40 条/页</option>
+            <option value="10">10 {intl.formatMessage({ id: 'common.pageUnit' })}</option>
+            <option value="20">20 {intl.formatMessage({ id: 'common.pageUnit' })}</option>
+            <option value="30">30 {intl.formatMessage({ id: 'common.pageUnit' })}</option>
+            <option value="40">40 {intl.formatMessage({ id: 'common.pageUnit' })}</option>
           </select>
         </li>
       </ul>
@@ -153,4 +156,4 @@ class Pagination extends Component<Props, State> {
   }
 }
 
-export default Pagination
+export default injectIntl(Pagination)

@@ -30,32 +30,36 @@ const originState: State = {
   types: [
     {
       id: 0,
+      intlId: 'config.typeAll',
       text: '全部',
       tags: tags.map(item => item.id)
     },
     {
       id: 1,
+      intlId: 'config.ffDev',
       text: '前端开发',
       tags: [1, 2, 3, 4, 5, 6, 7, 8, 9]
     },
-    { id: 2, text: '开发工具', tags: [18, 19] },
-    { id: 3, text: 'Python 开发', tags: [12] },
+    { id: 2, intlId: 'config.devTool', text: '开发工具', tags: [18, 19] },
+    { id: 3, intlId: 'config.pyDev', text: 'Python 开发', tags: [12] },
     {
       id: 4,
+      intlId: 'config.database',
       text: '数据库',
       tags: [15, 16, 17]
     },
     {
       id: 5,
+      intlId: 'config.beDev',
       text: '后端开发',
       tags: [10, 11, 12]
     },
-    { id: 6, text: '小程序开发', tags: [] },
-    { id: 7, text: '区块链', tags: [] },
-    { id: 8, text: '人工智能', tags: [] },
-    { id: 9, text: '服务器', tags: [13, 14] },
-    { id: 10, text: '移动端', tags: [] },
-    { id: 11, text: '计算机基础', tags: [] }
+    { id: 6, intlId: 'config.minDev', text: '小程序开发', tags: [] },
+    { id: 7, intlId: 'config.blockChain', text: '区块链', tags: [] },
+    { id: 8, intlId: 'config.ai', text: '人工智能', tags: [] },
+    { id: 9, intlId: 'config.server', text: '服务器', tags: [13, 14] },
+    { id: 10, intlId: 'config.mobile', text: '移动端', tags: [] },
+    { id: 11, intlId: 'config.pcBasis', text: '计算机基础', tags: [] }
   ],
   tags
 }

@@ -1,13 +1,16 @@
 import React, { SFC } from 'react'
+import { injectIntl, WrappedComponentProps } from 'react-intl'
 import { Link } from '@/components'
 
-interface Props {
+interface OwnProps {
   des: string
   src: string
   alt?: string
   to: string
   title: string
 }
+
+type Props = OwnProps & WrappedComponentProps
 
 const ArticleItem: SFC<Props> = props => {
   const { to, des, src, title, alt } = props
@@ -28,7 +31,7 @@ const ArticleItem: SFC<Props> = props => {
         <div className="article-right col-lg-8 col-xs-12">
           <div className="short-des">{`摘要：${des}`}</div>
           <div className="more-btn">
-            <Link to={to}>查看详情 &gt;</Link>
+            <Link to={to}>{props.intl.formatMessage({ id: 'common.moreData' })} &gt;</Link>
           </div>
         </div>
       </div>
@@ -36,4 +39,4 @@ const ArticleItem: SFC<Props> = props => {
   )
 }
 
-export default ArticleItem
+export default injectIntl(ArticleItem)

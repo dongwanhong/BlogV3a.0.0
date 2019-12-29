@@ -1,6 +1,5 @@
 import * as actionCreators from './actionCreators'
 import reducer from './reducer'
-import { State } from './types'
 
-export type State = State
+export * from './types'
 export { actionCreators, reducer }

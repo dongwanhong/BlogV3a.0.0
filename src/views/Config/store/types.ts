@@ -5,6 +5,7 @@ export interface Tag {
 
 export interface Type {
   id: number
+  intlId: string
   text: string
   tags: number[]
 }

@@ -1,4 +1,5 @@
 import React, { SFC } from 'react'
+import { injectIntl, WrappedComponentProps } from 'react-intl'
 
 const noData = (
   <svg width="64" height="41" viewBox="0 0 64 41" xmlns="http://www.w3.org/2000/svg">
@@ -15,13 +16,13 @@ const noData = (
   </svg>
 )
 
-const Empty: SFC<{}> = props => {
+const Empty: SFC<WrappedComponentProps> = props => {
   return (
     <div className="empty">
       {noData}
-      <p>暂无数据</p>
+      <p>{props.intl.formatMessage({ id: 'common.noData' })}</p>
     </div>
   )
 }
 
-export default Empty
+export default injectIntl(Empty)

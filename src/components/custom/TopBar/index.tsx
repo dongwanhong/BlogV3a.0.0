@@ -8,6 +8,7 @@ import { Link } from '../../index'
 import { AppState } from '@/store'
 import { Icon, Draweer } from '@/components'
 import { actionCreators as homeActionCreators } from '@views/Home/store'
+import { actionCreators as langActionCreators, Lang } from '@locale/store'
 
 const classNames: CSSTransitionClassNames = {
   enter: 'animated',
@@ -18,6 +19,7 @@ const classNames: CSSTransitionClassNames = {
 
 interface DispathToProps {
   changeRainRunStatus(): void
+  setLanguage(lang: Lang): void
 }
 
 interface NavItem {
@@ -33,6 +35,7 @@ export type NavList = readonly NavItem[]
 interface StateToProps {
   isMobileTerminal: boolean
   running: boolean
+  lang: Lang
 }
 
 interface OwnProps {
@@ -57,6 +60,7 @@ class TopBar extends Component<Props, State> {
     this.toggleNav = this.toggleNav.bind(this)
     this.toggleConfig = this.toggleConfig.bind(this)
     this.handleConfigClick = this.handleConfigClick.bind(this)
+    this.handleLangClick = this.handleLangClick.bind(this)
   }
 
   private toggleNav(): void {
@@ -74,8 +78,17 @@ class TopBar extends Component<Props, State> {
     this.setState(() => ({ showConfig: false }))
   }
 
+  public handleLangClick(): void {
+    const { setLanguage, lang } = this.props
+    if (lang === 'zh-CN') {
+      setLanguage('en-US')
+    } else {
+      setLanguage('zh-CN')
+    }
+  }
+
   public render(): React.ReactNode {
-    const { toggleNav, handleConfigClick, toggleConfig } = this
+    const { toggleNav, handleConfigClick, toggleConfig, handleLangClick } = this
     const { showNavList, showConfig } = this.state
     let { navList, intl, changeRainRunStatus, running } = this.props
     if (!navList) {
@@ -137,22 +150,30 @@ class TopBar extends Component<Props, State> {
           </nav>
         </CSSTransition>
         <Draweer
-          title="页面配置"
-          footnote="More than a coder, more than a designer."
+          title={intl.formatMessage({ id: 'config.title' })}
+          footnote={intl.formatMessage({ id: 'config.footnote' })}
           show={showConfig}
           onClose={toggleConfig}
         >
-          <p>
-            <label onClick={e => changeRainRunStatus()} className="checkbox">
-              <span className="text">首页雨天动画 </span>
-              <input
-                className="animation"
-                type="checkbox"
-                defaultChecked={running}
-                disabled={window.location.pathname !== '/'}
-              />
-            </label>
-          </p>
+          <div className="setting-content">
+            <p>
+              <label onClick={e => handleLangClick()} className="checkbox">
+                <span className="text">{intl.formatMessage({ id: 'config.lang' })} </span>
+                <input className="animation" type="checkbox" />
+              </label>
+            </p>
+            <p>
+              <label onClick={e => changeRainRunStatus()} className="checkbox">
+                <span className="text">{intl.formatMessage({ id: 'config.rain' })} </span>
+                <input
+                  className="animation"
+                  type="checkbox"
+                  defaultChecked={running}
+                  disabled={window.location.pathname !== '/'}
+                />
+              </label>
+            </p>
+          </div>
         </Draweer>
       </div>
     )
@@ -161,12 +182,16 @@ class TopBar extends Component<Props, State> {
 
 const mapStateToProps = (state: AppState): StateToProps => ({
   isMobileTerminal: state.getIn(['config', 'isMobileTerminal']),
+  lang: state.getIn(['local', 'lang']),
   running: state.getIn(['home', 'running'])
 })
 
 const mapDispatchToProps = (dispath: Dispatch): DispathToProps => ({
   changeRainRunStatus(): void {
     dispath(homeActionCreators.getToggleRainAnimation())
+  },
+  setLanguage(lang: Lang): void {
+    dispath(langActionCreators.getToggleBtn(lang))
   }
 })
 

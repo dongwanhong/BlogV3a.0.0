@@ -3,7 +3,7 @@ import { State, TOGGLE_PAGE_BTN, CHANGE_RAIN_ANIMATION, Action } from './types'
 
 const originState: State = {
   showBtn: false,
-  running: false,
+  running: true,
   timeout: 1000,
   classNames: {
     enter: 'animated',

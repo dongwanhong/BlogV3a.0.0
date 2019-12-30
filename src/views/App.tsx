@@ -1,6 +1,6 @@
 import { hot } from 'react-hot-loader/root'
 import React, { PureComponent } from 'react'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { HashRouter as Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from '../store'
 import renderRoutes, { routes } from '../router'

@@ -119,7 +119,7 @@ class TopBar extends Component<Props, State> {
         },
         {
           id: 5,
-          url: '/resume',
+          url: 'https://dongwanhong.github.io/BlogV1.0.0/blog-others/2018/02/resume.html',
           text: intl.formatMessage({ id: 'topbar.resume' }),
           icon: 'iconguanyuwomen'
         }

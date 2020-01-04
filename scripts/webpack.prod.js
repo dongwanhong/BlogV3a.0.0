@@ -44,7 +44,9 @@ const prodConfig = {
       // Give paths to parse for rules. These should be absolute
       paths: glob.sync([
         path.join(process.cwd(), 'src/**/*.html'),
-        path.join(process.cwd(), 'src/**/*.js')
+        path.join(process.cwd(), 'src/**/*.js'),
+        path.join(process.cwd(), 'src/**/*.ts'),
+        path.join(process.cwd(), 'src/**/*.tsx')
       ])
     }),
     new webpack.HashedModuleIdsPlugin({

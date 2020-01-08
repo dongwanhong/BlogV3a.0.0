@@ -31,7 +31,7 @@ class Rain {
     this.requestID = 0
     this.waterDrops = []
     this.droplets = []
-    this.isStop = false
+    this.isStop = true
     this.config = Object.assign({}, defaultConfig, config)
     // 为方法绑定执行上下文
     this.init = this.init.bind(this)
@@ -69,6 +69,7 @@ class Rain {
    */
   public start(): void {
     const { animation } = this
+    this.isStop = false
     this.requestID = requestAnimationFrame(animation)
   }
 
@@ -79,9 +80,16 @@ class Rain {
    */
   public goOn(): void {
     if (!this.isStop) return
-    const { animation } = this
+    const { animation, config } = this
+    const width = document.documentElement.clientWidth
+    const height = document.documentElement.clientHeight
+
     this.isStop = false
-    this.requestID = requestAnimationFrame(animation)
+    if (config.width === width && config.height === height) {
+      this.requestID = requestAnimationFrame(animation)
+    } else {
+      this.handleResize()
+    }
   }
 
   /**

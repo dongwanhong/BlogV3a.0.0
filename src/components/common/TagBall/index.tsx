@@ -94,8 +94,12 @@ class TagBall extends PureComponent<Props, State> {
    * @returns {void}
    */
   protected handleConfig(): Config {
-    const { width = 300, height = 300, children } = this.props
-    const radius = Math.min(width, height) / 2
+    let { width = 300, height = 300, children } = this.props
+    // 减去外部容器左右各有 15 像素的内边距
+    // （结合实际减去了更多）防止内容溢出
+    width = width - 64
+    // 将半径缩小以将每一项显示完全
+    const radius = Math.min(width, height) / 2 - 33
     const count = React.Children.count(children)
     return {
       count,

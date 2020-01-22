@@ -170,26 +170,11 @@ class ArticleList extends PureComponent<Props, State> {
       <div className="article-list">
         <TopBar />
         <div className="container">
+          <div className="text-title">
+            If you can't explain it simply,
+            <div>you don't understand it well enough.</div>
+          </div>
           <div className="row">
-            <div className="list-wrapper col-lg-9 col-xs-12">
-              <div className="text-title">
-                If you can't explain it simply,
-                <div>you don't understand it well enough.</div>
-              </div>
-              <div className="article-wrapper">
-                {filteredArticles.slice((pageNum - 1) * pageSize, pageNum * pageSize).map(item => (
-                  <ArticleItem
-                    key={item.key}
-                    title={item.title}
-                    src={item.src}
-                    des={item.des}
-                    to={item.to}
-                  />
-                ))}
-                {!filteredArticles.length && <Empty />}
-              </div>
-              <Pagination total={total} onChange={handlePaginationChange} />
-            </div>
             <div ref={ele} className="col-lg-3 col-xs-12">
               {<Tag onChange={tagInfo => changTags(tagInfo as TagInfoer)} tags={types} />}
               {width && !isMobileTerminal && tags.length && mount ? (
@@ -205,6 +190,21 @@ class ArticleList extends PureComponent<Props, State> {
                   ))}
                 </TagBall>
               ) : null}
+            </div>
+            <div className="list-wrapper col-lg-9 col-xs-12">
+              <div className="article-wrapper">
+                {filteredArticles.slice((pageNum - 1) * pageSize, pageNum * pageSize).map(item => (
+                  <ArticleItem
+                    key={item.key}
+                    title={item.title}
+                    src={item.src}
+                    des={item.des}
+                    to={item.to}
+                  />
+                ))}
+                {!filteredArticles.length && <Empty />}
+              </div>
+              <Pagination total={total} onChange={handlePaginationChange} />
             </div>
           </div>
         </div>

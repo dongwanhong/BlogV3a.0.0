@@ -13,6 +13,7 @@ export interface TagInfo {
 
 interface OwnProps {
   tags: TagInfo[]
+  className?: string
   onChange?: (tag: TagInfo) => void
 }
 
@@ -45,10 +46,10 @@ class Tag extends Component<Props, {}> {
 
   public render(): ReactChild {
     const { handleClick } = this
-    const { tags, intl } = this.props
+    const { tags, intl, className } = this.props
 
     return (
-      <ul className="tag-container">
+      <ul className={`tag-container ${className ? className : ''}`}>
         {tags.map(item => {
           const classNames = ['tag-item']
           if (item.active) {

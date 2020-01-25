@@ -23,6 +23,10 @@ type TagInfoer = TagInfo & {
   tags: number[]
 }
 
+type BallTagTyper = BallTagType & {
+  active: boolean
+}
+
 type Props = StateToProps
 
 interface State {
@@ -30,7 +34,7 @@ interface State {
   height: number
   mount: boolean
   tags: BallTagType[]
-  activeTagIndex: number
+  activeTagId: number
   types: TagInfoer[]
   pageNum: number
   pageSize: number
@@ -60,7 +64,7 @@ class ArticleList extends PureComponent<Props, State> {
     width: 0,
     height: 0,
     mount: true,
-    activeTagIndex: -1,
+    activeTagId: -1,
     tags: [],
     pageNum: 1,
     pageSize: 10,
@@ -74,6 +78,7 @@ class ArticleList extends PureComponent<Props, State> {
     this.filteredArticlesByType = []
 
     this.changTags = this.changTags.bind(this)
+    this.changTags2 = this.changTags2.bind(this)
     this.handlePaginationChange = this.handlePaginationChange.bind(this)
     this.filterArticlesBYTag = this.filterArticlesBYTag.bind(this)
     this.filterArticlesBYType = this.filterArticlesBYType.bind(this)
@@ -103,6 +108,25 @@ class ArticleList extends PureComponent<Props, State> {
     this.activeSelectTag(tagInfo)
   }
 
+  /**
+   * 二级标签切换（编程语言）
+   */
+  protected changTags2(tagInfo: BallTagTyper): void {
+    const { tags } = this.state
+    const newTags = tags.map(tag => {
+      ;(tag as BallTagTyper).active = false
+      if (tagInfo.id === tag.id) {
+        ;(tag as BallTagTyper).active = true
+      }
+      return tag
+    })
+
+    this.filterArticlesBYTag(tagInfo)
+    this.setState(() => ({
+      tags: newTags
+    }))
+  }
+
   private activeSelectTag(tagInfo: TagInfoer): void {
     const { types } = this.state
     const newTypes = types.map(
@@ -125,7 +149,7 @@ class ArticleList extends PureComponent<Props, State> {
     }
     const retTags = tags.filter(item => tagInfo.tags.includes(item.id))
     this.setState(
-      () => ({ tags: retTags, filteredArticles: newArticles, activeTagIndex: -1, mount: false }),
+      () => ({ tags: retTags, filteredArticles: newArticles, activeTagId: -1, mount: false }),
       () => {
         this.filteredArticlesByType = newArticles
         this.setState(() => ({
@@ -135,10 +159,10 @@ class ArticleList extends PureComponent<Props, State> {
     )
   }
 
-  protected filterArticlesBYTag(item: BallTagType, index: number): void {
+  protected filterArticlesBYTag(item: BallTagType): void {
     const { filteredArticlesByType } = this
     const newArticles = filteredArticlesByType.filter(oItem => oItem.tags.includes(item.text))
-    this.setState(() => ({ filteredArticles: newArticles, activeTagIndex: index }))
+    this.setState(() => ({ filteredArticles: newArticles, activeTagId: item.id }))
   }
 
   private handlePaginationChange(p: Params): void {
@@ -150,7 +174,7 @@ class ArticleList extends PureComponent<Props, State> {
   }
 
   public render(): ReactChild {
-    const { ele, changTags, filterArticlesBYTag, handlePaginationChange } = this
+    const { ele, changTags, filterArticlesBYTag, handlePaginationChange, changTags2 } = this
     const { isMobileTerminal } = this.props
     const {
       tags,
@@ -158,7 +182,7 @@ class ArticleList extends PureComponent<Props, State> {
       width,
       height,
       filteredArticles,
-      activeTagIndex,
+      activeTagId,
       mount,
       pageNum,
       pageSize
@@ -176,14 +200,22 @@ class ArticleList extends PureComponent<Props, State> {
           </div>
           <div className="row">
             <div ref={ele} className="col-lg-3 col-xs-12">
-              {<Tag onChange={tagInfo => changTags(tagInfo as TagInfoer)} tags={types} />}
-              {width && !isMobileTerminal && tags.length && mount ? (
+              {
+                <Tag
+                  className="types-tag"
+                  onChange={tagInfo => changTags(tagInfo as TagInfoer)}
+                  tags={types}
+                />
+              }
+              {isMobileTerminal ? (
+                <Tag onChange={tagInfo => changTags2(tagInfo as BallTagTyper)} tags={tags} />
+              ) : width && tags.length && mount ? (
                 <TagBall width={size} height={size}>
                   {tags.map((tag, index) => (
                     <TagItem
                       key={tag.id}
-                      className={activeTagIndex === index ? 'active' : ''}
-                      onClick={() => filterArticlesBYTag(tag, index)}
+                      className={activeTagId === tag.id ? 'active' : ''}
+                      onClick={() => filterArticlesBYTag(tag)}
                     >
                       {tag.text}
                     </TagItem>

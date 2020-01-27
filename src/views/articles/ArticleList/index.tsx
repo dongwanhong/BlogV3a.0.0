@@ -64,7 +64,7 @@ class ArticleList extends PureComponent<Props, State> {
     width: 0,
     height: 0,
     mount: true,
-    activeTagId: -1,
+    activeTagId: 0,
     tags: [],
     pageNum: 1,
     pageSize: 10,
@@ -148,8 +148,14 @@ class ArticleList extends PureComponent<Props, State> {
       newArticles = adjustedArticles.filter(item => item.types.includes(tagInfo.text))
     }
     const retTags = tags.filter(item => tagInfo.tags.includes(item.id))
+    // 类型变幻时默认选中语言的第一项
+    const firstTag = retTags[0]
+    if (typeof firstTag !== 'undefined') {
+      ;(firstTag as BallTagTyper).active = true
+    }
+
     this.setState(
-      () => ({ tags: retTags, filteredArticles: newArticles, activeTagId: -1, mount: false }),
+      () => ({ tags: retTags, filteredArticles: newArticles, activeTagId: 0, mount: false }),
       () => {
         this.filteredArticlesByType = newArticles
         this.setState(() => ({
@@ -161,7 +167,11 @@ class ArticleList extends PureComponent<Props, State> {
 
   protected filterArticlesBYTag(item: BallTagType): void {
     const { filteredArticlesByType } = this
-    const newArticles = filteredArticlesByType.filter(oItem => oItem.tags.includes(item.text))
+    let newArticles = filteredArticlesByType
+    if (item.id !== 0) {
+      newArticles = filteredArticlesByType.filter(oItem => oItem.tags.includes(item.text))
+    }
+
     this.setState(() => ({ filteredArticles: newArticles, activeTagId: item.id }))
   }
 

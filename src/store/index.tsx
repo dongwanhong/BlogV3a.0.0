@@ -10,6 +10,6 @@ const composeEnhancers =
   (window && (window as WindowReduxTool).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose
 const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)))
 
-export type AppState = AppState
+export { AppState }
 
 export default store

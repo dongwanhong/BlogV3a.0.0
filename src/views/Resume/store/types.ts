@@ -1,5 +1,3 @@
-import { NavList } from '../../../components/custom/TopBar'
-
 export const CHANGE_ACTIVE_INDEX = 'CHANGE_ACTIVE_INDEX'
 
 export interface Action {
@@ -9,5 +7,4 @@ export interface Action {
 
 export interface State {
   activeIndex: number
-  navList: NavList
 }

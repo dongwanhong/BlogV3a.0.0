@@ -29,12 +29,12 @@ class Resume extends PureComponent<Props, {}> {
 
   public render(): React.ReactNode {
     const { setActivePage } = this
-    const { activeIndex, setActiveIndex, navList } = this.props
+    const { activeIndex, setActiveIndex } = this.props
 
     return (
       <div className="resume">
         <div className="top-bar-warpper">
-          <TopBar navList={navList} />
+          <TopBar />
         </div>
         <div className="step-container">
           <Step
@@ -63,8 +63,7 @@ class Resume extends PureComponent<Props, {}> {
 }
 
 const mapStateToProps = (state: AppState): StateToProps => ({
-  activeIndex: state.getIn(['resume', 'activeIndex']),
-  navList: state.getIn(['resume', 'navList']).toJS()
+  activeIndex: state.getIn(['resume', 'activeIndex'])
 })
 
 const mapDispatchToProps = (dispath: Dispatch): DispathToProps => ({

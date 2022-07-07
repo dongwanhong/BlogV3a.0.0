@@ -122,7 +122,7 @@
     "immutable": "^4.0.0-rc.12",
     "jquery": "^3.4.1",
     "lodash": "^4.17.13",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "react": "^16.8.6",
     "react-document-title": "^2.0.3",
     "react-dom": "^16.8.6",
